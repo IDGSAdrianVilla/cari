@@ -7,8 +7,8 @@
 
 <link rel="icon" type="image/png" href="/images/icono.png" />
 
-<script src="/js/validaciones.js"></script>
-<script src="/js/tools.js"></script>
+<script src="{{ asset('js/validaciones.js') }}"></script>
+<script src="{{ asset('js/tools.js') }}"></script>
 
 <link rel="stylesheet" href="/css/estilos.css">
 

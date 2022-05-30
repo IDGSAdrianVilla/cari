@@ -62,4 +62,4 @@
     </div>
 </div>
 
-<script src="/js/funcionalidadModales.js"></script>
+<script src="{{ asset('js/funcionalidadModales.js') }}"></script>
