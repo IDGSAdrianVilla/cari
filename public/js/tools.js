@@ -5,7 +5,7 @@ $(document).ready(function(){
 
         $(".asd").css('filter','grayscale(0.1) blur(10px)');
         $.ajax({
-            url:'/detalleReporte/'+id,
+            url: route('detalleReporte', {id}),
             type:'get',
             success:  function (detalleReporte) {
                 mapToForm(detalleReporte);
