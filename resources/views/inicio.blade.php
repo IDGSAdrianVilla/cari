@@ -20,7 +20,7 @@
                     <div class="notifications__item verModalReporte" id="{{ $reporte->folio }}" style="height: auto; padding-top: 15px; padding-bottom: 15px;" data-toggle='modal' data-target='#verModalReporte'>
                         
                         <div class="notifications__item__avatar">
-                            <img src="images/reportes/1.png" />
+                            <img src="asset( 'images/reportes/1.png' )" />
                         </div>
 
                         <div class="notifications__item__content">

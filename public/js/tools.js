@@ -112,19 +112,19 @@ $(document).ready(function(){
             if ( r[0].empleadoAtendiendo == "" || r[0].empleadoAtendiendo == null ) {
                 insert += `
                     <div class="col-sm-2">
-                    <a href="/atendiendo/`+r[0].folio+`" class="btn btn-primary form-control" style="margin-top: 15px;"><img src="/images/proceso.png" alt="" width="22px"></a>
+                    <a href="/atendiendo/`+r[0].folio+`" class="btn btn-primary form-control" style="margin-top: 15px;"><img src="asset( 'images/proceso.png' )" alt="" width="22px"></a>
                     </div>
                 `;
             } else if ( r[0].PKTblEmpleadosAtediendo == PKTblEmpleado ) {
                 insert += `
                     <div class="col-sm-2">
-                        <a href="/desatendiendo/`+r[0].folio+`" class="btn btn-danger form-control" style="margin-top: 15px;"><img src="/images/proceso.png" alt="" width="22px"></a>
+                        <a href="/desatendiendo/`+r[0].folio+`" class="btn btn-danger form-control" style="margin-top: 15px;"><img src="asset( 'images/proceso.png' )" alt="" width="22px"></a>
                     </div>
                 `;
             } else {
                 insert += `
                     <div class="col-sm-2">
-                        <a class="btn btn-danger form-control" style="margin-top: 15px;"><img src="/images/proceso.png" alt="" width="22px"></a>
+                        <a class="btn btn-danger form-control" style="margin-top: 15px;"><img src="asset( 'images/proceso.png' )" alt="" width="22px"></a>
                     </div>
                 `;
             }
@@ -142,19 +142,19 @@ $(document).ready(function(){
             if ( r[0].empleadoAtendiendo == "" || r[0].empleadoAtendiendo == null ) {
                 insert += `
                     <div class="col-sm-2">
-                    <a href="/atendiendo/`+r[0].folio+`" class="btn btn-primary form-control" style="margin-top: 15px;"><img src="/images/proceso.png" alt="" width="22px"></a>
+                    <a href="/atendiendo/`+r[0].folio+`" class="btn btn-primary form-control" style="margin-top: 15px;"><img src="asset( 'images/proceso.png' )" alt="" width="22px"></a>
                     </div>
                 `;
             } else if ( r[0].PKTblEmpleadosAtediendo == PKTblEmpleado ) {
                 insert += `
                     <div class="col-sm-2">
-                        <a href="/desatendiendo/`+r[0].folio+`" class="btn btn-danger form-control" style="margin-top: 15px;"><img src="/images/proceso.png" alt="" width="22px"></a>
+                        <a href="/desatendiendo/`+r[0].folio+`" class="btn btn-danger form-control" style="margin-top: 15px;"><img src="asset( 'images/proceso.png' )" alt="" width="22px"></a>
                     </div>
                 `;
             } else {
                 insert += `
                     <div class="col-sm-2">
-                        <a class="btn btn-danger form-control" style="margin-top: 15px;"><img src="/images/proceso.png" alt="" width="22px"></a>
+                        <a class="btn btn-danger form-control" style="margin-top: 15px;"><img src="asset( 'images/proceso.png' )" alt="" width="22px"></a>
                     </div>
                 `;
             }
@@ -424,9 +424,9 @@ $(document).ready(function(){
         contadorAfk++;
         //Se comprueba si ha pasado del tiempo que designemos.
         if (contadorAfk > 20) { // M��s de 59 minutos, lo detectamos como ausente o inactivo.
-            var r = confirm("�0�7Desea continuar en esta sesion?");
+            var r = confirm("¿Desea continuar en esta sesion?");
             if (r == false) {
-                window.location.assign('controllers/logout.php');
+                window.location.assign(route('logout'));
             }else{
                 contadorAfk = 0;
             }
