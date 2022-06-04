@@ -20,8 +20,8 @@
                 <h2 class="form-title" id="signup"><span>O</span>Entrar</h2>
 
                 <div class="form-holder">
-                    <input name="usuario" id="usuario" type="text" class="input" placeholder="Usuario" onkeyup="con();" autocomplete="off" required/>
-                    <input name="contrasenia" id="contraseña" type="password" class="input" placeholder="Contraseña" onkeyup="con();" required/>
+                    <input name="usuario" id="usuario" type="text" class="input" placeholder="Usuario" autocomplete="off" required/>
+                    <input name="contrasenia" id="contraseña" type="password" class="input" placeholder="Contraseña" required/>
                 </div>
 
                 <br><br>
