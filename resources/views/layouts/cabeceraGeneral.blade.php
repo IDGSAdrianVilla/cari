@@ -10,7 +10,7 @@
 <script src="{{ asset('js/validaciones.js') }}"></script>
 <script src="{{ asset('js/tools.js') }}"></script>
 
-<link rel="stylesheet" href="/css/estilos.css">
+<link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
 
 <style>
     @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");

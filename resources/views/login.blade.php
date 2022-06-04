@@ -6,10 +6,10 @@
 
 	<title>M-net</title>
 
-	<link rel="icon" type="image/png" href="images/icono.png" />
+	<link rel="icon" type="image/png" href="{{ asset('images/icono.png') }}" />
    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-   	<link rel="stylesheet" href="css/estiloIndex.css">
+   	<link rel="stylesheet" href="{{ asset('css/estiloIndex.css') }}">
 </head>
 <body>
 	

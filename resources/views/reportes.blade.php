@@ -25,7 +25,7 @@
         <div class="col-sm-2">
             <div class="form-group">
                 <label>Reporte</label>
-                <a href="{{ url('reporteExcel') }}"><button class="btn btn-info form-control"><img src="{{ asset('images/eporte.png') }}"alt="" width="22px"></button></a>
+                <a href="{{ url('reporteExcel') }}"><button class="btn btn-info form-control"><img src="{{ asset('images/reporte.png') }}"alt="" width="22px"></button></a>
             </div>
         </div>
 
