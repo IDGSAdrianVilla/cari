@@ -77,7 +77,7 @@ class ReportesController extends Controller
     }
 
     public function obtenerDetalleReporte ( $id ) {
-        return DB::select('SELECT * FROM generalReportes WHERE folio = '.$id);
+        return DB::select('SELECT * FROM generalreportes WHERE folio = '.$id);
     }
 
     public function atendiendoReporte ( $id ) {

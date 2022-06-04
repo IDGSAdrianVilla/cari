@@ -24,7 +24,7 @@ class PageController extends Controller
                                   nombrePoblacion,
                                   nombreProblema,
                                   fechaAlta
-                           FROM generalReportes
+                           FROM generalreportes
                            WHERE status = "Pendiente"
                            ORDER BY folio ASC
                            LIMIT 5');
@@ -67,8 +67,8 @@ class PageController extends Controller
 
     public function obtenerInsumosReportes ( $status ) {
         if ( session()->has('usuario') ) {
-            $reportes = DB::select('SELECT * FROM generalReportes WHERE status = "'.$status.'"');
-            $detalleReporte = DB::select('SELECT * FROM generalReportes WHERE status = "'.$status.'" LIMIT 1');
+            $reportes = DB::select('SELECT * FROM generalreportes WHERE status = "'.$status.'"');
+            $detalleReporte = DB::select('SELECT * FROM generalreportes WHERE status = "'.$status.'" LIMIT 1');
 
             $poblaciones    = $this->obtenerTblCatPoblaciones();
             $problemas      = $this->obtenerTblCatProblemas();
