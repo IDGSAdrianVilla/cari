@@ -109,7 +109,6 @@ $(document).ready(function(){
 
 var textarea = document.querySelector('#direccion');
 
-textarea.addEventListener('keydown', autosize);
              
 function autosize(){
     var el = this;
@@ -121,7 +120,6 @@ function autosize(){
 
 var textarea = document.querySelector('#referencias');
 
-textarea.addEventListener('keydown', autosize);
              
 function autosize(){
     var el = this;
@@ -133,7 +131,6 @@ function autosize(){
 
 var textarea = document.querySelector('#problema');
 
-textarea.addEventListener('keydown', autosize);
              
 function autosize(){
     var el = this;
@@ -145,7 +142,6 @@ function autosize(){
 
 var textarea = document.querySelector('#observaciones');
 
-textarea.addEventListener('keydown', autosize);
              
 function autosize(){
     var el = this;
@@ -157,7 +153,6 @@ function autosize(){
 
 var textarea = document.querySelector('#direccion1');
 
-textarea.addEventListener('keydown', autosize);
              
 function autosize(){
     var el = this;
@@ -169,7 +164,6 @@ function autosize(){
 
 var textarea = document.querySelector('#caracteristicas');
 
-textarea.addEventListener('keydown', autosize);
              
 function autosize(){
     var el = this;
@@ -181,7 +175,6 @@ function autosize(){
 
 var textarea = document.querySelector('#referencias1');
 
-textarea.addEventListener('keydown', autosize);
              
 function autosize(){
     var el = this;
@@ -193,7 +186,6 @@ function autosize(){
 
 var textarea = document.querySelector('#disponibilidad1');
 
-textarea.addEventListener('keydown', autosize);
              
 function autosize(){
     var el = this;
@@ -205,7 +197,6 @@ function autosize(){
 
 var textarea = document.querySelector('#observaciones1');
 
-textarea.addEventListener('keydown', autosize);
              
 function autosize(){
     var el = this;
