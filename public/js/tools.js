@@ -83,6 +83,7 @@ $(document).ready(function(){
         let PKTblEmpleado = $('#PKTblEmpleado').val();
         
         let insert = "";
+        const img = 'https://cari.villasoftsolutions.com/project/public/images/proceso.png';
         $(".apartadoBotones").empty();
 
         if ( r[0].status == 'Atendido') {
@@ -112,19 +113,19 @@ $(document).ready(function(){
             if ( r[0].empleadoAtendiendo == "" || r[0].empleadoAtendiendo == null ) {
                 insert += `
                     <div class="col-sm-2">
-                    <a href="/atendiendo/`+r[0].folio+`" class="btn btn-primary form-control" style="margin-top: 15px;"><img src="../images/proceso.png" alt="" width="22px"></a>
+                    <a href="/atendiendo/`+r[0].folio+`" class="btn btn-primary form-control" style="margin-top: 15px;"><img src="`+img+`" alt="" width="22px"></a>
                     </div>
                 `;
             } else if ( r[0].PKTblEmpleadosAtediendo == PKTblEmpleado ) {
                 insert += `
                     <div class="col-sm-2">
-                        <a href="/desatendiendo/`+r[0].folio+`" class="btn btn-danger form-control" style="margin-top: 15px;"><img src="../images/proceso.png" alt="" width="22px"></a>
+                        <a href="/desatendiendo/`+r[0].folio+`" class="btn btn-danger form-control" style="margin-top: 15px;"><img src="`+img+`" alt="" width="22px"></a>
                     </div>
                 `;
             } else {
                 insert += `
                     <div class="col-sm-2">
-                        <a class="btn btn-danger form-control" style="margin-top: 15px;"><img src="../images/proceso.png" alt="" width="22px"></a>
+                        <a class="btn btn-danger form-control" style="margin-top: 15px;"><img src="`+img+`" alt="" width="22px"></a>
                     </div>
                 `;
             }
@@ -142,19 +143,19 @@ $(document).ready(function(){
             if ( r[0].empleadoAtendiendo == "" || r[0].empleadoAtendiendo == null ) {
                 insert += `
                     <div class="col-sm-2">
-                    <a href="/atendiendo/`+r[0].folio+`" class="btn btn-primary form-control" style="margin-top: 15px;"><img src="../images/proceso.png" alt="" width="22px"></a>
+                    <a href="/atendiendo/`+r[0].folio+`" class="btn btn-primary form-control" style="margin-top: 15px;"><img src="`+img+`" alt="" width="22px"></a>
                     </div>
                 `;
             } else if ( r[0].PKTblEmpleadosAtediendo == PKTblEmpleado ) {
                 insert += `
                     <div class="col-sm-2">
-                        <a href="/desatendiendo/`+r[0].folio+`" class="btn btn-danger form-control" style="margin-top: 15px;"><img src="../images/proceso.png" alt="" width="22px"></a>
+                        <a href="/desatendiendo/`+r[0].folio+`" class="btn btn-danger form-control" style="margin-top: 15px;"><img src="`+img+`" alt="" width="22px"></a>
                     </div>
                 `;
             } else {
                 insert += `
                     <div class="col-sm-2">
-                        <a class="btn btn-danger form-control" style="margin-top: 15px;"><img src="../images/proceso.png" alt="" width="22px"></a>
+                        <a class="btn btn-danger form-control" style="margin-top: 15px;"><img src="`+img+`" alt="" width="22px"></a>
                     </div>
                 `;
             }
