@@ -25,7 +25,7 @@
         <div class="col-sm-2">
             <div class="form-group">
                 <label>Reporte</label>
-                <a href="{{ url('reporteExcel') }}"><button class="btn btn-info form-control"><img src="asset( 'asset( 'images/reporte.png )"alt="" width' )="22px"></button></a>
+                <a href="{{ url('reporteExcel') }}"><button class="btn btn-info form-control"><img src="{{ asset('asset( 'images/e }}porte.png )"alt="" width' )="22px"></button></a>
             </div>
         </div>
 
@@ -86,13 +86,13 @@
                                 <td class="table-data verModalReporte"><b></b>
                                     <a target="_blank" href="https://www.google.es/maps?q={{ $item->coordenadas }}">
                                         <div style="width: 100%; height: 100%;">
-                                            <img src="asset( 'images/maps.png' )" alt="" width="22px">
+                                            <img src="{{ asset('images/maps.png') }}" alt="" width="22px">
                                         </div>
                                     </a>
                                 </td>
                             @else
                                 <td class="table-data verModalReporte" data-toggle='modal' data-target='#verModalReporte' id="{{ $item->folio }}">
-                                    <img src="asset( 'images/sinmaps.png' )" alt="" width="22px">
+                                    <img src="{{ asset('images/sinmaps.png') }}" alt="" width="22px">
                                 </td>
                             @endif
 
@@ -100,7 +100,7 @@
                                 <td style="text-align: center;">
                                     <a href="/retomar/{{ $item->folio }}">
                                         <div style="width: 100%; height: 100%;">
-                                            <img src="asset( 'images/retomar.png' )" alt="" width="22px">
+                                            <img src="{{ asset('images/retomar.png') }}" alt="" width="22px">
                                         </div>
                                     </a>
                                 </td>
@@ -108,13 +108,13 @@
                                 <td class="table-data">                
                                     <a href="/atender/{{ $item->folio }}">
                                         <div style="width: 100%; height: 100%;">
-                                            <img src="asset( 'images/atender.png' )" alt="" width="22px">
+                                            <img src="{{ asset('images/atender.png') }}" alt="" width="22px">
                                         </div>
                                     </a>
                                 </td>
                             @else
                                 <td class="table-data">
-                                    <img src="asset( 'images/incompleto.png' )" alt="" width="22px">
+                                    <img src="{{ asset('images/incompleto.png') }}" alt="" width="22px">
                                 </td>
                             @endif
 
