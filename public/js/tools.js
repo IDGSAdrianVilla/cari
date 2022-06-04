@@ -112,19 +112,19 @@ $(document).ready(function(){
             if ( r[0].empleadoAtendiendo == "" || r[0].empleadoAtendiendo == null ) {
                 insert += `
                     <div class="col-sm-2">
-                    <a href="/atendiendo/`+r[0].folio+`" class="btn btn-primary form-control" style="margin-top: 15px;"><img src=" {{ asset('images/proceso.png') }} " alt="" width="22px"></a>
+                    <a href="/atendiendo/`+r[0].folio+`" class="btn btn-primary form-control" style="margin-top: 15px;"><img src="../images/proceso.png" alt="" width="22px"></a>
                     </div>
                 `;
             } else if ( r[0].PKTblEmpleadosAtediendo == PKTblEmpleado ) {
                 insert += `
                     <div class="col-sm-2">
-                        <a href="/desatendiendo/`+r[0].folio+`" class="btn btn-danger form-control" style="margin-top: 15px;"><img src=" {{ asset('images/proceso.png') }} " alt="" width="22px"></a>
+                        <a href="/desatendiendo/`+r[0].folio+`" class="btn btn-danger form-control" style="margin-top: 15px;"><img src="../images/proceso.png" alt="" width="22px"></a>
                     </div>
                 `;
             } else {
                 insert += `
                     <div class="col-sm-2">
-                        <a class="btn btn-danger form-control" style="margin-top: 15px;"><img src=" {{ asset('images/proceso.png') }} " alt="" width="22px"></a>
+                        <a class="btn btn-danger form-control" style="margin-top: 15px;"><img src="../images/proceso.png" alt="" width="22px"></a>
                     </div>
                 `;
             }
@@ -142,19 +142,19 @@ $(document).ready(function(){
             if ( r[0].empleadoAtendiendo == "" || r[0].empleadoAtendiendo == null ) {
                 insert += `
                     <div class="col-sm-2">
-                    <a href="/atendiendo/`+r[0].folio+`" class="btn btn-primary form-control" style="margin-top: 15px;"><img src=" {{ asset('images/proceso.png') }} " alt="" width="22px"></a>
+                    <a href="/atendiendo/`+r[0].folio+`" class="btn btn-primary form-control" style="margin-top: 15px;"><img src="../images/proceso.png" alt="" width="22px"></a>
                     </div>
                 `;
             } else if ( r[0].PKTblEmpleadosAtediendo == PKTblEmpleado ) {
                 insert += `
                     <div class="col-sm-2">
-                        <a href="/desatendiendo/`+r[0].folio+`" class="btn btn-danger form-control" style="margin-top: 15px;"><img src=" {{ asset('images/proceso.png') }} " alt="" width="22px"></a>
+                        <a href="/desatendiendo/`+r[0].folio+`" class="btn btn-danger form-control" style="margin-top: 15px;"><img src="../images/proceso.png" alt="" width="22px"></a>
                     </div>
                 `;
             } else {
                 insert += `
                     <div class="col-sm-2">
-                        <a class="btn btn-danger form-control" style="margin-top: 15px;"><img src=" {{ asset('images/proceso.png') }} " alt="" width="22px"></a>
+                        <a class="btn btn-danger form-control" style="margin-top: 15px;"><img src="../images/proceso.png" alt="" width="22px"></a>
                     </div>
                 `;
             }
