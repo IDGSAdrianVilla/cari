@@ -290,7 +290,7 @@ $(document).ready(function(){
 
         $(".asd").css('filter','grayscale(0.1) blur(10px)');
         $.ajax({
-            url:'/detalleUsuario/'+id,
+            url: route('detalleUsuario', {id}),
             type:'get',
             success:  function (detalleUsuario) {
                 mapToFormInsumoUsuario(detalleUsuario);
