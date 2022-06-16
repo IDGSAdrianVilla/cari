@@ -62,5 +62,4 @@
     </div>
 </div>
 
-@routes
 <script src="{{ asset('js/funcionalidadModales.js') }}"></script>

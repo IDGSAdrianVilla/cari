@@ -18,7 +18,6 @@ $(document).ready(function(){
             },
             error:function(x,xs,xt){
                window.open(JSON.stringify(x));
-               //alert('error: ' + JSON.stringify(x) +"\n error string: "+ xs + "\n error throwed: " + xt);
             }
          });
     });
@@ -399,10 +398,10 @@ $(document).ready(function(){
 
     var contadorAfk = 1;
 
-    //Cada minuto se lanza la funci��n ctrlTiempo
+    //Cada minuto se lanza la función ctrlTiempo
     var contadorAfk = setInterval(ctrlTiempo, 60000); 
 
-    //Si el usuario mueve el rat��n cambiamos la variable a 0.
+    //Si el usuario mueve el cursor cambiamos la variable a 0.
     $(this).mousemove(function (e) {
         contadorAfk = 0;
     });
@@ -424,8 +423,8 @@ $(document).ready(function(){
         //Se aumenta en 1 la variable.
         contadorAfk++;
         //Se comprueba si ha pasado del tiempo que designemos.
-        if (contadorAfk > 20) { // M��s de 59 minutos, lo detectamos como ausente o inactivo.
-            var r = confirm("¿Desea continuar en esta sesion?");
+        if (contadorAfk > 20) { // Más de 20 minutos, lo detectamos como ausente o inactivo.
+            var r = confirm("¿Desea continuar en esta sesión?");
             if (r == false) {
                 window.location.assign(route('logout'));
             }else{
