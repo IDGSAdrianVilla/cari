@@ -65,12 +65,13 @@
                         @if ( $item->Activo == 1)
                             <td class="table-data">
                                 <a href="/inactivarCliente/{{ $item->PKTblClientes }}">
+                                <a href="{{ route('inactivarCliente', $item->PKTblClientes) }}">
                                     <button class="btn btn-warning"><b>Inactivar</b></button>
                                 </a>
                             </td>
                         @else
                             <td class="table-data">
-                                <a href="/activarCliente/{{ $item->PKTblClientes }}">
+                                <a href="{{ route('activarCliente', $item->PKTblClientes) }}">
                                     <button class="btn btn-info"><b>Activar</b></button>
                                 </a>
                             </td>

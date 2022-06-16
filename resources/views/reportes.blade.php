@@ -98,15 +98,15 @@
 
                             @if ( !empty($item->empleadoRealizo) )
                                 <td style="text-align: center;">
-                                    <a href="/retomar/{{ $item->folio }}">
+                                    <a href="{{ route('retomar', $item->folio) }}">
                                         <div style="width: 100%; height: 100%;">
                                             <img src="{{ asset('images/retomar.png') }}" alt="" width="22px">
                                         </div>
                                     </a>
                                 </td>
                             @elseif ( !empty($item->diagnostico) || !empty($item->solucion) )
-                                <td class="table-data">                
-                                    <a href="/atender/{{ $item->folio }}">
+                                <td class="table-data">
+                                    <a href="{{ route('atender', $item->folio) }}">
                                         <div style="width: 100%; height: 100%;">
                                             <img src="{{ asset('images/atender.png') }}" alt="" width="22px">
                                         </div>

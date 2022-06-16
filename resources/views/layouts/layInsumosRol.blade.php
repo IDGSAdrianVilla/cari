@@ -41,13 +41,13 @@
 
                 @if ( $item->Activo == 1)
                     <td class="table-data">
-                        <a href="/inactivarRol/{{ $item->PKCatRoles }}">
+                        <a href="{{ route('inactivarRol', $item->PKCatRoles) }}">
                             <button class="btn btn-warning"><b>Inactivar</b></button>
                         </a>
                     </td>
                 @else
                     <td class="table-data">
-                        <a href="/activarRol/{{ $item->PKCatRoles }}">
+                        <a href="{{ route('activarRol', $item->PKCatRoles) }}">
                             <button class="btn btn-info"><b>Activar</b></button>
                         </a>
                     </td>
