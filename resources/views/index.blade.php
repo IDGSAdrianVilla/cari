@@ -68,7 +68,7 @@
                                     </div>
 
                                     <center>
-                                        <div class="g-recaptcha" data-sitekey="6Le3XXogAAAAAGgD2zCTsaVT6cMwAFzF68aKgEoE"></div>
+                                        <div class="g-recaptcha" data-sitekey="{{env('KEY_RECAPTCHA')}}"></div>
                                         <br>
                                     </center>
 
