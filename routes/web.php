@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('login');
+    return view('index');
 });
 
 Route::post('/login','App\Http\Controllers\UserController@login')->name('login');

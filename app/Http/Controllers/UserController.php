@@ -13,7 +13,7 @@ class UserController extends Controller
 
     public function login (Request $request) {
         $return = TblEmpleados::where([
-                                        ["usuario",$request['usuario']],
+                                        ["usuario",$request['correo']],
                                         ["contrasenia",$request['contrasenia']],
                                         ["Activo", 1]
                                      ])
@@ -22,7 +22,7 @@ class UserController extends Controller
         session()->flush();
         session(['usuario' => $return]);
 
-        return count($return) > 0 ? redirect('inicio') : back();
+        return count($return) > 0 ? redirect('inicio') : back()->withErrors(['mensajeError' => 'Por favor verifique sus credenciales']);
     }
 
     public function actualizarEmpleado ( Request $request ) {
