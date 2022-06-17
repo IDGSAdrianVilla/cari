@@ -175,7 +175,7 @@ $(document).ready(function(){
 
         $(".asd").css('filter','grayscale(0.1) blur(10px)');
         $.ajax({
-            url:'/detallePoblacion/'+id,
+            url: route('detallePoblacion', {id}),
             type:'get',
             success:  function (detallePoblacion) {
                 mapToFormInsumoPoblacion(detallePoblacion);
@@ -214,7 +214,7 @@ $(document).ready(function(){
 
         $(".asd").css('filter','grayscale(0.1) blur(10px)');
         $.ajax({
-            url:'/detalleProblema/'+id,
+            url: route('detalleProblema', {id}),
             type:'get',
             success:  function (detalleProblema) {
                 mapToFormInsumoProblema(detalleProblema);
@@ -252,7 +252,7 @@ $(document).ready(function(){
 
         $(".asd").css('filter','grayscale(0.1) blur(10px)');
         $.ajax({
-            url:'/detalleRol/'+id,
+            url: route('detalleRol', {id}),
             type:'get',
             success:  function (detalleRol) {
                 mapToFormInsumoRol(detalleRol);
