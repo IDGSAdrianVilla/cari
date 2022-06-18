@@ -6,7 +6,7 @@
                 <h4 class="modal-title"><b> {{ session('usuario')[0]->{'nombreEmpleado'} }} {{ session('usuario')[0]->{'apellidoPaterno'} }} {{ session('usuario')[0]->{'apellidoMaterno'} }} </b></h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" action="{{ route('actualizarSesion') }}" autocomplete="off" method="post" onsubmit="return validarActiazacionUsuario()">
+                <form class="form-horizontal" action="{{ route('actualizarSesion') }}" autocomplete="off" method="post" onsubmit="return validarActiazacionUsuarioC()">
                     @csrf
 
                     <div class="form-group" style="display: none;">
@@ -40,8 +40,8 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3">Correo:</label>
                         <div class="col-sm-9">
-                            <input name="correo" id="correo" type="text" class="form-control" placeholder="Correo" value="{{ session('usuario')[0]->{'correo'} }}">
-                            <b id="result"></b>
+                            <input name="correo" type="text" id="correoInput" class="form-control" placeholder="Correo" value="{{ session('usuario')[0]->{'correo'} }}">
+                            <b class="resultInput"></b>
                         </div>
                     </div>
 

@@ -1,5 +1,5 @@
 function validarActiazacionUsuario() {
-    let correo = $('#correo').val();
+    let correo = $('#correoInput').val();
     console.log(correo);
     return validateEmail(correo) ? true : false;
 }
@@ -11,8 +11,8 @@ const validateEmail = (email) => {
 };
 
 const validate = () => {
-    const $result = $('#result');
-    const email = $('#correo').val();
+    const $result = $('.resultInput');
+    const email = $('#correoInput').val();
     $result.text('');
 
     if (validateEmail(email)) {
@@ -25,9 +25,36 @@ const validate = () => {
     return false;
 }
 
+function validarActiazacionUsuarioC() {
+    let correo = $('#correoInput2').val();
+    console.log(correo);
+    return validateEmailC(correo) ? true : false;
+}
+
+const validateEmailC = (email) => {
+    return email.match(
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+};
+
+const validateC = () => {
+    const $result = $('.resultInput2');
+    const email = $('#correoInput2').val();
+    $result.text('');
+
+    if (validateEmailC(email)) {
+        $result.text('Correo válido');
+        $result.css('color', 'green');
+    } else {
+        $result.text('Correo inválido');
+        $result.css('color', 'red');
+    }
+    return false;
+}
 
 $(document).ready(function(){
-    $('#correo').on('input', validate);
+    $('#correoInput').on('input', validate);
+    $('#correoInput2').on('input', validateC);
     
     $(".verModalReporte").click( function(){
 
