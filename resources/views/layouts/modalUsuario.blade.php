@@ -8,6 +8,11 @@
             <div class="modal-body">
                 <form class="form-horizontal" action="{{ route('actualizarSesion') }}" autocomplete="off" method="post" onsubmit="return validarActiazacionUsuario()">
                     @csrf
+
+                    <div class="form-group" style="display: none;">
+                        <input name="PKTblEmpleados" type="text" class="form-control" value="{{ session('usuario')[0]->{'PKTblEmpleados'} }}">
+                    </div>
+
                     <div class="form-group">
                         <label class="control-label col-sm-3">Nombre:</label>
                         <div class="col-sm-9">
