@@ -36,7 +36,7 @@ class ClientesController extends Controller
                     $cliente->save();
                 DB::commit();
 
-                return back();
+                return redirect('obtenerClientes');
 
             } catch (\Throwable $th) {
                 Log::info($th);
@@ -53,7 +53,7 @@ class ClientesController extends Controller
                 TblClientes::where('PKTblClientes', $id)
                         ->update(['Activo' => 0]);
 
-                return back();
+                return redirect('obtenerClientes');
             } catch (\Throwable $th) {
                 Log::info($th);
                 return back();
@@ -69,7 +69,7 @@ class ClientesController extends Controller
                 TblClientes::where('PKTblClientes', $id)
                         ->update(['Activo' => 1]);
 
-                return back();
+                return redirect('obtenerClientes');
             } catch (\Throwable $th) {
                 Log::info($th);
                 return back();

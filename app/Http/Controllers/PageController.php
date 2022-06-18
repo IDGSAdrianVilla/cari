@@ -228,7 +228,7 @@ class PageController extends Controller
                 $roles          = $this->obtenerTblCatRoles();
                 $clientes       = $this->obtenerTblClientes();
         
-                $clientes = TblClientes::select(
+                $tclientes = TblClientes::select(
                                             'tblclientes.PKTblClientes',
                                             'tblclientes.nombreCliente',
                                             'tblclientes.apellidoPaterno',
@@ -253,7 +253,7 @@ class PageController extends Controller
                 }
         
                 return view('clientes')
-                    ->with('tclientes', $clientes)
+                    ->with('tclientes', $tclientes)
                     ->with('poblaciones', $poblaciones)
                     ->with('problemas', $problemas)
                     ->with('roles', $roles)
