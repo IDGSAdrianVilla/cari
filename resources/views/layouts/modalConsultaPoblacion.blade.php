@@ -16,14 +16,14 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3">Nombre Población:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control parametroNombrePoblacion" name="nombrePoblacion" style="background: white;">
+                            <input type="text" class="form-control parametroNombrePoblacion" name="nombrePoblacion" style="background: white;" onkeypress="return soloLetras(event);" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label col-sm-3">Código Postal:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control parametroCP" name="codigoPostal" style="background: white;" maxlength="5">
+                            <input type="text" class="form-control parametroCP" name="codigoPostal" style="background: white;" maxlength="5" onkeypress="return soloNumeros(event);" required>
                         </div>
                     </div>
 

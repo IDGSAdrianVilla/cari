@@ -14,7 +14,7 @@
                         <li><a href="{{ url('reportes/Atendido') }}">Atendidos</a></li>
                     </ul>
                 </li>
-                @if (session('usuario')[0]->{'FKCatRoles'} == 3 || session('usuario')[0]->{'FKCatRoles'} == 1)
+                @if ( session('usuario')[0]->{'FKCatRoles'} == 3 || session('usuario')[0]->{'FKCatRoles'} == 1 )
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown">Clientes <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -24,7 +24,7 @@
                     </li>
                 @endif
 
-                @if (session('usuario')[0]->{'FKCatRoles'} == 1)
+                @if ( session('usuario')[0]->{'FKCatRoles'} == 1 )
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown">Insumos <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -47,7 +47,7 @@
                 </li-->
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                @if (session('usuario')[0]->{'FKCatRoles'} == 1)
+                @if ( session('usuario')[0]->{'FKCatRoles'} == 1 )
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown">Usuarios <span class="caret"></span></a>
                         <ul class="dropdown-menu">

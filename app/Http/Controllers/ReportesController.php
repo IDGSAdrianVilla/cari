@@ -19,155 +19,185 @@ class ReportesController extends Controller
 {
 
     public function registrarReporte (Request $request) {
+        if ( session()->has('usuario') ) {
+            try {
 
-        try {
+                DB::beginTransaction();
 
-            DB::beginTransaction();
+                    $detalle = new TblDetalleReporte;
+                    $detalle->save();
 
-                $detalle = new TblDetalleReporte;
-                $detalle->save();
+                    $reporte                            = new TblReportes;
+                    $reporte->FKCatProblemas            = $request['PKCatProblemas'];
+                    $reporte->FKTblEmpleadosRecibio     = session('usuario')[0]->{'PKTblEmpleados'}; // esto cambiara una vez implementado el login
+                    $reporte->FKCatStatus               = 1; // es el primer status por defecto para recien registrado
+                    $reporte->FKTblDetalleReporte       = $detalle->id;
+                    $reporte->FKTblClientes             = $request['PKTblClientes'];
+                    $reporte->descripcionProblema       = $request['descripcionProblema'];
+                    $reporte->observaciones             = $request['observaciones'];
+                    $reporte->fechaAlta                 = Carbon::now();
+                    $var = $reporte->save();
+                    
+                DB::commit();
 
-                $reporte                            = new TblReportes;
-                $reporte->FKCatProblemas            = $request['PKCatProblemas'];
-                $reporte->FKTblEmpleadosRecibio     = session('usuario')[0]->{'PKTblEmpleados'}; // esto cambiara una vez implementado el login
-                $reporte->FKCatStatus               = 1; // es el primer status por defecto para recien registrado
-                $reporte->FKTblDetalleReporte       = $detalle->id;
-                $reporte->FKTblClientes             = $request['PKTblClientes'];
-                $reporte->descripcionProblema       = $request['descripcionProblema'];
-                $reporte->observaciones             = $request['observaciones'];
-                $reporte->fechaAlta                 = Carbon::now();
-                $var = $reporte->save();
-                
-            DB::commit();
+                return back();
 
-            return back();
-
-        } catch (\Throwable $th) {
-            Log::info($th);
-            return back();
+            } catch (\Throwable $th) {
+                Log::info($th);
+                return back();
+            }
+        } else {
+            return redirect('/');
         }
-
     }
 
     public function actualizarReporte (Request $request) {
-        try {
+        if ( session()->has('usuario') ) {
+            try {
 
-            DB::beginTransaction();
-                TblReportes::where('PKTblReportes', $request['PKTblReportes'])
-                           ->update([
-                            'descripcionProblema' => $request['descripcionProblema'],
-                            'observaciones'       => $request['observaciones']
-                        ]);
-                        
-                TblDetalleReporte::where('PKTblDetalleReporte', DB::raw('(SELECT FKTblDetalleReporte FROM tblreportes WHERE PKTblReportes = '.$request["PKTblReportes"].')'))
-                                 ->update([
-                                    'diagnostico'               => $request['diagnostico'],
-                                    'solucion'                  => $request['solucion'],
-                                    'FKTblEmpleadosActualizo'   => session('usuario')[0]->{'PKTblEmpleados'},
-                                    'fechaActualizacion'        => Carbon::now()
-                                ]);
-            DB::commit();
+                DB::beginTransaction();
+                    TblReportes::where('PKTblReportes', $request['PKTblReportes'])
+                            ->update([
+                                'descripcionProblema' => $request['descripcionProblema'],
+                                'observaciones'       => $request['observaciones']
+                            ]);
+                            
+                    TblDetalleReporte::where('PKTblDetalleReporte', DB::raw('(SELECT FKTblDetalleReporte FROM tblreportes WHERE PKTblReportes = '.$request["PKTblReportes"].')'))
+                                    ->update([
+                                        'diagnostico'               => $request['diagnostico'],
+                                        'solucion'                  => $request['solucion'],
+                                        'FKTblEmpleadosActualizo'   => session('usuario')[0]->{'PKTblEmpleados'},
+                                        'fechaActualizacion'        => Carbon::now()
+                                    ]);
+                DB::commit();
 
-            //return redirect('/reportes/Pendiente');
-            return back();
-        } catch (\Throwable $th) {
-            Log::info($th);
-            return back();
+                //return redirect('/reportes/Pendiente');
+                return back();
+            } catch (\Throwable $th) {
+                Log::info($th);
+                return back();
+            }
+        } else {
+            return redirect('/');
         }
     }
 
     public function obtenerDetalleReporte ( $id ) {
-        return DB::select('SELECT * FROM generalreportes WHERE folio = '.$id);
+        if ( session()->has('usuario') ) {
+            return DB::select('SELECT * FROM generalreportes WHERE folio = '.$id);
+        } else {
+            return redirect('/');
+        }
     }
 
     public function atendiendoReporte ( $id ) {
-        try {
-            DB::beginTransaction();
-                $temp = TblReportes::where('PKTblReportes', $id)
-                    ->first();
+        if ( session()->has('usuario') ) {
+            try {
+                DB::beginTransaction();
+                    $temp = TblReportes::where('PKTblReportes', $id)
+                        ->first();
 
-                TblDetalleReporte::where('PKTblDetalleReporte', $temp->{'FKTblDetalleReporte'})
-                                ->update([
-                                    'FKTblEmpleadosAtediendo'   => session('usuario')[0]->{'PKTblEmpleados'},
-                                    'fechaAtendiendo'           => Carbon::now()
-                                ]);
-            DB::commit();
+                    TblDetalleReporte::where('PKTblDetalleReporte', $temp->{'FKTblDetalleReporte'})
+                                    ->update([
+                                        'FKTblEmpleadosAtediendo'   => session('usuario')[0]->{'PKTblEmpleados'},
+                                        'fechaAtendiendo'           => Carbon::now()
+                                    ]);
+                DB::commit();
 
-            return back();
-        } catch (\Throwable $th) {
-            Log::info($th);
-            return back();
+                return back();
+            } catch (\Throwable $th) {
+                Log::info($th);
+                return back();
+            }
+        } else {
+            return redirect('/');
         }
     }
 
     public function desatendiendoReporte ( $id ) {
-        try {
-            DB::beginTransaction();
-                $temp = TblReportes::where('PKTblReportes', $id)
-                    ->first();
+        if ( session()->has('usuario') ) {
+            try {
+                DB::beginTransaction();
+                    $temp = TblReportes::where('PKTblReportes', $id)
+                        ->first();
 
-                TblDetalleReporte::where('PKTblDetalleReporte', $temp->{'FKTblDetalleReporte'})
-                                ->update([
-                                    'FKTblEmpleadosAtediendo'   => null,
-                                    'fechaAtendiendo'           => null
-                                ]);
-            DB::commit();
+                    TblDetalleReporte::where('PKTblDetalleReporte', $temp->{'FKTblDetalleReporte'})
+                                    ->update([
+                                        'FKTblEmpleadosAtediendo'   => null,
+                                        'fechaAtendiendo'           => null
+                                    ]);
+                DB::commit();
 
-            return back();
-        } catch (\Throwable $th) {
-            Log::info($th);
-            return back();
+                return back();
+            } catch (\Throwable $th) {
+                Log::info($th);
+                return back();
+            }
+        } else {
+            return redirect('/');
         }
     }
 
     public function atenderReporte ( $id ) {
-        try {
+        if ( session()->has('usuario') ) {
+            try {
 
-            DB::beginTransaction();
-                TblReportes::where('PKTblReportes', $id)
-                           ->update([
-                                'FKCatStatus' => 2
-                            ]);
+                DB::beginTransaction();
+                    TblReportes::where('PKTblReportes', $id)
+                            ->update([
+                                    'FKCatStatus' => 2
+                                ]);
 
-                TblDetalleReporte::where('PKTblDetalleReporte', DB::raw('(SELECT FKTblDetalleReporte FROM tblreportes WHERE PKTblReportes = '.$id.')'))
-                                 ->update([
-                                        'FKTblEmpleadosAtencion'    => session('usuario')[0]->{'PKTblEmpleados'},
-                                        'fechaAtencion'             => Carbon::now()
-                                    ]);
-            DB::commit();
+                    TblDetalleReporte::where('PKTblDetalleReporte', DB::raw('(SELECT FKTblDetalleReporte FROM tblreportes WHERE PKTblReportes = '.$id.')'))
+                                    ->update([
+                                            'FKTblEmpleadosAtencion'    => session('usuario')[0]->{'PKTblEmpleados'},
+                                            'fechaAtencion'             => Carbon::now()
+                                        ]);
+                DB::commit();
 
-            return redirect('/reportes/Atendido');
-        } catch (\Throwable $th) {
-            Log::info($th);
-            return back();
+                return redirect('/reportes/Atendido');
+            } catch (\Throwable $th) {
+                Log::info($th);
+                return back();
+            }
+        } else {
+            return redirect('/');
         }
     }
 
     public function retomarReporte ($id) {
-        try {
+        if ( session()->has('usuario') ) {
+            try {
 
-            DB::beginTransaction();
-                TblReportes::where('PKTblReportes', $id)
-                           ->update([
-                                'FKCatStatus' => 1
-                            ]);
+                DB::beginTransaction();
+                    TblReportes::where('PKTblReportes', $id)
+                            ->update([
+                                    'FKCatStatus' => 1
+                                ]);
 
-                TblDetalleReporte::where('PKTblDetalleReporte', DB::raw('(SELECT FKTblDetalleReporte FROM tblreportes WHERE PKTblReportes = '.$id.')'))
-                                 ->update([
-                                        'FKTblEmpleadosAtencion' => null,
-                                        'fechaAtencion'         => null
-                                    ]);
-            DB::commit();
+                    TblDetalleReporte::where('PKTblDetalleReporte', DB::raw('(SELECT FKTblDetalleReporte FROM tblreportes WHERE PKTblReportes = '.$id.')'))
+                                    ->update([
+                                            'FKTblEmpleadosAtencion' => null,
+                                            'fechaAtencion'         => null
+                                        ]);
+                DB::commit();
 
-            return redirect('/reportes/Pendiente');
-        } catch (\Throwable $th) {
-            Log::info($th);
-            return back();
+                return redirect('/reportes/Pendiente');
+            } catch (\Throwable $th) {
+                Log::info($th);
+                return back();
+            }
+        } else {
+            return redirect('/');
         }
     }
 
     public function reporteExcel () {
-        return Excel::download(new ReportesExport, 'reportesPendientes.xlsx');
+        if ( session()->has('usuario') ) {
+            return Excel::download(new ReportesExport, 'reportesPendientes.xlsx');
+        } else {
+            return redirect('/');
+        }
     }
 
 }

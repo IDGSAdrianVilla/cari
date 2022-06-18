@@ -16,14 +16,14 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3">Nombre Rol:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control parametroNombreRol" name="nombreRol" style="background: white;">
+                            <input type="text" class="form-control parametroNombreRol" name="nombreRol" style="background: white;" onkeypress="return soloLetras(event);" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label col-sm-3">Descripción Problema:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control parametroDescripcion" name="descripcionRol" style="background: white;">
+                            <input type="text" class="form-control parametroDescripcion" name="descripcionRol" style="background: white;" onkeypress="return soloLetras(event);" required>
                         </div>
                     </div>
 

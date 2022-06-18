@@ -26,74 +26,82 @@ class UserController extends Controller
     }
 
     public function actualizarEmpleado ( Request $request ) {
-        try {
-            if ( $this->validarCorreo($request['correo'], $request['PKTblEmpleados']) ) {
-                $temporal = TblEmpleados::where('PKTblEmpleados', $request['PKTblEmpleados'])
-                                        ->get();
-    
-                if ( !is_string($request['contrasenia']) && !empty($request['FKCatRoles']) ) {
-                    $data = [
-                        'nombreEmpleado'    => $request['nombreEmpleado'],
-                        'apellidoPaterno'   => $request['apellidoPaterno'],
-                        'apellidoMaterno'   => $request['apellidoMaterno'],
-                        'FKCatRoles'        => $request['FKCatRoles'],
-                        'correo'            => $request['correo']
-                    ];
+        if ( session()->has('usuario') ) {
+            try {
+                if ( $this->validarCorreo($request['correo'], $request['PKTblEmpleados']) ) {
+                    $temporal = TblEmpleados::where('PKTblEmpleados', $request['PKTblEmpleados'])
+                                            ->get();
+        
+                    if ( !is_string($request['contrasenia']) && !empty($request['FKCatRoles']) ) {
+                        $data = [
+                            'nombreEmpleado'    => $request['nombreEmpleado'],
+                            'apellidoPaterno'   => $request['apellidoPaterno'],
+                            'apellidoMaterno'   => $request['apellidoMaterno'],
+                            'FKCatRoles'        => $request['FKCatRoles'],
+                            'correo'            => $request['correo']
+                        ];
+                    } else {
+                        $data = [
+                            'nombreEmpleado'    => $request['nombreEmpleado'],
+                            'apellidoPaterno'   => $request['apellidoPaterno'],
+                            'apellidoMaterno'   => $request['apellidoMaterno'],
+                            'correo'            => $request['correo'],
+                            'FKCatRoles'        => $request['FKCatRoles'],
+                            'contrasenia'       => $request['contrasenia']
+                        ];
+                    }
+        
+                    TblEmpleados::where("PKTblEmpleados", $request['PKTblEmpleados'])
+                                ->update($data);
+        
+                    return back();
                 } else {
-                    $data = [
-                        'nombreEmpleado'    => $request['nombreEmpleado'],
-                        'apellidoPaterno'   => $request['apellidoPaterno'],
-                        'apellidoMaterno'   => $request['apellidoMaterno'],
-                        'correo'            => $request['correo'],
-                        'FKCatRoles'        => $request['FKCatRoles'],
-                        'contrasenia'       => $request['contrasenia']
-                    ];
+                    return back()->withErrors(['mensajeError' => 'Otra cuenta ya esta asociada a este correo.']);
                 }
-    
-                TblEmpleados::where("PKTblEmpleados", $request['PKTblEmpleados'])
-                            ->update($data);
-    
-                return back();
-            } else {
-                return back()->withErrors(['mensajeError' => 'Otra cuenta ya esta asociada a este correo.']);
-            }
 
-        } catch (\Throwable $th) {
-            Log::info($th);
-            return back()->withErrors(['mensajeError' => 'Error al actualizar']);
+            } catch (\Throwable $th) {
+                Log::info($th);
+                return back()->withErrors(['mensajeError' => 'Error al actualizar']);
+            }
+        } else {
+            return redirect('/');
         }
     }
 
     public function actualizarSesion ( Request $request ) {
-        try {
-            if ( $this->validarCorreo($request['correo'], $request['PKTblEmpleados']) ) {
-                if ( !is_string($request['contrasenia']) ) {
-                    $data = [
-                        'nombreEmpleado'    => $request['nombreEmpleado'],
-                        'apellidoPaterno'   => $request['apellidoPaterno'],
-                        'apellidoMaterno'   => $request['apellidoMaterno'],
-                        'correo'            => $request['correo']
-                    ];
+        if ( session()->has('usuario') ) {
+            try {
+                if ( $this->validarCorreo($request['correo'], $request['PKTblEmpleados']) ) {
+                    if ( !is_string($request['contrasenia']) ) {
+                        $data = [
+                            'nombreEmpleado'    => $request['nombreEmpleado'],
+                            'apellidoPaterno'   => $request['apellidoPaterno'],
+                            'apellidoMaterno'   => $request['apellidoMaterno'],
+                            'correo'            => $request['correo']
+                        ];
+                    } else {
+                        $data = [
+                            'nombreEmpleado'    => $request['nombreEmpleado'],
+                            'apellidoPaterno'   => $request['apellidoPaterno'],
+                            'apellidoMaterno'   => $request['apellidoMaterno'],
+                            'correo'            => $request['correo'],
+                            'contrasenia'       => $request['contrasenia']
+                        ];
+                    }
+            
+                    TblEmpleados::where("PKTblEmpleados", session('usuario')[0]->{'PKTblEmpleados'})
+                                ->update($data);
+            
+                    return $this->logout();
                 } else {
-                    $data = [
-                        'nombreEmpleado'    => $request['nombreEmpleado'],
-                        'apellidoPaterno'   => $request['apellidoPaterno'],
-                        'apellidoMaterno'   => $request['apellidoMaterno'],
-                        'correo'            => $request['correo'],
-                        'contrasenia'       => $request['contrasenia']
-                    ];
+                    return back()->withErrors(['mensajeError' => 'Otra cuenta ya esta asociada a este correo.']);
                 }
-        
-                TblEmpleados::where("PKTblEmpleados", session('usuario')[0]->{'PKTblEmpleados'})
-                            ->update($data);
-        
-                return $this->logout();
-            } else {
-                return back()->withErrors(['mensajeError' => 'Otra cuenta ya esta asociada a este correo.']);
+            } catch (\Throwable $th) {
+                Log::info($th);
+                return back()->withErrors(['mensajeError' => 'Error al actualizar']);
             }
-        } catch (\Throwable $th) {
-            Log::info($th);
-            return back()->withErrors(['mensajeError' => 'Error al actualizar']);
+        } else {
+            return redirect('/');
         }
     }
 
@@ -107,78 +115,93 @@ class UserController extends Controller
     }
 
     public function registrarUsuario ( Request $request ) {
-        try {
+        if ( session()->has('usuario') ) {
+            try {
 
-            $verificarExistencia = TblEmpleados::where([
-                                        ['usuario',$request['usuario']],
-                                        ['contrasenia',$request['contrasenia']]
-                                    ])->first();
+                $verificarExistencia = TblEmpleados::where([
+                                            ['usuario',$request['usuario']],
+                                            ['contrasenia',$request['contrasenia']]
+                                        ])->first();
 
-            if( !is_numeric($verificarExistencia) || count($verificarExistencia) == 0 ){
-                DB::beginTransaction();
-                    $usuario                    = new TblEmpleados;
-                    $usuario->FKCatRoles        = $request['FKCatRoles'];
-                    $usuario->nombreEmpleado    = $request['nombreEmpleado'];
-                    $usuario->apellidoPaterno   = $request['apellidoPaterno'];
-                    $usuario->apellidoMaterno   = $request['apellidoMaterno'];
-                    $usuario->fechaAlta         = $request['fechaAlta'];
-                    $usuario->usuario           = $request['usuario'];
-                    $usuario->contrasenia       = $request['contrasenia'];
-                    $usuario->fechaAlta         = Carbon::now();
-                    $usuario->Activo            = 1;
-                    $var = $usuario->save();
-                DB::commit();
+                if( !is_numeric($verificarExistencia) || count($verificarExistencia) == 0 ){
+                    DB::beginTransaction();
+                        $usuario                    = new TblEmpleados;
+                        $usuario->FKCatRoles        = $request['FKCatRoles'];
+                        $usuario->nombreEmpleado    = $request['nombreEmpleado'];
+                        $usuario->apellidoPaterno   = $request['apellidoPaterno'];
+                        $usuario->apellidoMaterno   = $request['apellidoMaterno'];
+                        $usuario->fechaAlta         = $request['fechaAlta'];
+                        $usuario->usuario           = $request['usuario'];
+                        $usuario->contrasenia       = $request['contrasenia'];
+                        $usuario->fechaAlta         = Carbon::now();
+                        $usuario->Activo            = 1;
+                        $var = $usuario->save();
+                    DB::commit();
+                }
+
+                return back();
+            } catch (\Throwable $th) {
+                Log::info($th);
+                return back();
             }
-
-            return back();
-        } catch (\Throwable $th) {
-            Log::info($th);
-            return back();
+        } else {
+            return redirect('/');
         }
     }
 
     public function inactivarUsuario ( $id ) {
-        try {
-            TblEmpleados::where('PKTblEmpleados', $id)
-                        ->update(['Activo' => 0]);
+        if ( session()->has('usuario') ) {
+            try {
+                TblEmpleados::where('PKTblEmpleados', $id)
+                            ->update(['Activo' => 0]);
 
-            return back();
-        } catch (\Throwable $th) {
-            Log::info($th);
-            return back();
+                return back();
+            } catch (\Throwable $th) {
+                Log::info($th);
+                return back();
+            }
+        } else {
+            return redirect('/');
         }
-        
     }
 
     public function activarUsuario ( $id ) {
-        try {
-            TblEmpleados::where('PKTblEmpleados', $id)
-                        ->update(['Activo' => 1]);
+        if ( session()->has('usuario') ) {
+            try {
+                TblEmpleados::where('PKTblEmpleados', $id)
+                            ->update(['Activo' => 1]);
 
-            return back();
-        } catch (\Throwable $th) {
-            Log::info($th);
-            return back();
+                return back();
+            } catch (\Throwable $th) {
+                Log::info($th);
+                return back();
+            }
+        } else {
+            return redirect('/');
         }
     }
 
     public function detalleUsuario ( $PKTblEmpleados ) {
-        return TblEmpleados::select(
-                                'tblempleados.PKTblEmpleados',
-                                'tblempleados.nombreEmpleado',
-                                'tblempleados.apellidoPaterno',
-                                'tblempleados.apellidoMaterno',
-                                'tblempleados.fechaAlta',
-                                'tblempleados.correo',
-                                'tblempleados.usuario',
-                                'tblempleados.Activo',
-                                'tblempleados.contrasenia',
-                                'tblempleados.FKCatRoles',
-                                'catroles.nombreRol'
-                            )
-                           ->join('catroles','PKCatRoles','FKCatRoles')
-                           ->where( 'PKTblEmpleados', $PKTblEmpleados )
-                           ->get();
+        if ( session()->has('usuario') ) {
+            return TblEmpleados::select(
+                                    'tblempleados.PKTblEmpleados',
+                                    'tblempleados.nombreEmpleado',
+                                    'tblempleados.apellidoPaterno',
+                                    'tblempleados.apellidoMaterno',
+                                    'tblempleados.fechaAlta',
+                                    'tblempleados.correo',
+                                    'tblempleados.usuario',
+                                    'tblempleados.Activo',
+                                    'tblempleados.contrasenia',
+                                    'tblempleados.FKCatRoles',
+                                    'catroles.nombreRol'
+                                )
+                                ->join('catroles','PKCatRoles','FKCatRoles')
+                                ->where( 'PKTblEmpleados', $PKTblEmpleados )
+                                ->get();
+        } else {
+            return redirect('/');
+        }
     }
 
     public function logout () {

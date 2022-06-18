@@ -16,59 +16,75 @@ class ClientesController extends Controller
 {
 
     public function registrarCliente ( Request $request) {
-        try {
-            DB::beginTransaction();
-                $direccion                      = new TblDirecciones;
-                $direccion->FKCatPoblaciones    = $request['PKCatPoblaciones'];
-                $direccion->coordenadas         = $request['coordenadas'];
-                $direccion->referencias         = $request['referencias'];
-                $direccion->direccion           = $request['direccion'];
-                $direccion->save();
+        if ( session()->has('usuario') ) {
+            try {
+                DB::beginTransaction();
+                    $direccion                      = new TblDirecciones;
+                    $direccion->FKCatPoblaciones    = $request['PKCatPoblaciones'];
+                    $direccion->coordenadas         = $request['coordenadas'];
+                    $direccion->referencias         = $request['referencias'];
+                    $direccion->direccion           = $request['direccion'];
+                    $direccion->save();
 
-                $cliente                    = new TblClientes;
-                $cliente->FKTblDirecciones  = $direccion->id;
-                $cliente->nombreCliente     = $request['nombreCliente'];
-                $cliente->apellidoPaterno   = $request['apellidoPaterno'];
-                $cliente->apellidoMaterno   = $request['apellidoMaterno'];
-                $cliente->telefono          = $request['telefono'];
-                $cliente->fechaAlta         = Carbon::now();
-                $cliente->save();
-            DB::commit();
+                    $cliente                    = new TblClientes;
+                    $cliente->FKTblDirecciones  = $direccion->id;
+                    $cliente->nombreCliente     = $request['nombreCliente'];
+                    $cliente->apellidoPaterno   = $request['apellidoPaterno'];
+                    $cliente->apellidoMaterno   = $request['apellidoMaterno'];
+                    $cliente->telefono          = $request['telefono'];
+                    $cliente->fechaAlta         = Carbon::now();
+                    $cliente->save();
+                DB::commit();
 
-            return back();
+                return back();
 
-        } catch (\Throwable $th) {
-            Log::info($th);
-            return back();
+            } catch (\Throwable $th) {
+                Log::info($th);
+                return back();
+            }
+        } else {
+            return redirect('/');
         }
     }
 
     public function inactivarCliente ( $id ) {
-        try {
-            TblClientes::where('PKTblClientes', $id)
-                       ->update(['Activo' => 0]);
+        if ( session()->has('usuario') ) {
+            try {
+                TblClientes::where('PKTblClientes', $id)
+                        ->update(['Activo' => 0]);
 
-            return back();
-        } catch (\Throwable $th) {
-            Log::info($th);
-            return back();
+                return back();
+            } catch (\Throwable $th) {
+                Log::info($th);
+                return back();
+            }
+        } else {
+            return redirect('/');
         }
     }
 
     public function activarCliente ( $id ) {
-        try {
-            TblClientes::where('PKTblClientes', $id)
-                       ->update(['Activo' => 1]);
+        if ( session()->has('usuario') ) {
+            try {
+                TblClientes::where('PKTblClientes', $id)
+                        ->update(['Activo' => 1]);
 
-            return back();
-        } catch (\Throwable $th) {
-            Log::info($th);
-            return back();
+                return back();
+            } catch (\Throwable $th) {
+                Log::info($th);
+                return back();
+            }
+        } else {
+            return redirect('/');
         }
     }
 
     public function detalleCliente ( $PKTblClientes ) {
-        return TblClientes::where( 'PKTblClientes', $PKTblClientes )->get();
+        if ( session()->has('usuario') ) {
+            return TblClientes::where( 'PKTblClientes', $PKTblClientes )->get();
+        } else {
+            return redirect('/');
+        }
     }
 
 }
