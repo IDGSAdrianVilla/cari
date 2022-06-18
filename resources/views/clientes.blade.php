@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Inicio</title>
+    <title>Clientes</title>
 
     @include('layouts/cabeceraGeneral')
 </head>

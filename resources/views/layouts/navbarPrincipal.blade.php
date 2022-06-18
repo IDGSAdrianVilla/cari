@@ -14,25 +14,30 @@
                         <li><a href="{{ url('reportes/Atendido') }}">Atendidos</a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown">Insumos <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li data-toggle="modal" data-target="#modalPoblacion"><a>Agregar Poblaci&oacute;n</a></li>
-                        <li data-toggle="modal" data-target="#modalProblema"><a>Agregar Problema</a></li>
-                        <li data-toggle="modal" data-target="#modalRol"><a>Agregar Rol</a></li>
-                        <hr>
-                        <li data-toggle="modal"><a href="{{ url('obtenerInsumosPoblaciones') }}">Poblaciones</a></li>
-                        <li data-toggle="modal"><a href="{{ url('obtenerInsumosProblemas') }}">Problemas</a></li>
-                        <li data-toggle="modal"><a href="{{ url('obtenerInsumosRoles') }}">Roles</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown">Clientes <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li data-toggle="modal" data-target="#modalClienteRegistro"><a>Agregar Cliente</a></li>
-                        <li data-toggle="modal"><a href="{{ url('obtenerClientes') }}">Ver todos</a></li>
-                    </ul>
-                </li>
+                @if (session('usuario')[0]->{'FKCatRoles'} == 3 || session('usuario')[0]->{'FKCatRoles'} == 1)
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">Clientes <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li data-toggle="modal" data-target="#modalClienteRegistro"><a>Agregar Cliente</a></li>
+                            <li data-toggle="modal"><a href="{{ url('obtenerClientes') }}">Ver todos</a></li>
+                        </ul>
+                    </li>
+                @endif
+
+                @if (session('usuario')[0]->{'FKCatRoles'} == 1)
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">Insumos <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li data-toggle="modal" data-target="#modalPoblacion"><a>Agregar Poblaci&oacute;n</a></li>
+                            <li data-toggle="modal" data-target="#modalProblema"><a>Agregar Problema</a></li>
+                            <li data-toggle="modal" data-target="#modalRol"><a>Agregar Rol</a></li>
+                            <hr>
+                            <li data-toggle="modal"><a href="{{ url('obtenerInsumosPoblaciones') }}">Poblaciones</a></li>
+                            <li data-toggle="modal"><a href="{{ url('obtenerInsumosProblemas') }}">Problemas</a></li>
+                            <li data-toggle="modal"><a href="{{ url('obtenerInsumosRoles') }}">Roles</a></li>
+                        </ul>
+                    </li>
+                @endif
                 <!--li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown">M&aacute;s <span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -42,13 +47,15 @@
                 </li-->
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown">Usuarios <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li data-toggle="modal" data-target="#modalUsuarioRegistro"><a>Agregar Usuario</a></li>
-                        <li data-toggle="modal"><a href="{{ url('obtenerUsuarios') }}">Ver todos</a></li>
-                    </ul>
-                </li>
+                @if (session('usuario')[0]->{'FKCatRoles'} == 1)
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">Usuarios <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li data-toggle="modal" data-target="#modalUsuarioRegistro"><a>Agregar Usuario</a></li>
+                            <li data-toggle="modal"><a href="{{ url('obtenerUsuarios') }}">Ver todos</a></li>
+                        </ul>
+                    </li>
+                @endif
                 <li data-toggle="modal" data-target="#modalUsuario"><a><span class="glyphicon glyphicon-user"></span> &nbsp;{{ session('usuario')[0]->{'nombreEmpleado'} }} {{ session('usuario')[0]->{'apellidoPaterno'} }}</a></li>
                 <li><a href="{{ route('logout') }}"><span class="glyphicon glyphicon-log-in"></span> Salir</a></li>
             </ul>

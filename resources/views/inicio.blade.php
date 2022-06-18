@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Inicio</title>
+    <title>CARI</title>
 
     @include('layouts/cabeceraInicio')
 </head>

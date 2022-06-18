@@ -27,7 +27,7 @@ class UserController extends Controller
 
     public function actualizarEmpleado ( Request $request ) {
         try {
-            if ( $this->validarCorreo($request['correo']) ) {
+            if ( $this->validarCorreo($request['correo'], $request['PKTblEmpleados']) ) {
                 $temporal = TblEmpleados::where('PKTblEmpleados', $request['PKTblEmpleados'])
                                         ->get();
     
@@ -53,7 +53,7 @@ class UserController extends Controller
                 TblEmpleados::where("PKTblEmpleados", $request['PKTblEmpleados'])
                             ->update($data);
     
-                return $request['FKCatRoles'] != $temporal[0]['FKCatRoles'] ? $this->logout() : back();
+                return back();
             } else {
                 return back()->withErrors(['mensajeError' => 'Otra cuenta ya esta asociada a este correo.']);
             }
@@ -66,7 +66,7 @@ class UserController extends Controller
 
     public function actualizarSesion ( Request $request ) {
         try {
-            if ( $this->validarCorreo($request['correo']) ) {
+            if ( $this->validarCorreo($request['correo'], $request['PKTblEmpleados']) ) {
                 if ( !is_string($request['contrasenia']) ) {
                     $data = [
                         'nombreEmpleado'    => $request['nombreEmpleado'],
@@ -97,8 +97,12 @@ class UserController extends Controller
         }
     }
 
-    public function validarCorreo( $correo ) {
-        $return = TblEmpleados::where('correo', $correo)->get();
+    public function validarCorreo( $correo, $pk ) {
+        $return = TblEmpleados::where([
+                                        ['correo', $correo],
+                                        ['PKTblEmpleados', '!=', $pk]
+                                     ])
+                              ->get();
         return count($return) > 0 ? false : true;
     }
 

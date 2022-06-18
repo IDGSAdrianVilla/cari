@@ -89,141 +89,161 @@ class PageController extends Controller
     }
 
     public function obtenerInsumosRoles () {
-        $troles         = CatRoles::all();
-        $poblaciones    = $this->obtenerTblCatPoblaciones();
-        $problemas      = $this->obtenerTblCatProblemas();
-        $roles          = $this->obtenerTblCatRoles();
-        $clientes       = $this->obtenerTblClientes();
+        if ( session('usuario')[0]->{'PKTblEmpleados'} == 1 ) {
+            $troles         = CatRoles::orderBy('PKCatRoles', 'DESC')->get();
+            $poblaciones    = $this->obtenerTblCatPoblaciones();
+            $problemas      = $this->obtenerTblCatProblemas();
+            $roles          = $this->obtenerTblCatRoles();
+            $clientes       = $this->obtenerTblClientes();
 
-        $cont = 0;
-        foreach ($roles as $item) {
-            $roles[$cont]['fechaAlta'] = Carbon::parse($roles[$cont]['fechaAlta'])->format('d-m-Y');
-            $cont += 1;
+            $cont = 0;
+            foreach ($troles as $item) {
+                $troles[$cont]['fechaAlta'] = Carbon::parse($troles[$cont]['fechaAlta'])->format('d-m-Y');
+                $cont += 1;
+            }
+
+            return view('insumos')
+                ->with('busqueda','Roles')
+                ->with('troles', $troles)
+                ->with('poblaciones', $poblaciones)
+                ->with('problemas', $problemas)
+                ->with('roles', $roles)
+                ->with('clientes', $clientes);
+        } else {
+            return back()->withErrors(['mensajeError' => 'Al parecer no tienes permitido esto.']);
         }
-
-        return view('insumos')
-             ->with('busqueda','Roles')
-             ->with('troles', $troles)
-             ->with('poblaciones', $poblaciones)
-             ->with('problemas', $problemas)
-             ->with('roles', $roles)
-             ->with('clientes', $clientes);
     }
 
     public function obtenerInsumosProblemas () {
-        $tProblemas = CatProblemas::all();
+        if ( session('usuario')[0]->{'PKTblEmpleados'} == 1 ) {
+            $tProblemas = CatProblemas::orderBy('PKCatProblemas', 'DESC')->get();
 
-        $poblaciones    = $this->obtenerTblCatPoblaciones();
-        $problemas      = $this->obtenerTblCatProblemas();
-        $roles          = $this->obtenerTblCatRoles();
-        $clientes       = $this->obtenerTblClientes();
+            $poblaciones    = $this->obtenerTblCatPoblaciones();
+            $problemas      = $this->obtenerTblCatProblemas();
+            $roles          = $this->obtenerTblCatRoles();
+            $clientes       = $this->obtenerTblClientes();
 
-        $cont = 0;
-        foreach ($tProblemas as $item) {
-            $tProblemas[$cont]['fechaAlta'] = Carbon::parse($tProblemas[$cont]['fechaAlta'])->format('d-m-Y');
-            $cont += 1;
+            $cont = 0;
+            foreach ($tProblemas as $item) {
+                $tProblemas[$cont]['fechaAlta'] = Carbon::parse($tProblemas[$cont]['fechaAlta'])->format('d-m-Y');
+                $cont += 1;
+            }
+
+            return view('insumos')
+                ->with('busqueda','Problemas')
+                ->with('poblaciones', $poblaciones)
+                ->with('problemas', $problemas)
+                ->with('tProblemas', $tProblemas)
+                ->with('roles', $roles)
+                ->with('clientes', $clientes);
+        } else {
+            return back()->withErrors(['mensajeError' => 'Al parecer no tienes permitido esto.']);
         }
-
-        return view('insumos')
-             ->with('busqueda','Problemas')
-             ->with('poblaciones', $poblaciones)
-             ->with('problemas', $problemas)
-             ->with('tProblemas', $tProblemas)
-             ->with('roles', $roles)
-             ->with('clientes', $clientes);
     }
 
     public function obtenerInsumosPoblaciones () {
-        $tPoblaciones   = CatPoblaciones::all();
-        $poblaciones    = $this->obtenerTblCatPoblaciones();
-        $problemas      = $this->obtenerTblCatProblemas();
-        $roles          = $this->obtenerTblCatRoles();
-        $clientes       = $this->obtenerTblClientes();
-
-        $cont = 0;
-        foreach ($tPoblaciones as $item) {
-            $tPoblaciones[$cont]['fechaAlta'] = Carbon::parse($tPoblaciones[$cont]['fechaAlta'])->format('d-m-Y');
-            $cont += 1;
+        if ( session('usuario')[0]->{'PKTblEmpleados'} == 1 ) {
+            $tPoblaciones   = CatPoblaciones::orderBy('PKCatPoblaciones', 'DESC')->get();
+            $poblaciones    = $this->obtenerTblCatPoblaciones();
+            $problemas      = $this->obtenerTblCatProblemas();
+            $roles          = $this->obtenerTblCatRoles();
+            $clientes       = $this->obtenerTblClientes();
+    
+            $cont = 0;
+            foreach ($tPoblaciones as $item) {
+                $tPoblaciones[$cont]['fechaAlta'] = Carbon::parse($tPoblaciones[$cont]['fechaAlta'])->format('d-m-Y');
+                $cont += 1;
+            }
+    
+            return view('insumos')
+                 ->with('busqueda','Poblaciones')
+                 ->with('poblaciones', $poblaciones)
+                 ->with('problemas', $problemas)
+                 ->with('tPoblaciones', $tPoblaciones)
+                 ->with('roles', $roles)
+                 ->with('clientes', $clientes);
+        } else {
+            return back()->withErrors(['mensajeError' => 'Al parecer no tienes permitido esto.']);
         }
-
-        return view('insumos')
-             ->with('busqueda','Poblaciones')
-             ->with('poblaciones', $poblaciones)
-             ->with('problemas', $problemas)
-             ->with('tPoblaciones', $tPoblaciones)
-             ->with('roles', $roles)
-             ->with('clientes', $clientes);
     }
 
     public function obtenerUsuarios () {
-        $poblaciones    = $this->obtenerTblCatPoblaciones();
-        $problemas      = $this->obtenerTblCatProblemas();
-        $roles          = $this->obtenerTblCatRoles();
-        $clientes       = $this->obtenerTblClientes();
+        if ( session('usuario')[0]->{'PKTblEmpleados'} == 1 ) {
+            $poblaciones    = $this->obtenerTblCatPoblaciones();
+            $problemas      = $this->obtenerTblCatProblemas();
+            $roles          = $this->obtenerTblCatRoles();
+            $clientes       = $this->obtenerTblClientes();
 
-        $usuarios = TblEmpleados::select(
-                                'tblempleados.PKTblEmpleados',
-                                'tblempleados.nombreEmpleado',
-                                'tblempleados.apellidoPaterno',
-                                'tblempleados.apellidoMaterno',
-                                'tblempleados.fechaAlta',
-                                'tblempleados.correo',
-                                'tblempleados.Activo',
-                                'catroles.nombreRol'
-                            )
-                            ->join('catroles','PKCatRoles','FKCatRoles')
-                            ->orderBy('PKTblEmpleados','DESC')
-                            ->get();
+            $usuarios = TblEmpleados::select(
+                                    'tblempleados.PKTblEmpleados',
+                                    'tblempleados.nombreEmpleado',
+                                    'tblempleados.apellidoPaterno',
+                                    'tblempleados.apellidoMaterno',
+                                    'tblempleados.fechaAlta',
+                                    'tblempleados.correo',
+                                    'tblempleados.Activo',
+                                    'catroles.nombreRol'
+                                )
+                                ->join('catroles','PKCatRoles','FKCatRoles')
+                                ->orderBy('PKTblEmpleados','DESC')
+                                ->get();
 
-        $cont = 0;
-        foreach ($usuarios as $item) {
-            $usuarios[$cont]['fechaAlta'] = Carbon::parse($usuarios[$cont]['fechaAlta'])->format('d-m-Y');
-            $cont += 1;
+            $cont = 0;
+            foreach ($usuarios as $item) {
+                $usuarios[$cont]['fechaAlta'] = Carbon::parse($usuarios[$cont]['fechaAlta'])->format('d-m-Y');
+                $cont += 1;
+            }
+            return view('usuarios')
+                ->with('usuarios', $usuarios)
+                ->with('poblaciones', $poblaciones)
+                ->with('problemas', $problemas)
+                ->with('roles', $roles)
+                ->with('clientes', $clientes);
+        } else {
+            return back()->withErrors(['mensajeError' => 'Al parecer no tienes permitido esto.']);
         }
-        return view('usuarios')
-             ->with('usuarios', $usuarios)
-             ->with('poblaciones', $poblaciones)
-             ->with('problemas', $problemas)
-             ->with('roles', $roles)
-             ->with('clientes', $clientes);
     }
 
     public function obtenerClientes () {
-        $poblaciones    = $this->obtenerTblCatPoblaciones();
-        $problemas      = $this->obtenerTblCatProblemas();
-        $roles          = $this->obtenerTblCatRoles();
-        $clientes       = $this->obtenerTblClientes();
-
-        $clientes = TblClientes::select(
-                                    'tblclientes.PKTblClientes',
-                                    'tblclientes.nombreCliente',
-                                    'tblclientes.apellidoPaterno',
-                                    'tblclientes.apellidoMaterno',
-                                    'tblclientes.telefono',
-                                    'tblclientes.telefonoOpcional',
-                                    'tblclientes.fechaAlta',
-                                    'tblclientes.Activo',
-                                    'tbldirecciones.coordenadas',
-                                    'tbldirecciones.referencias',
-                                    'tbldirecciones.direccion',
-                                    'catpoblaciones.nombrePoblacion'
-                                )
-                               ->join('tbldirecciones', 'tbldirecciones.PKTblDirecciones', 'tblclientes.FKTblDirecciones')
-                               ->join('catpoblaciones', 'catpoblaciones.PKCatPoblaciones', 'tbldirecciones.FKCatPoblaciones')
-                               ->get();
-
-        $cont = 0;
-        foreach ($clientes as $item) {
-            $clientes[$cont]['fechaAlta'] = Carbon::parse($clientes[$cont]['fechaAlta'])->format('d-m-Y');
-            $cont += 1;
+        if ( session('usuario')[0]->{'PKTblEmpleados'} == 3 || session('usuario')[0]->{'PKTblEmpleados'} == 1 ) {
+            $poblaciones    = $this->obtenerTblCatPoblaciones();
+            $problemas      = $this->obtenerTblCatProblemas();
+            $roles          = $this->obtenerTblCatRoles();
+            $clientes       = $this->obtenerTblClientes();
+    
+            $clientes = TblClientes::select(
+                                        'tblclientes.PKTblClientes',
+                                        'tblclientes.nombreCliente',
+                                        'tblclientes.apellidoPaterno',
+                                        'tblclientes.apellidoMaterno',
+                                        'tblclientes.telefono',
+                                        'tblclientes.telefonoOpcional',
+                                        'tblclientes.fechaAlta',
+                                        'tblclientes.Activo',
+                                        'tbldirecciones.coordenadas',
+                                        'tbldirecciones.referencias',
+                                        'tbldirecciones.direccion',
+                                        'catpoblaciones.nombrePoblacion'
+                                    )
+                                   ->join('tbldirecciones', 'tbldirecciones.PKTblDirecciones', 'tblclientes.FKTblDirecciones')
+                                   ->join('catpoblaciones', 'catpoblaciones.PKCatPoblaciones', 'tbldirecciones.FKCatPoblaciones')
+                                   ->get();
+    
+            $cont = 0;
+            foreach ($clientes as $item) {
+                $clientes[$cont]['fechaAlta'] = Carbon::parse($clientes[$cont]['fechaAlta'])->format('d-m-Y');
+                $cont += 1;
+            }
+    
+            return view('clientes')
+                 ->with('tclientes', $clientes)
+                 ->with('poblaciones', $poblaciones)
+                 ->with('problemas', $problemas)
+                 ->with('roles', $roles)
+                 ->with('clientes', $clientes);
+        } else {
+            return back()->withErrors(['mensajeError' => 'Al parecer no tienes permitido esto.']);
         }
-
-        return view('clientes')
-             ->with('tclientes', $clientes)
-             ->with('poblaciones', $poblaciones)
-             ->with('problemas', $problemas)
-             ->with('roles', $roles)
-             ->with('clientes', $clientes);
     }
 
 }
