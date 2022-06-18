@@ -6,33 +6,33 @@
                 <h4 class="modal-title"><b>Registrar Usuario</b></h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" action="{{ route('registrarUsuario') }}" autocomplete="off" method="post">
+                <form class="form-horizontal" action="{{ route('registrarUsuario') }}" autocomplete="off" method="post" onsubmit="return validarActiazacionUsuarioC2()">
                     @csrf
                     <div class="form-group">
                         <label class="control-label col-sm-3">Nombre:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="Nombre" name="nombreEmpleado" onkeypress="return soloLetras(event);">
+                            <input type="text" class="form-control" placeholder="Nombre" name="nombreEmpleado" onkeypress="return soloLetras(event);" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label col-sm-3">Apellido Paterno:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="Apellido Paterno" name="apellidoPaterno" onkeypress="return soloLetras(event);">
+                            <input type="text" class="form-control" placeholder="Apellido Paterno" name="apellidoPaterno" onkeypress="return soloLetras(event);" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label col-sm-3">Apellido Materno:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="Apellido Materno" name="apellidoMaterno" onkeypress="return soloLetras(event);">
+                            <input type="text" class="form-control" placeholder="Apellido Materno" name="apellidoMaterno" onkeypress="return soloLetras(event);" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label col-sm-3">Rol:</label>
                         <div class="col-sm-9">
-                            <select id="rol" name="FKCatRoles" class="form-control"  style="background: #D5EDFF;">
+                            <select id="rol" name="FKCatRoles" class="form-control"  style="background: #D5EDFF;" required>
                                 <option value="" style="visibility: hidden; display: none;">Seleccione una poblaci&oacute;n</option>
                                 @foreach($roles as $rol)
                                     <option value="{{$rol->PKCatRoles}}">{{$rol->nombreRol}}</option>
@@ -46,16 +46,17 @@
                     </h6>
 
                     <div class="form-group">
-                        <label class="control-label col-sm-3">Usuario:</label>
+                        <label class="control-label col-sm-3">Correo:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="Usuario" onkeypress="return soloLetras(event);" name="usuario">
+                            <input type="text" class="form-control" id="correoInput3" placeholder="Correo" name="correo" required>
+                            <b class="resultInput3"></b>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label col-sm-3">Contraseña:</label>
                         <div class="col-sm-9">
-                            <input type="password" class="form-control" placeholder="Contraseña" name="contrasenia">
+                            <input type="password" class="form-control" placeholder="Contraseña" name="contrasenia" required>
                         </div>
                     </div>
 

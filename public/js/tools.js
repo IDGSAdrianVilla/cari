@@ -52,9 +52,37 @@ const validateC = () => {
     return false;
 }
 
+function validarActiazacionUsuarioC2() {
+    let correo = $('#correoInput3').val();
+    console.log(correo);
+    return validateEmailC2(correo) ? true : false;
+}
+
+const validateEmailC2 = (email) => {
+    return email.match(
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+};
+
+const validateC2 = () => {
+    const $result = $('.resultInput3');
+    const email = $('#correoInput3').val();
+    $result.text('');
+
+    if (validateEmailC2(email)) {
+        $result.text('Correo válido');
+        $result.css('color', 'green');
+    } else {
+        $result.text('Correo inválido');
+        $result.css('color', 'red');
+    }
+    return false;
+}
+
 $(document).ready(function(){
     $('#correoInput').on('input', validate);
     $('#correoInput2').on('input', validateC);
+    $('#correoInput3').on('input', validateC2);
     
     $(".verModalReporte").click( function(){
 

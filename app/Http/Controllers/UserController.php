@@ -114,35 +114,44 @@ class UserController extends Controller
         return count($return) > 0 ? false : true;
     }
 
+    public function validarSoloCorreo( $correo ) {
+        $return = TblEmpleados::where('correo', $correo)->get();
+        return count($return) > 0 ? false : true;
+    }
+
     public function registrarUsuario ( Request $request ) {
         if ( session()->has('usuario') ) {
-            try {
+            if ( $this->validarCorreo($request['correo'], $request['PKTblEmpleados']) ) {
+                try {
 
-                $verificarExistencia = TblEmpleados::where([
-                                            ['usuario',$request['usuario']],
-                                            ['contrasenia',$request['contrasenia']]
-                                        ])->first();
+                    $verificarExistencia = TblEmpleados::where([
+                                                ['usuario',$request['usuario']],
+                                                ['contrasenia',$request['contrasenia']]
+                                            ])->first();
 
-                if( !is_numeric($verificarExistencia) || count($verificarExistencia) == 0 ){
-                    DB::beginTransaction();
-                        $usuario                    = new TblEmpleados;
-                        $usuario->FKCatRoles        = $request['FKCatRoles'];
-                        $usuario->nombreEmpleado    = $request['nombreEmpleado'];
-                        $usuario->apellidoPaterno   = $request['apellidoPaterno'];
-                        $usuario->apellidoMaterno   = $request['apellidoMaterno'];
-                        $usuario->fechaAlta         = $request['fechaAlta'];
-                        $usuario->usuario           = $request['usuario'];
-                        $usuario->contrasenia       = $request['contrasenia'];
-                        $usuario->fechaAlta         = Carbon::now();
-                        $usuario->Activo            = 1;
-                        $var = $usuario->save();
-                    DB::commit();
+                    if( !is_numeric($verificarExistencia) || count($verificarExistencia) == 0 ){
+                        DB::beginTransaction();
+                            $usuario                    = new TblEmpleados;
+                            $usuario->FKCatRoles        = $request['FKCatRoles'];
+                            $usuario->nombreEmpleado    = $request['nombreEmpleado'];
+                            $usuario->apellidoPaterno   = $request['apellidoPaterno'];
+                            $usuario->apellidoMaterno   = $request['apellidoMaterno'];
+                            $usuario->fechaAlta         = $request['fechaAlta'];
+                            $usuario->correo            = $request['correo'];
+                            $usuario->contrasenia       = $request['contrasenia'];
+                            $usuario->fechaAlta         = Carbon::now();
+                            $usuario->Activo            = 1;
+                            $var = $usuario->save();
+                        DB::commit();
+                    }
+
+                    return back();
+                } catch (\Throwable $th) {
+                    Log::info($th);
+                    return back();
                 }
-
-                return back();
-            } catch (\Throwable $th) {
-                Log::info($th);
-                return back();
+            } else {
+                return back()->withErrors(['mensajeError' => 'Otra cuenta ya esta asociada a este correo.']);
             }
         } else {
             return redirect('/');
