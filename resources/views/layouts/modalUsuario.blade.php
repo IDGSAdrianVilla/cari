@@ -6,26 +6,26 @@
                 <h4 class="modal-title"><b> {{ session('usuario')[0]->{'nombreEmpleado'} }} {{ session('usuario')[0]->{'apellidoPaterno'} }} {{ session('usuario')[0]->{'apellidoMaterno'} }} </b></h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" action="{{ route('actualizarEmpleado') }}" autocomplete="off" method="post">
+                <form class="form-horizontal" action="{{ route('actualizarSesion') }}" autocomplete="off" method="post" onsubmit="return validarActiazacionUsuario()">
                     @csrf
                     <div class="form-group">
                         <label class="control-label col-sm-3">Nombre:</label>
                         <div class="col-sm-9">
-                            <input name="nombreEmpleado" type="text" class="form-control" placeholder="Nombre" value="{{ session('usuario')[0]->{'nombreEmpleado'} }}">
+                            <input name="nombreEmpleado" type="text" class="form-control" placeholder="Nombre" value="{{ session('usuario')[0]->{'nombreEmpleado'} }}" onkeypress="return soloLetras(event);">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label col-sm-3">Apellido Paterno:</label>
                         <div class="col-sm-9">
-                            <input name="apellidoPaterno" type="text" class="form-control" placeholder="Apellido Paterno" value="{{ session('usuario')[0]->{'apellidoPaterno'} }}">
+                            <input name="apellidoPaterno" type="text" class="form-control" placeholder="Apellido Paterno" value="{{ session('usuario')[0]->{'apellidoPaterno'} }}" onkeypress="return soloLetras(event);">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label col-sm-3">Apellido Materno:</label>
                         <div class="col-sm-9">
-                            <input name="apellidoMaterno" type="text" class="form-control" placeholder="Apellido Materno" value="{{ session('usuario')[0]->{'apellidoMaterno'} }}">
+                            <input name="apellidoMaterno" type="text" class="form-control" placeholder="Apellido Materno" value="{{ session('usuario')[0]->{'apellidoMaterno'} }}" onkeypress="return soloLetras(event);">
                         </div>
                     </div>
 
@@ -33,9 +33,10 @@
                     <hr>
 
                     <div class="form-group">
-                        <label class="control-label col-sm-3">Usuario:</label>
+                        <label class="control-label col-sm-3">Correo:</label>
                         <div class="col-sm-9">
-                            <input name="usuario" type="text" class="form-control" placeholder="Usuario" value="{{ session('usuario')[0]->{'usuario'} }}">
+                            <input name="correo" id="correo" type="text" class="form-control" placeholder="Correo" value="{{ session('usuario')[0]->{'correo'} }}">
+                            <b id="result"></b>
                         </div>
                     </div>
 
@@ -54,7 +55,7 @@
                     </div>
 
                     <div class="alert alert-warning" style="text-align: justify;">
-                        <a href="javascript:void(0);" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         <p style="padding-right: 25px;">
                             <strong>Atenci&oacute;n!</strong> Para realizar alguna actualizaci&oacute;n de su informaci&oacute;n posteriormente se tendr&aacute; que loguear nuevamente para aplicar los cambios.
                         </p>

@@ -37,6 +37,7 @@ Route::post('registrarReporte','App\Http\Controllers\ReportesController@registra
 
 // Rutas con respecto a usuario/empleado
 Route::post('actualizarEmpleado','App\Http\Controllers\UserController@actualizarEmpleado')->name('actualizarEmpleado');
+Route::post('actualizarSesion','App\Http\Controllers\UserController@actualizarSesion')->name('actualizarSesion');
 
 // Rutas para la navegación de los reportes
 Route::get('/reportes/{status}','App\Http\Controllers\PageController@obtenerInsumosReportes')->name('reportes');

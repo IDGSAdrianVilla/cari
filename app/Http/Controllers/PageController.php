@@ -161,7 +161,16 @@ class PageController extends Controller
         $roles          = $this->obtenerTblCatRoles();
         $clientes       = $this->obtenerTblClientes();
 
-        $usuarios = TblEmpleados::select('PKTblEmpleados','nombreRol', 'nombreEmpleado', 'apellidoPaterno', 'apellidoMaterno', 'tblempleados.fechaAlta', 'usuario', 'tblempleados.Activo')
+        $usuarios = TblEmpleados::select(
+                                'tblempleados.PKTblEmpleados',
+                                'tblempleados.nombreEmpleado',
+                                'tblempleados.apellidoPaterno',
+                                'tblempleados.apellidoMaterno',
+                                'tblempleados.fechaAlta',
+                                'tblempleados.correo',
+                                'tblempleados.Activo',
+                                'catroles.nombreRol'
+                            )
                             ->join('catroles','PKCatRoles','FKCatRoles')
                             ->orderBy('PKTblEmpleados','DESC')
                             ->get();
@@ -185,9 +194,22 @@ class PageController extends Controller
         $roles          = $this->obtenerTblCatRoles();
         $clientes       = $this->obtenerTblClientes();
 
-        $clientes = TblClientes::select('tblclientes.PKTblClientes', 'tblclientes.nombreCliente', 'tblclientes.apellidoPaterno', 'tblclientes.apellidoMaterno', 'tblclientes.telefono', 'tblclientes.telefonoOpcional', 'tblclientes.fechaAlta', 'tblclientes.Activo', 'tbldirecciones.coordenadas', 'tbldirecciones.referencias', 'tbldirecciones.direccion', 'catpoblaciones.nombrePoblacion')
-                               ->join('tbldirecciones','tbldirecciones.PKTblDirecciones','tblclientes.FKTblDirecciones')
-                               ->join('catpoblaciones','catpoblaciones.PKCatPoblaciones','tbldirecciones.FKCatPoblaciones')
+        $clientes = TblClientes::select(
+                                    'tblclientes.PKTblClientes',
+                                    'tblclientes.nombreCliente',
+                                    'tblclientes.apellidoPaterno',
+                                    'tblclientes.apellidoMaterno',
+                                    'tblclientes.telefono',
+                                    'tblclientes.telefonoOpcional',
+                                    'tblclientes.fechaAlta',
+                                    'tblclientes.Activo',
+                                    'tbldirecciones.coordenadas',
+                                    'tbldirecciones.referencias',
+                                    'tbldirecciones.direccion',
+                                    'catpoblaciones.nombrePoblacion'
+                                )
+                               ->join('tbldirecciones', 'tbldirecciones.PKTblDirecciones', 'tblclientes.FKTblDirecciones')
+                               ->join('catpoblaciones', 'catpoblaciones.PKCatPoblaciones', 'tbldirecciones.FKCatPoblaciones')
                                ->get();
 
         $cont = 0;

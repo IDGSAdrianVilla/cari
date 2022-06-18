@@ -1,4 +1,34 @@
+function validarActiazacionUsuario() {
+    let correo = $('#correo').val();
+    console.log(correo);
+    return validateEmail(correo) ? true : false;
+}
+
+const validateEmail = (email) => {
+    return email.match(
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+};
+
+const validate = () => {
+    const $result = $('#result');
+    const email = $('#correo').val();
+    $result.text('');
+
+    if (validateEmail(email)) {
+        $result.text('Correo válido');
+        $result.css('color', 'green');
+    } else {
+        $result.text('Correo inválido');
+        $result.css('color', 'red');
+    }
+    return false;
+}
+
+
 $(document).ready(function(){
+    $('#correo').on('input', validate);
+    
     $(".verModalReporte").click( function(){
 
         let id = $(this).attr("id");
@@ -315,8 +345,8 @@ $(document).ready(function(){
         $(".parametroAMaterno").val(usu[0].apellidoMaterno);
         $(".rolParametro").text(usu[0].nombreRol);
         $(".rolParametro").attr('value', usu[0].FKCatRoles);
-        $(".parametroUsuario").val(usu[0].usuario);
-        $(".parametroUsuario").val(usu[0].usuario);
+        $(".parametroCorreo").val(usu[0].correo);
+        $(".parametroCorreo").val(usu[0].correo);
     }
 
     $(".verModalInstalacion").click( function(){

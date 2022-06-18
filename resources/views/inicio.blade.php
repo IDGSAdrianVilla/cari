@@ -9,10 +9,15 @@
 
     @include('layouts/navbarPrincipal')
 
-    <div class="container">
-        <h2 align="center"><br><br><b style="color:mediumaquamarine;">Pendientes</b></h2>
+    <div class="container" style="padding-top: 80px;">
+        @if($errors->any())
+            <div class="alert alert-danger alert-dismissible" style="z-index: 1001;">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Upss!</strong> {{$errors->first()}}
+            </div>
+        @endif
+        <h2 align="center"><b style="color:mediumaquamarine;">Pendientes</b></h2>
         <div class="col-md-12">
-            <hr>
             <h4 align="center"><b style="color:gray;">Reportes</b></h4>
             <hr>
             <div class="notifications">
@@ -32,7 +37,7 @@
 
                     </div>
                 @endforeach
-                <a href="javascript:void(0);"><h4><b style="color: gray;">Ver m&aacute;s...</b></h4></a>
+                <a href="{{ url('reportes/Pendiente') }}"><h4><b style="color: gray;">Ver m&aacute;s...</b></h4></a>
             </div>
         </div>
     </div>

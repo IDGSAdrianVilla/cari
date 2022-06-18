@@ -6,7 +6,7 @@
                 <h4 class="modal-title"><b>Actualizar Usuario</b></h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" action="{{ route('actualizarEmpleado') }}" autocomplete="off" method="post">
+                <form class="form-horizontal" action="{{ route('actualizarEmpleado') }}" autocomplete="off" method="post" onsubmit="return validarActiazacionUsuario()">
                     @csrf
 
                     <input type="hidden" id="PKTblEmpleados" name="PKTblEmpleados">
@@ -49,17 +49,26 @@
                     </h6>
 
                     <div class="form-group">
-                        <label class="control-label col-sm-3">Usuario:</label>
+                        <label class="control-label col-sm-3">Correo:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control parametroUsuario" placeholder="Usuario" onkeypress="return soloLetras(event);" name="usuario">
+                            <input type="text" class="form-control parametroCorreo" placeholder="Correo" name="correo" id="correo">
+                            <br>
+                            <b id="result"></b>
                         </div>
                     </div>
 
-                    <div class="form-group nuevaContrasenia" style="display:none;">
-                        <label class="control-label col-sm-3">Nueva Contraseña:</label>
+                    <div class="form-group nuevaContrasenia">
+                        <label class="control-label col-sm-3">Actualizar Contraseña:</label>
                         <div class="col-sm-9">
                             <input type="password" class="form-control" placeholder="Nueva Contraseña" name="contrasenia">
                         </div>
+                    </div>
+
+                    <div class="alert alert-warning" style="text-align: justify;">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <p style="padding-right: 25px;">
+                            <strong>Atención!</strong> En caso de realizar alguna modificación que tenga que ver con correo o cambio de rol, se debera logear nuevamente para iniciar con normalidad.
+                        </p>
                     </div>
 
                     <div class="form-group">

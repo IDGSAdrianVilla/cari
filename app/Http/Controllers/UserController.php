@@ -13,8 +13,8 @@ class UserController extends Controller
 
     public function login (Request $request) {
         $return = TblEmpleados::where([
-                                        ["usuario",$request['correo']],
-                                        ["contrasenia",$request['contrasenia']],
+                                        ["correo", $request['correo']],
+                                        ["contrasenia", $request['contrasenia']],
                                         ["Activo", 1]
                                      ])
                               ->get();
@@ -27,68 +27,79 @@ class UserController extends Controller
 
     public function actualizarEmpleado ( Request $request ) {
         try {
-
-            if ( $request['PKTblEmpleados'] == session('usuario')[0]->{'PKTblEmpleados'}) {
-
+            if ( $this->validarCorreo($request['correo']) ) {
                 $temporal = TblEmpleados::where('PKTblEmpleados', $request['PKTblEmpleados'])
                                         ->get();
-
+    
                 if ( !is_string($request['contrasenia']) && !empty($request['FKCatRoles']) ) {
                     $data = [
                         'nombreEmpleado'    => $request['nombreEmpleado'],
                         'apellidoPaterno'   => $request['apellidoPaterno'],
                         'apellidoMaterno'   => $request['apellidoMaterno'],
                         'FKCatRoles'        => $request['FKCatRoles'],
-                        'usuario'           => $request['usuario']
+                        'correo'            => $request['correo']
                     ];
                 } else {
                     $data = [
                         'nombreEmpleado'    => $request['nombreEmpleado'],
                         'apellidoPaterno'   => $request['apellidoPaterno'],
                         'apellidoMaterno'   => $request['apellidoMaterno'],
-                        'usuario'           => $request['usuario'],
+                        'correo'            => $request['correo'],
                         'FKCatRoles'        => $request['FKCatRoles'],
                         'contrasenia'       => $request['contrasenia']
                     ];
                 }
-
+    
                 TblEmpleados::where("PKTblEmpleados", $request['PKTblEmpleados'])
                             ->update($data);
-
-                return $request['FKCatRoles'] == 1 || $temporal[0]['FKCatRoles'] == 1 ? $this->logout() : back();
-
+    
+                return $request['FKCatRoles'] != $temporal[0]['FKCatRoles'] ? $this->logout() : back();
             } else {
+                return back()->withErrors(['mensajeError' => 'Otra cuenta ya esta asociada a este correo.']);
+            }
 
+        } catch (\Throwable $th) {
+            Log::info($th);
+            return back()->withErrors(['mensajeError' => 'Error al actualizar']);
+        }
+    }
+
+    public function actualizarSesion ( Request $request ) {
+        try {
+            if ( $this->validarCorreo($request['correo']) ) {
                 if ( !is_string($request['contrasenia']) ) {
                     $data = [
                         'nombreEmpleado'    => $request['nombreEmpleado'],
                         'apellidoPaterno'   => $request['apellidoPaterno'],
                         'apellidoMaterno'   => $request['apellidoMaterno'],
-                        'usuario'           => $request['usuario']
+                        'correo'            => $request['correo']
                     ];
                 } else {
                     $data = [
                         'nombreEmpleado'    => $request['nombreEmpleado'],
                         'apellidoPaterno'   => $request['apellidoPaterno'],
                         'apellidoMaterno'   => $request['apellidoMaterno'],
-                        'usuario'           => $request['usuario'],
+                        'correo'            => $request['correo'],
                         'contrasenia'       => $request['contrasenia']
                     ];
                 }
-
+        
                 TblEmpleados::where("PKTblEmpleados", session('usuario')[0]->{'PKTblEmpleados'})
                             ->update($data);
-
+        
                 return $this->logout();
-                
+            } else {
+                return back()->withErrors(['mensajeError' => 'Otra cuenta ya esta asociada a este correo.']);
             }
-
         } catch (\Throwable $th) {
-
             Log::info($th);
-            return back();
-            
+            return back()->withErrors(['mensajeError' => 'Error al actualizar']);
         }
+    }
+
+    public function validarCorreo( $correo ) {
+        $return = TblEmpleados::where('correo', $correo)->get();
+        return count($return) > 0 ? false : true;
     }
 
     public function registrarUsuario ( Request $request ) {
@@ -148,7 +159,19 @@ class UserController extends Controller
     }
 
     public function detalleUsuario ( $PKTblEmpleados ) {
-        return TblEmpleados::select('PKTblEmpleados','nombreRol', 'nombreEmpleado', 'apellidoPaterno', 'apellidoMaterno', 'tblempleados.fechaAlta', 'usuario', 'tblempleados.Activo', 'contrasenia', 'FKCatRoles')
+        return TblEmpleados::select(
+                                'tblempleados.PKTblEmpleados',
+                                'tblempleados.nombreEmpleado',
+                                'tblempleados.apellidoPaterno',
+                                'tblempleados.apellidoMaterno',
+                                'tblempleados.fechaAlta',
+                                'tblempleados.correo',
+                                'tblempleados.usuario',
+                                'tblempleados.Activo',
+                                'tblempleados.contrasenia',
+                                'tblempleados.FKCatRoles',
+                                'catroles.nombreRol'
+                            )
                            ->join('catroles','PKCatRoles','FKCatRoles')
                            ->where( 'PKTblEmpleados', $PKTblEmpleados )
                            ->get();

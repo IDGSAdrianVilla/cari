@@ -16,6 +16,16 @@
                 <input id="searchNo" type="text" class="form-control" placeholder="No." maxlength="10">
             </div>
         </div-->
+
+        @if($errors->any())
+            <div class="container">
+                <div class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Upss!</strong> {{$errors->first()}}
+                </div>
+            </div>
+        @endif
+
         <div class="col-sm-10">
             <div class="form-group">
                 <label>Buscar en Reportes {{ $status }}s</label>
