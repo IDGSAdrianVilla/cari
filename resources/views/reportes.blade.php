@@ -47,7 +47,7 @@
                     <th style="text-align: center;"><a style="color: white;">Tel&eacute;fono</a></th>
                     <th class="header__item" style="text-align: center;"><a style="color: white;" id="qwe" class="filter__link" href="javascript:void(0);">Problema</a></th>
                     <th style="text-align: center;"><a style="color: white;">Fecha</a></th>
-                    <th class="header__item" style="text-align: center;"><a style="color: white;" id="ert" class="filter__link" href="javascript:void(0);">Poblaci&oacute;n</a></th>
+                    <th class="header__item" style="text-align: center;"><a style="color: white;" id="ert" class="filter__link" href="javascript:void(0);">Población</a></th>
                     <th style="text-align: center;"><a style="color: white;">Maps</a></th>
                     @if ( $status == 'Pendiente')
                         <th style="text-align: center;"><a style="color: white;">Atender</a></th>

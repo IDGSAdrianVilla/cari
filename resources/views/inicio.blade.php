@@ -37,7 +37,7 @@
 
                     </div>
                 @endforeach
-                <a href="{{ url('reportes/Pendiente') }}"><h4><b style="color: gray;">Ver m&aacute;s...</b></h4></a>
+                <a href="{{ url('reportes/Pendiente') }}"><h4><b style="color: gray;">Ver más...</b></h4></a>
             </div>
         </div>
     </div>

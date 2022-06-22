@@ -51,10 +51,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-sm-3">Poblaci&oacute;n:</label>
+                        <label class="control-label col-sm-3">Población:</label>
                         <div class="col-sm-9">
                             <select id="poblacion" name="PKCatPoblaciones" class="form-control"  style="background: #D5EDFF;">
-                                <option value="" style="visibility: hidden; display: none;">Seleccione una poblaci&oacute;n</option>
+                                <option value="" style="visibility: hidden; display: none;">Seleccione una población</option>
                                 @foreach($poblaciones as $poblacion)
                                     <option value="{{$poblacion->PKCatPoblaciones}}">{{$poblacion->nombrePoblacion}}</option>
                                 @endforeach
@@ -68,9 +68,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-3">Direcci&oacute;n:</label>
+                        <label class="control-label col-sm-3">Dirección:</label>
                         <div class="col-sm-9">
-                            <textarea rows="1" class="form-control" id="direccion" placeholder="Direcci&oacute;n" name="direccion" onkeypress="return letrasYNumeros(event);"></textarea>
+                            <textarea rows="1" class="form-control" id="direccion" placeholder="Dirección" name="direccion" onkeypress="return letrasYNumeros(event);"></textarea>
                         </div>
                     </div>
                     <div class="form-group">

@@ -6,7 +6,7 @@
                 <h4 class="modal-title"><b> {{ session('usuario')[0]->{'nombreEmpleado'} }} {{ session('usuario')[0]->{'apellidoPaterno'} }} {{ session('usuario')[0]->{'apellidoMaterno'} }} </b></h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" action="{{ route('actualizarSesion') }}" autocomplete="off" method="post" onsubmit="return validarActiazacionUsuarioC()">
+                <form name="sesionForm" class="form-horizontal" action="{{ route('actualizarSesion') }}" autocomplete="off" method="post" onsubmit="return validarActiazacionUsuarioC()">
                     @csrf
 
                     <div class="form-group" style="display: none;">
@@ -34,39 +34,42 @@
                         </div>
                     </div>
 
-                    <h6 align="center"><b style="color: gray;">Datos de la sesi&oacute;n</b></h6>
+                    <h6 align="center"><b style="color: gray;">Datos de la sesión</b></h6>
                     <hr>
 
                     <div class="form-group">
                         <label class="control-label col-sm-3">Correo:</label>
                         <div class="col-sm-9">
-                            <input name="correo" type="text" id="correoInput" class="form-control" placeholder="Correo" value="{{ session('usuario')[0]->{'correo'} }}">
-                            <b class="resultInput"></b>
+                            <input name="correo" type="text" id="correoInput2" class="form-control" placeholder="Correo" value="{{ session('usuario')[0]->{'correo'} }}">
+                            <b class="resultInput2"></b>
                         </div>
                     </div>
 
                     <div class="form-group contrasenaac">
-                        <label class="control-label col-sm-3">Contrase&ntilde;a Actual:</label>
+                        <label class="control-label col-sm-3">Contraseña Actual:</label>
                         <div class="col-sm-9">
-                            <input id="contrasena" type="password" class="form-control" placeholder="Contrase&ntilde;a Actual">
+                            <input id="contrasena" type="password" class="form-control" placeholder="Contraseña Actual">
                         </div>
                     </div>
 
                     <div class="form-group contrasenan" style="display: none;">
-                        <label class="control-label col-sm-3">Nueva Contrase&ntilde;a:</label>
+                        <label class="control-label col-sm-3">Nueva Contraseña:</label>
                         <div class="col-sm-9">
-                            <input id="contrasenan" name="contrasenia" type="password" class="form-control" placeholder="Nueva Contrase&ntilde;a">
+                            <input id="contrasenan" name="contrasenia" type="password" class="form-control" placeholder="Nueva Contraseña">
                         </div>
                     </div>
 
                     <div class="alert alert-warning" style="text-align: justify;">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         <p style="padding-right: 25px;">
-                            <strong>Atenci&oacute;n!</strong> Para realizar alguna actualizaci&oacute;n de su informaci&oacute;n posteriormente se tendr&aacute; que loguear nuevamente para aplicar los cambios.
+                            <strong>Atención!</strong> Para realizar alguna actualización de su información posteriormente se tendrá que loguear nuevamente para aplicar los cambios.
                         </p>
                     </div>
 
                     <div class="form-group">
+                        <center>
+                            <b id="errorEnvioSesion" style="color: red;"></b>
+                        </center>
                         <div class="col-sm-12" style="text-align:center; margin-top: 3%;">
                             <button class="btn btn-primary"><b style="color:white;">Actualizar informaci&oacute;n</b></button>
                         </div>

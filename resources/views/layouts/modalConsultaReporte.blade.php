@@ -47,7 +47,7 @@
                     <section class="telefonoOcional"></section>
 
                     <div class="form-group">
-                        <label class="control-label col-sm-3">Poblaci&oacute;n:</label>
+                        <label class="control-label col-sm-3">Población:</label>
                         <div class="col-sm-9">
                             <!-- ver el porque de la variable cont-->
                             <!--select name="id_poblacion" class="form-control poblacion" required style="background: #FFDFDF;" id="<?php //echo $cont;?>"-->
@@ -65,7 +65,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label class="control-label col-sm-3">Direcci&oacute;n:</label>
+                        <label class="control-label col-sm-3">Dirección:</label>
                         <div class="col-sm-9">
                             <textarea rows="1" class="form-control parametrodireccion" name="direccion" id="direccion" readonly style="background: white;"></textarea>
                         </div>
@@ -93,7 +93,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label class="control-label col-sm-3">Descripci&oacute;n del problema:</label>
+                        <label class="control-label col-sm-3">Descripción del problema:</label>
                         <div class="col-sm-9">
                             <textarea rows="1" class="form-control parametrodescripcionProblema" name="descripcionProblema"></textarea>
                         </div>
@@ -114,7 +114,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label class="control-label col-sm-3">Soluci&oacute;n:</label>
+                        <label class="control-label col-sm-3">Solución:</label>
                         <div class="col-sm-9">
                             <textarea rows="1" class="form-control parametrosolucion" name="solucion"></textarea>
                         </div>
@@ -141,7 +141,7 @@
 
                     <section class="apartadoActualizo" style="visibility: hidden; display: none;">
                         <h6 align="center">
-                            <b>Ultima actualizaci&oacute;n por 
+                            <b>Ultima actualización por 
                                 <b style="color: #008FFF;" class="empleadoActualizo"></b>
                             </b>
                         </h6>

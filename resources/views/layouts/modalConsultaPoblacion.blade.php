@@ -29,7 +29,7 @@
 
                     <div class="form-group">
                         <div class="col-sm-6" style="text-align:center; margin-top: 3%;">
-                            <button class="btn form-control" style="background: #FFA26D;"><b style="color:white;">Actualizar poblaci&oacute;n</b></button>
+                            <button class="btn form-control" style="background: #FFA26D;"><b style="color:white;">Actualizar población</b></button>
                         </div>
                         <div class="col-sm-6 btnAccion" style="text-align:center; margin-top: 3%;"></div>
                     </div>
