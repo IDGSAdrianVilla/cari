@@ -44,6 +44,8 @@ function validarActiazacionUsuarioC() {
         contrasenia     == document.sesionForm.contrasenia.value
     ) {
         $('#errorEnvioSesion').text('No se ha realizado ningún cambio');
+    } else {
+        $('#errorEnvioSesion').text('');
     }
 
     return validateEmailC(correo) &&
