@@ -46,20 +46,71 @@ class PageController extends Controller
         return TblClientes::where('Activo', 1)->get();
     }
 
+    private function obtenerRegistroReportesUsuarios() {
+        $resultado = DB::select("select
+                                    count(*) as registros,
+                                    concat(tblempleados.nombreEmpleado, ' ', tblempleados.apellidoPaterno) as nombre
+                                from tblreportes
+                                inner join tblempleados on tblempleados.PKTblEmpleados = tblreportes.FKTblEmpleadosRecibio
+                                group by nombre");
+
+        $cantidadRegistros = [];
+        $nombresRegistros = [];
+
+        foreach ($resultado as $item) {
+            array_push($cantidadRegistros, $item->registros);
+            array_push($nombresRegistros, $item->nombre);
+        }
+
+        return [
+            'cantidadRegistros' => $cantidadRegistros,
+            'nombresRegistros'  => $nombresRegistros
+        ];
+    }
+
+    private function obtenerAtencionReportesUsuarios() {
+        $resultado = DB::select("select
+                                    count(*) as registros,
+                                    concat(tblempleados.nombreEmpleado, ' ', tblempleados.apellidoPaterno) as nombre
+                                from tblreportes
+                                inner join tbldetallereporte on tbldetallereporte.PKTblDetalleReporte = tblreportes.FKTblDetalleReporte
+                                inner join tblempleados on tblempleados.PKTblEmpleados = tbldetallereporte.FKTblEmpleadosAtencion
+                                group by nombre");
+
+        $cantidadRegistros = [];
+        $nombresRegistros = [];
+
+        foreach ($resultado as $item) {
+            array_push($cantidadRegistros, $item->registros);
+            array_push($nombresRegistros, $item->nombre);
+        }
+
+        return [
+            'cantidadRegistros' => $cantidadRegistros,
+            'nombresRegistros'  => $nombresRegistros
+        ];
+    }
+
     public function obtenerInsumos () {
         if ( session()->has('usuario') ) {
-            $reportes       = $this->obtenerTblReportes();
-            $poblaciones    = $this->obtenerTblCatPoblaciones();
-            $problemas      = $this->obtenerTblCatProblemas();
-            $roles          = $this->obtenerTblCatRoles();
-            $clientes       = $this->obtenerTblClientes();
+            $reportes           = $this->obtenerTblReportes();
+            $poblaciones        = $this->obtenerTblCatPoblaciones();
+            $problemas          = $this->obtenerTblCatProblemas();
+            $roles              = $this->obtenerTblCatRoles();
+            $clientes           = $this->obtenerTblClientes();
+            $graficaRegistro    = $this->obtenerRegistroReportesUsuarios();
+            $graficaAtencion    = $this->obtenerAtencionReportesUsuarios();
 
             return view('inicio')
                 ->with('reportes', $reportes)
                 ->with('poblaciones', $poblaciones)
                 ->with('problemas', $problemas)
                 ->with('roles', $roles)
-                ->with('clientes', $clientes);
+                ->with('clientes', $clientes)
+                ->with('cantidadRegistrosRegistro', $graficaRegistro['cantidadRegistros'])
+                ->with('nombresRegistrosRegistro', $graficaRegistro['nombresRegistros'])
+                ->with('cantidadRegistrosAtencion', $graficaAtencion['cantidadRegistros'])
+                ->with('nombresRegistrosAtencion', $graficaAtencion['nombresRegistros']);
         } else {
             return redirect('/');
         }

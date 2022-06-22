@@ -12,6 +12,8 @@
 
 <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <style>
     @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
@@ -21,6 +23,5 @@
         margin: 0;
         padding: 0;
         font-family: "Poppins", sans-serif !important;
-        background: linear-gradient(315deg, #ffffff, #d7e1ec);
     }
 </style>
