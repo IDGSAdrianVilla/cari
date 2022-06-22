@@ -1,13 +1,5 @@
-let PKTblEmpleados;
-let nombreEmpleado;
-let apellidoPaterno;
-let apellidoMaterno;
-let correo;
-let contrasenia;
-
 function validarActiazacionUsuario() {
     let correo = $('#correoInput').val();
-    console.log(correo);
     return validateEmail(correo) ? true : false;
 }
 
@@ -30,34 +22,6 @@ const validate = () => {
         $result.css('color', 'red');
     }
     return false;
-}
-
-function validarActiazacionUsuarioC() {
-    let correo = $('#correoInput2').val();
-
-    if (
-        PKTblEmpleados  == document.sesionForm.PKTblEmpleados.value ||
-        nombreEmpleado  == document.sesionForm.nombreEmpleado.value ||
-        apellidoPaterno == document.sesionForm.apellidoPaterno.value ||
-        apellidoMaterno == document.sesionForm.apellidoMaterno.value ||
-        correo          == document.sesionForm.correo.value ||
-        contrasenia     == document.sesionForm.contrasenia.value
-    ) {
-        $('#errorEnvioSesion').text('No se ha realizado ningún cambio');
-    } else {
-        $('#errorEnvioSesion').text('');
-    }
-
-    return validateEmailC(correo) &&
-           (
-               PKTblEmpleados  != document.sesionForm.PKTblEmpleados.value ||
-               nombreEmpleado  != document.sesionForm.nombreEmpleado.value ||
-               apellidoPaterno != document.sesionForm.apellidoPaterno.value ||
-               apellidoMaterno != document.sesionForm.apellidoMaterno.value ||
-               correo          != document.sesionForm.correo.value ||
-               contrasenia     != document.sesionForm.contrasenia.value
-            ) ?
-           true : false ;
 }
 
 const validateEmailC = (email) => {
@@ -109,15 +73,6 @@ const validateC2 = () => {
 }
 
 $(document).ready(function(){
-    $('#modalSesionUsuario').click( function () {
-        PKTblEmpleados  = document.sesionForm.PKTblEmpleados.value;
-        nombreEmpleado  = document.sesionForm.nombreEmpleado.value;
-        apellidoPaterno = document.sesionForm.apellidoPaterno.value;
-        apellidoMaterno = document.sesionForm.apellidoMaterno.value;
-        correo          = document.sesionForm.correo.value;
-        contrasenia     = document.sesionForm.contrasenia.value;
-    });
-
     $('#correoInput').on('input', validate);
     $('#correoInput2').on('input', validateC);
     $('#correoInput3').on('input', validateC2);

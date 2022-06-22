@@ -48,7 +48,7 @@
                     <div class="form-group contrasenaac">
                         <label class="control-label col-sm-3">Contraseña Actual:</label>
                         <div class="col-sm-9">
-                            <input id="contrasena" type="password" class="form-control" placeholder="Contraseña Actual">
+                            <input id="contrasena" name="contraseniaant" type="password" class="form-control" placeholder="Contraseña Actual">
                         </div>
                     </div>
 
@@ -92,4 +92,53 @@
             $(".contrasenaac").hide();
         }
     });
+
+    const PKTblEmpleados = "{{ session('usuario')[0]->{'PKTblEmpleados'} }}";
+    const nombreEmpleado = "{{ session('usuario')[0]->{'nombreEmpleado'} }}";
+    const apellidoPaterno = "{{ session('usuario')[0]->{'apellidoPaterno'} }}";
+    const apellidoMaterno = "{{ session('usuario')[0]->{'apellidoMaterno'} }}";
+    const correo2 = "{{ session('usuario')[0]->{'correo'} }}";
+
+    function validarActiazacionUsuarioC() {
+        let correo = $('#correoInput2').val();
+
+
+        if (
+            PKTblEmpleados  == document.sesionForm.PKTblEmpleados.value &&
+            nombreEmpleado  == document.sesionForm.nombreEmpleado.value &&
+            apellidoPaterno == document.sesionForm.apellidoPaterno.value &&
+            apellidoMaterno == document.sesionForm.apellidoMaterno.value &&
+            correo2         == document.sesionForm.correo.value &&
+            (document.sesionForm.contrasenia.value == '' || document.sesionForm.contrasenia.value == null)
+        ) {
+            $('#errorEnvioSesion').text('No se ha realizado ningún cambio');
+        } else {
+            $('#errorEnvioSesion').text('');
+        }
+
+        return validateEmailC(correo) &&
+            (
+                PKTblEmpleados  != document.sesionForm.PKTblEmpleados.value ||
+                nombreEmpleado  != document.sesionForm.nombreEmpleado.value ||
+                apellidoPaterno != document.sesionForm.apellidoPaterno.value ||
+                apellidoMaterno != document.sesionForm.apellidoMaterno.value ||
+                correo2         != document.sesionForm.correo.value ||
+                (document.sesionForm.contrasenia.value != '' && document.sesionForm.contrasenia.value != null)
+                ) ?
+            true : false ;
+    }
+
+    $('#correoInput2').on('input', function () {
+        if (
+            PKTblEmpleados  != document.sesionForm.PKTblEmpleados.value ||
+            nombreEmpleado  != document.sesionForm.nombreEmpleado.value ||
+            apellidoPaterno != document.sesionForm.apellidoPaterno.value ||
+            apellidoMaterno != document.sesionForm.apellidoMaterno.value ||
+            correo2         != document.sesionForm.correo.value ||
+            (document.sesionForm.contrasenia.value == '' || document.sesionForm.contrasenia.value == null)
+        ) {
+            $('#errorEnvioSesion').text('');
+        }
+    });
+
 </script>
