@@ -33,6 +33,7 @@ class ClientesController extends Controller
                     $cliente->apellidoMaterno   = $request['apellidoMaterno'];
                     $cliente->telefono          = $request['telefono'];
                     $cliente->fechaAlta         = Carbon::now();
+                    $cliente->Activo            = 1;
                     $cliente->save();
                 DB::commit();
 

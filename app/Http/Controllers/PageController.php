@@ -26,7 +26,7 @@ class PageController extends Controller
                                   fechaAlta
                            FROM generalreportes
                            WHERE status = "Pendiente"
-                           ORDER BY folio ASC
+                           ORDER BY folio DESC
                            LIMIT 5');
     }
 
@@ -295,6 +295,7 @@ class PageController extends Controller
                                         )
                                     ->join('tbldirecciones', 'tbldirecciones.PKTblDirecciones', 'tblclientes.FKTblDirecciones')
                                     ->join('catpoblaciones', 'catpoblaciones.PKCatPoblaciones', 'tbldirecciones.FKCatPoblaciones')
+                                    ->orderBy('tblclientes.PKTblClientes', 'DESC')
                                     ->get();
         
                 $cont = 0;
