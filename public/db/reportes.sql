@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.9.7
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 07-04-2022 a las 19:55:58
--- Versión del servidor: 10.4.22-MariaDB
--- Versión de PHP: 7.4.27
+-- Host: localhost:3306
+-- Generation Time: Jun 22, 2022 at 11:04 PM
+-- Server version: 5.7.23-23
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `reportes`
+-- Database: `villasof_cari`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `catpoblaciones`
+-- Table structure for table `catpoblaciones`
 --
 
 CREATE TABLE `catpoblaciones` (
@@ -35,19 +36,10 @@ CREATE TABLE `catpoblaciones` (
   `Activo` int(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Volcado de datos para la tabla `catpoblaciones`
---
-
-INSERT INTO `catpoblaciones` (`PKCatPoblaciones`, `nombrePoblacion`, `codigoPostal`, `fechaAlta`, `Activo`) VALUES
-(1, 'San Pedro Cholula', '52753', '2021-06-08', 0),
-(2, 'Santiago', '50987', '2022-03-01', 0),
-(3, 'Acazulco', '52753', '2022-04-04', 1);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `catproblemas`
+-- Table structure for table `catproblemas`
 --
 
 CREATE TABLE `catproblemas` (
@@ -58,19 +50,10 @@ CREATE TABLE `catproblemas` (
   `Activo` int(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Volcado de datos para la tabla `catproblemas`
---
-
-INSERT INTO `catproblemas` (`PKCatProblemas`, `nombreProblema`, `descripcionProblema`, `fechaAlta`, `Activo`) VALUES
-(1, 'Antena movida', 'asdasd', '2022-03-01', 1),
-(2, 'Router dañado', 'asd', '2022-03-01', 1),
-(3, 'Cable roto', 'asderg', '2022-04-04', 1);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `catroles`
+-- Table structure for table `catroles`
 --
 
 CREATE TABLE `catroles` (
@@ -82,17 +65,18 @@ CREATE TABLE `catroles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Volcado de datos para la tabla `catroles`
+-- Dumping data for table `catroles`
 --
 
 INSERT INTO `catroles` (`PKCatRoles`, `nombreRol`, `descripcionRol`, `fechaAlta`, `Activo`) VALUES
 (1, 'Administrador', 'asdasdasd', '2022-03-01', 1),
-(2, 'Técnico', 'asdfasd', '2022-04-04', 1);
+(2, 'Técnico', 'asdfasd', '2022-04-04', 1),
+(3, 'Servicio al cliente', 'Empleado en cargado de la atención al cliente', '2022-06-18', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `catstatus`
+-- Table structure for table `catstatus`
 --
 
 CREATE TABLE `catstatus` (
@@ -103,7 +87,7 @@ CREATE TABLE `catstatus` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Volcado de datos para la tabla `catstatus`
+-- Dumping data for table `catstatus`
 --
 
 INSERT INTO `catstatus` (`PKCatStatus`, `nombreStatus`, `descripcionStatus`, `fechaAlta`) VALUES
@@ -113,8 +97,8 @@ INSERT INTO `catstatus` (`PKCatStatus`, `nombreStatus`, `descripcionStatus`, `fe
 -- --------------------------------------------------------
 
 --
--- Estructura Stand-in para la vista `generalreportes`
--- (Véase abajo para la vista actual)
+-- Stand-in structure for view `generalreportes`
+-- (See below for the actual view)
 --
 CREATE TABLE `generalreportes` (
 `folio` int(10) unsigned
@@ -153,7 +137,7 @@ CREATE TABLE `generalreportes` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `migrations`
+-- Table structure for table `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -162,26 +146,10 @@ CREATE TABLE `migrations` (
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Volcado de datos para la tabla `migrations`
---
-
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(2, '2022_02_26_133155_cat_problemas', 1),
-(3, '2022_02_26_133231_cat_roles', 1),
-(4, '2022_02_26_133256_cat_poblaciones', 1),
-(5, '2022_02_26_133310_cat_status', 1),
-(6, '2022_02_26_133402_tbl_empleados', 1),
-(7, '2022_02_26_133507_tbl_detalle_reporte', 1),
-(8, '2022_02_26_133555_tbl_direcciones', 1),
-(9, '2022_02_26_133625_tbl_clientes', 1),
-(10, '2022_02_27_133541_tbl_reportes', 1);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `personal_access_tokens`
+-- Table structure for table `personal_access_tokens`
 --
 
 CREATE TABLE `personal_access_tokens` (
@@ -190,7 +158,7 @@ CREATE TABLE `personal_access_tokens` (
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -199,7 +167,7 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tblclientes`
+-- Table structure for table `tblclientes`
 --
 
 CREATE TABLE `tblclientes` (
@@ -214,19 +182,10 @@ CREATE TABLE `tblclientes` (
   `Activo` int(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Volcado de datos para la tabla `tblclientes`
---
-
-INSERT INTO `tblclientes` (`PKTblClientes`, `FKTblDirecciones`, `nombreCliente`, `apellidoPaterno`, `apellidoMaterno`, `telefono`, `telefonoOpcional`, `fechaAlta`, `Activo`) VALUES
-(3, 6, 'Diego', 'Contreras', 'Dimas', '0123456789', '1234567890', '2022-03-01', 1),
-(4, 7, 'Adrián', 'Villa', 'Reyes', '7292271384', '', '2022-03-18', 1),
-(5, 9, 'José', 'Farfan', 'Ostio', '0987654321', NULL, '2022-04-04', 1);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbldetallereporte`
+-- Table structure for table `tbldetallereporte`
 --
 
 CREATE TABLE `tbldetallereporte` (
@@ -241,44 +200,24 @@ CREATE TABLE `tbldetallereporte` (
   `fechaAtendiendo` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Volcado de datos para la tabla `tbldetallereporte`
---
-
-INSERT INTO `tbldetallereporte` (`PKTblDetalleReporte`, `diagnostico`, `solucion`, `FKTblEmpleadosActualizo`, `fechaActualizacion`, `FKTblEmpleadosAtencion`, `fechaAtencion`, `FKTblEmpleadosAtediendo`, `fechaAtendiendo`) VALUES
-(4, 'asdwedwe', 'asd', 1, '2022-04-04 06:28:16', 1, '2022-04-05 01:30:52', NULL, NULL),
-(5, NULL, NULL, 1, '2022-04-04 07:10:05', NULL, NULL, NULL, NULL),
-(7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(8, 'Mordio el perro', 'Se cambio el cable', 1, '2022-04-06 02:50:36', 1, '2022-04-06 02:51:07', NULL, NULL),
-(9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbldirecciones`
+-- Table structure for table `tbldirecciones`
 --
 
 CREATE TABLE `tbldirecciones` (
   `PKTblDirecciones` int(10) UNSIGNED NOT NULL,
   `FKCatPoblaciones` int(10) UNSIGNED NOT NULL,
-  `coordenadas` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `coordenadas` text COLLATE utf8mb4_unicode_ci,
   `referencias` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `direccion` text COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Volcado de datos para la tabla `tbldirecciones`
---
-
-INSERT INTO `tbldirecciones` (`PKTblDirecciones`, `FKCatPoblaciones`, `coordenadas`, `referencias`, `direccion`) VALUES
-(6, 1, '34234', 'asdasd', 'ewrwer'),
-(7, 1, '19.268649, -99.491644', 'A 50 metros del comedor comunitario', 'Calzada Guadalupe Victoria 54'),
-(9, 3, '1234234', 'rwerwer', '234234');
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tblempleados`
+-- Table structure for table `tblempleados`
 --
 
 CREATE TABLE `tblempleados` (
@@ -288,26 +227,16 @@ CREATE TABLE `tblempleados` (
   `apellidoPaterno` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `apellidoMaterno` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `fechaAlta` date NOT NULL,
+  `correo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `usuario` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `contrasenia` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Activo` int(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Volcado de datos para la tabla `tblempleados`
---
-
-INSERT INTO `tblempleados` (`PKTblEmpleados`, `FKCatRoles`, `nombreEmpleado`, `apellidoPaterno`, `apellidoMaterno`, `fechaAlta`, `usuario`, `contrasenia`, `Activo`) VALUES
-(1, 2, 'Carlos', 'Millan', 'Hinojosa', '2022-03-01', 'carlos', '1234', 1),
-(2, 1, 'asd', 'asdasd', 'asdasd', '2022-04-04', 'asd', 'asd', 0),
-(3, 1, 'Fabiola', 'Hernandez', 'Montiel', '2022-04-04', 'Fabi', '1234', 1),
-(4, 2, 'sdf wef wefw', 'sdfsdf', 'sdfsdf', '2022-04-04', 'sdf', 'sdf', 0),
-(5, 2, 'Carlos', 'Millan', 'Hinojosa', '2022-04-05', 'carlos', '12345', 1);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tblreportes`
+-- Table structure for table `tblreportes`
 --
 
 CREATE TABLE `tblreportes` (
@@ -319,64 +248,54 @@ CREATE TABLE `tblreportes` (
   `FKTblClientes` int(10) UNSIGNED NOT NULL,
   `descripcionProblema` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `observaciones` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fechaAlta` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `fechaAlta` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `tblreportes`
---
-
-INSERT INTO `tblreportes` (`PKTblReportes`, `FKCatProblemas`, `FKTblEmpleadosRecibio`, `FKCatStatus`, `FKTblDetalleReporte`, `FKTblClientes`, `descripcionProblema`, `observaciones`, `fechaAlta`) VALUES
-(3, 1, 1, 2, 4, 3, 'asdasd', 'asdasd', '2022-04-04 20:30:52'),
-(4, 1, 1, 1, 5, 4, 'No tiene internet hace dos días', 'Ningunaasdasdasd', '2022-04-04 02:09:45'),
-(5, 3, 1, 2, 8, 4, 'kljnjkn', 'jknjknjkn', '2022-04-05 21:51:07'),
-(6, 2, 1, 1, 9, 3, 'Por una descarga electrica', 'dadad asda', '2022-04-06 02:47:56');
 
 -- --------------------------------------------------------
 
 --
--- Estructura para la vista `generalreportes`
+-- Structure for view `generalreportes`
 --
 DROP TABLE IF EXISTS `generalreportes`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `generalreportes`  AS SELECT `reporte`.`PKTblReportes` AS `folio`, `cliente`.`nombreCliente` AS `nombreCliente`, `cliente`.`apellidoPaterno` AS `apellidoPaterno`, `cliente`.`apellidoMaterno` AS `apellidoMaterno`, `cliente`.`telefono` AS `telefono`, `cliente`.`telefonoOpcional` AS `telefonoOpcional`, `poblacion`.`PKCatPoblaciones` AS `PKCatPoblaciones`, `poblacion`.`nombrePoblacion` AS `nombrePoblacion`, `direccion`.`coordenadas` AS `coordenadas`, `direccion`.`direccion` AS `direccion`, `direccion`.`referencias` AS `referencias`, `problema`.`PKCatProblemas` AS `PKCatProblemas`, `problema`.`nombreProblema` AS `nombreProblema`, `reporte`.`descripcionProblema` AS `descripcionProblema`, `reporte`.`observaciones` AS `observaciones`, `detallereporte`.`diagnostico` AS `diagnostico`, `detallereporte`.`solucion` AS `solucion`, concat(`empleadorecibio`.`nombreEmpleado`,' ',`empleadorecibio`.`apellidoPaterno`) AS `empleadoRecibio`, date_format(`reporte`.`fechaAlta`,'%d-%m-%Y') AS `fechaAlta`, date_format(`reporte`.`fechaAlta`,'%H:%i:%S') AS `horaAlta`, concat(`empleadoactualizo`.`nombreEmpleado`,' ',`empleadoactualizo`.`apellidoPaterno`) AS `empleadoActualizo`, date_format(`detallereporte`.`fechaActualizacion`,'%d-%m-%Y') AS `fechaActualizacion`, date_format(`detallereporte`.`fechaActualizacion`,'%H:%i:%S') AS `horaActualizacion`, concat(`empleadorealizo`.`nombreEmpleado`,' ',`empleadorealizo`.`apellidoPaterno`) AS `empleadoRealizo`, date_format(`detallereporte`.`fechaAtencion`,'%d-%m-%Y') AS `fechaAtencion`, date_format(`detallereporte`.`fechaAtencion`,'%H:%i:%S') AS `horaAtencion`, `empleadoatendiendo`.`PKTblEmpleados` AS `PKTblEmpleadosAtediendo`, concat(`empleadoatendiendo`.`nombreEmpleado`,' ',`empleadoatendiendo`.`apellidoPaterno`) AS `empleadoAtendiendo`, date_format(`detallereporte`.`fechaAtendiendo`,'%d-%m-%Y') AS `fechaAtendiendo`, date_format(`detallereporte`.`fechaAtendiendo`,'%H:%i:%S') AS `horaAtendiendo`, `status`.`nombreStatus` AS `status` FROM ((((((((((`tblreportes` `reporte` join `tblclientes` `cliente` on(`cliente`.`PKTblClientes` = `reporte`.`FKTblClientes`)) join `tbldirecciones` `direccion` on(`direccion`.`PKTblDirecciones` = `cliente`.`FKTblDirecciones`)) join `catpoblaciones` `poblacion` on(`poblacion`.`PKCatPoblaciones` = `direccion`.`FKCatPoblaciones`)) join `catproblemas` `problema` on(`problema`.`PKCatProblemas` = `reporte`.`FKCatProblemas`)) join `tbldetallereporte` `detallereporte` on(`detallereporte`.`PKTblDetalleReporte` = `reporte`.`FKTblDetalleReporte`)) left join `tblempleados` `empleadorecibio` on(`empleadorecibio`.`PKTblEmpleados` = `reporte`.`FKTblEmpleadosRecibio`)) left join `tblempleados` `empleadoactualizo` on(`empleadoactualizo`.`PKTblEmpleados` = `detallereporte`.`FKTblEmpleadosActualizo`)) left join `tblempleados` `empleadorealizo` on(`empleadorealizo`.`PKTblEmpleados` = `detallereporte`.`FKTblEmpleadosAtencion`)) left join `tblempleados` `empleadoatendiendo` on(`empleadoatendiendo`.`PKTblEmpleados` = `detallereporte`.`FKTblEmpleadosAtediendo`)) join `catstatus` `status` on(`status`.`PKCatStatus` = `reporte`.`FKCatStatus`)) ORDER BY `reporte`.`PKTblReportes` DESC ;
+CREATE VIEW `generalreportes` AS SELECT `reporte`.`PKTblReportes` AS `folio`, `cliente`.`nombreCliente` AS `nombreCliente`, `cliente`.`apellidoPaterno` AS `apellidoPaterno`, `cliente`.`apellidoMaterno` AS `apellidoMaterno`, `cliente`.`telefono` AS `telefono`, `cliente`.`telefonoOpcional` AS `telefonoOpcional`, `poblacion`.`PKCatPoblaciones` AS `PKCatPoblaciones`, `poblacion`.`nombrePoblacion` AS `nombrePoblacion`, `direccion`.`coordenadas` AS `coordenadas`, `direccion`.`direccion` AS `direccion`, `direccion`.`referencias` AS `referencias`, `problema`.`PKCatProblemas` AS `PKCatProblemas`, `problema`.`nombreProblema` AS `nombreProblema`, `reporte`.`descripcionProblema` AS `descripcionProblema`, `reporte`.`observaciones` AS `observaciones`, `detallereporte`.`diagnostico` AS `diagnostico`, `detallereporte`.`solucion` AS `solucion`, concat(`empleadorecibio`.`nombreEmpleado`,' ',`empleadorecibio`.`apellidoPaterno`) AS `empleadoRecibio`, date_format(`reporte`.`fechaAlta`,'%d-%m-%Y') AS `fechaAlta`, date_format(`reporte`.`fechaAlta`,'%H:%i:%S') AS `horaAlta`, concat(`empleadoactualizo`.`nombreEmpleado`,' ',`empleadoactualizo`.`apellidoPaterno`) AS `empleadoActualizo`, date_format(`detallereporte`.`fechaActualizacion`,'%d-%m-%Y') AS `fechaActualizacion`, date_format(`detallereporte`.`fechaActualizacion`,'%H:%i:%S') AS `horaActualizacion`, concat(`empleadorealizo`.`nombreEmpleado`,' ',`empleadorealizo`.`apellidoPaterno`) AS `empleadoRealizo`, date_format(`detallereporte`.`fechaAtencion`,'%d-%m-%Y') AS `fechaAtencion`, date_format(`detallereporte`.`fechaAtencion`,'%H:%i:%S') AS `horaAtencion`, `empleadoatendiendo`.`PKTblEmpleados` AS `PKTblEmpleadosAtediendo`, concat(`empleadoatendiendo`.`nombreEmpleado`,' ',`empleadoatendiendo`.`apellidoPaterno`) AS `empleadoAtendiendo`, date_format(`detallereporte`.`fechaAtendiendo`,'%d-%m-%Y') AS `fechaAtendiendo`, date_format(`detallereporte`.`fechaAtendiendo`,'%H:%i:%S') AS `horaAtendiendo`, `status`.`nombreStatus` AS `status` FROM ((((((((((`tblreportes` `reporte` join `tblclientes` `cliente` on((`cliente`.`PKTblClientes` = `reporte`.`FKTblClientes`))) join `tbldirecciones` `direccion` on((`direccion`.`PKTblDirecciones` = `cliente`.`FKTblDirecciones`))) join `catpoblaciones` `poblacion` on((`poblacion`.`PKCatPoblaciones` = `direccion`.`FKCatPoblaciones`))) join `catproblemas` `problema` on((`problema`.`PKCatProblemas` = `reporte`.`FKCatProblemas`))) join `tbldetallereporte` `detallereporte` on((`detallereporte`.`PKTblDetalleReporte` = `reporte`.`FKTblDetalleReporte`))) left join `tblempleados` `empleadorecibio` on((`empleadorecibio`.`PKTblEmpleados` = `reporte`.`FKTblEmpleadosRecibio`))) left join `tblempleados` `empleadoactualizo` on((`empleadoactualizo`.`PKTblEmpleados` = `detallereporte`.`FKTblEmpleadosActualizo`))) left join `tblempleados` `empleadorealizo` on((`empleadorealizo`.`PKTblEmpleados` = `detallereporte`.`FKTblEmpleadosAtencion`))) left join `tblempleados` `empleadoatendiendo` on((`empleadoatendiendo`.`PKTblEmpleados` = `detallereporte`.`FKTblEmpleadosAtediendo`))) join `catstatus` `status` on((`status`.`PKCatStatus` = `reporte`.`FKCatStatus`))) ORDER BY `reporte`.`PKTblReportes` DESC ;
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `catpoblaciones`
+-- Indexes for table `catpoblaciones`
 --
 ALTER TABLE `catpoblaciones`
   ADD PRIMARY KEY (`PKCatPoblaciones`);
 
 --
--- Indices de la tabla `catproblemas`
+-- Indexes for table `catproblemas`
 --
 ALTER TABLE `catproblemas`
   ADD PRIMARY KEY (`PKCatProblemas`);
 
 --
--- Indices de la tabla `catroles`
+-- Indexes for table `catroles`
 --
 ALTER TABLE `catroles`
   ADD PRIMARY KEY (`PKCatRoles`);
 
 --
--- Indices de la tabla `catstatus`
+-- Indexes for table `catstatus`
 --
 ALTER TABLE `catstatus`
   ADD PRIMARY KEY (`PKCatStatus`);
 
 --
--- Indices de la tabla `migrations`
+-- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `personal_access_tokens`
+-- Indexes for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
@@ -384,14 +303,14 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
--- Indices de la tabla `tblclientes`
+-- Indexes for table `tblclientes`
 --
 ALTER TABLE `tblclientes`
   ADD PRIMARY KEY (`PKTblClientes`),
   ADD KEY `tblclientes_fktbldirecciones_foreign` (`FKTblDirecciones`);
 
 --
--- Indices de la tabla `tbldetallereporte`
+-- Indexes for table `tbldetallereporte`
 --
 ALTER TABLE `tbldetallereporte`
   ADD PRIMARY KEY (`PKTblDetalleReporte`),
@@ -400,21 +319,21 @@ ALTER TABLE `tbldetallereporte`
   ADD KEY `tbldetallereporte_fktblempleadosatediendo_foreign` (`FKTblEmpleadosAtediendo`);
 
 --
--- Indices de la tabla `tbldirecciones`
+-- Indexes for table `tbldirecciones`
 --
 ALTER TABLE `tbldirecciones`
   ADD PRIMARY KEY (`PKTblDirecciones`),
   ADD KEY `tbldirecciones_fkcatpoblaciones_foreign` (`FKCatPoblaciones`);
 
 --
--- Indices de la tabla `tblempleados`
+-- Indexes for table `tblempleados`
 --
 ALTER TABLE `tblempleados`
   ADD PRIMARY KEY (`PKTblEmpleados`),
   ADD KEY `tblempleados_fkcatroles_foreign` (`FKCatRoles`);
 
 --
--- Indices de la tabla `tblreportes`
+-- Indexes for table `tblreportes`
 --
 ALTER TABLE `tblreportes`
   ADD PRIMARY KEY (`PKTblReportes`),
@@ -425,114 +344,62 @@ ALTER TABLE `tblreportes`
   ADD KEY `tblreportes_fktblclientes_foreign` (`FKTblClientes`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `catpoblaciones`
+-- AUTO_INCREMENT for table `catpoblaciones`
 --
 ALTER TABLE `catpoblaciones`
-  MODIFY `PKCatPoblaciones` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `PKCatPoblaciones` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `catproblemas`
+-- AUTO_INCREMENT for table `catproblemas`
 --
 ALTER TABLE `catproblemas`
-  MODIFY `PKCatProblemas` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `PKCatProblemas` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `catroles`
+-- AUTO_INCREMENT for table `catroles`
 --
 ALTER TABLE `catroles`
-  MODIFY `PKCatRoles` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `PKCatRoles` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT de la tabla `catstatus`
+-- AUTO_INCREMENT for table `catstatus`
 --
 ALTER TABLE `catstatus`
   MODIFY `PKCatStatus` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `migrations`
+-- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `personal_access_tokens`
+-- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `tblclientes`
+-- AUTO_INCREMENT for table `tblclientes`
 --
 ALTER TABLE `tblclientes`
-  MODIFY `PKTblClientes` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `PKTblClientes` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `tbldetallereporte`
+-- AUTO_INCREMENT for table `tbldetallereporte`
 --
 ALTER TABLE `tbldetallereporte`
-  MODIFY `PKTblDetalleReporte` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `PKTblDetalleReporte` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `tbldirecciones`
+-- AUTO_INCREMENT for table `tbldirecciones`
 --
 ALTER TABLE `tbldirecciones`
-  MODIFY `PKTblDirecciones` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT de la tabla `tblempleados`
---
-ALTER TABLE `tblempleados`
-  MODIFY `PKTblEmpleados` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT de la tabla `tblreportes`
---
-ALTER TABLE `tblreportes`
-  MODIFY `PKTblReportes` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `tblclientes`
---
-ALTER TABLE `tblclientes`
-  ADD CONSTRAINT `tblclientes_fktbldirecciones_foreign` FOREIGN KEY (`FKTblDirecciones`) REFERENCES `tbldirecciones` (`PKTblDirecciones`);
-
---
--- Filtros para la tabla `tbldetallereporte`
---
-ALTER TABLE `tbldetallereporte`
-  ADD CONSTRAINT `tbldetallereporte_fktblempleadosactualizo_foreign` FOREIGN KEY (`FKTblEmpleadosActualizo`) REFERENCES `tblempleados` (`PKTblEmpleados`),
-  ADD CONSTRAINT `tbldetallereporte_fktblempleadosatediendo_foreign` FOREIGN KEY (`FKTblEmpleadosAtediendo`) REFERENCES `tblempleados` (`PKTblEmpleados`),
-  ADD CONSTRAINT `tbldetallereporte_fktblempleadosatencion_foreign` FOREIGN KEY (`FKTblEmpleadosAtencion`) REFERENCES `tblempleados` (`PKTblEmpleados`);
-
---
--- Filtros para la tabla `tbldirecciones`
---
-ALTER TABLE `tbldirecciones`
-  ADD CONSTRAINT `tbldirecciones_fkcatpoblaciones_foreign` FOREIGN KEY (`FKCatPoblaciones`) REFERENCES `catpoblaciones` (`PKCatPoblaciones`);
-
---
--- Filtros para la tabla `tblempleados`
---
-ALTER TABLE `tblempleados`
-  ADD CONSTRAINT `tblempleados_fkcatroles_foreign` FOREIGN KEY (`FKCatRoles`) REFERENCES `catroles` (`PKCatRoles`);
-
---
--- Filtros para la tabla `tblreportes`
---
-ALTER TABLE `tblreportes`
-  ADD CONSTRAINT `tblreportes_fkcatproblemas_foreign` FOREIGN KEY (`FKCatProblemas`) REFERENCES `catproblemas` (`PKCatProblemas`),
-  ADD CONSTRAINT `tblreportes_fkcatstatus_foreign` FOREIGN KEY (`FKCatStatus`) REFERENCES `catstatus` (`PKCatStatus`),
-  ADD CONSTRAINT `tblreportes_fktblclientes_foreign` FOREIGN KEY (`FKTblClientes`) REFERENCES `tblclientes` (`PKTblClientes`),
-  ADD CONSTRAINT `tblreportes_fktbldetallereporte_foreign` FOREIGN KEY (`FKTblDetalleReporte`) REFERENCES `tbldetallereporte` (`PKTblDetalleReporte`),
-  ADD CONSTRAINT `tblreportes_fktblempleadosrecibio_foreign` FOREIGN KEY (`FKTblEmpleadosRecibio`) REFERENCES `tblempleados` (`PKTblEmpleados`);
+  MODIFY `PKTblDirecciones` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
