@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 22, 2022 at 11:04 PM
+-- Generation Time: Jun 22, 2022 at 11:33 PM
 -- Server version: 5.7.23-23
 -- PHP Version: 7.4.29
 
@@ -226,12 +226,18 @@ CREATE TABLE `tblempleados` (
   `nombreEmpleado` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `apellidoPaterno` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `apellidoMaterno` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fechaAlta` date NOT NULL,
+  `fechaAlta` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `correo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `usuario` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `contrasenia` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Activo` int(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tblempleados`
+--
+
+INSERT INTO `tblempleados` (`PKTblEmpleados`, `FKCatRoles`, `nombreEmpleado`, `apellidoPaterno`, `apellidoMaterno`, `fechaAlta`, `correo`, `contrasenia`, `Activo`) VALUES
+(0, 1, 'Adrián', 'Villa', 'Reyes', '2022-06-23 04:24:56', 'villa.isc.tec@gmail.com', 'oracle:1234', 1);
 
 -- --------------------------------------------------------
 

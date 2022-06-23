@@ -20,7 +20,6 @@ class TblEmpleados extends Migration
             $table->string('apellidoPaterno');
             $table->string('apellidoMaterno');
             $table->date('fechaAlta');
-            $table->string('usuario');
             $table->string('contrasenia');
             $table->foreign('FKCatRoles')->references('PKCatRoles')->on('CatRoles');
         });

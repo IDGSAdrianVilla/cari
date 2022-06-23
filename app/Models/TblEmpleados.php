@@ -19,7 +19,6 @@ class TblEmpleados extends Model
         'apellidoMaterno', 
         'fechaAlta',
         'correo',
-        'usuario',
         'contrasenia',
         'fechaAlta',
         'Activo'
