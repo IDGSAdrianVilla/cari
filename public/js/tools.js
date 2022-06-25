@@ -140,7 +140,7 @@ $(document).ready(function(){
         ];
 
         Object.keys(r[0]).forEach(function(key) {
-            $.inArray(key, exepciones) != -1 ? $(".parametro"+key).attr('placeholder', r[0][key] != null ? r[0][key] : 'Sin información').text(r[0][key]) : $(".parametro"+key).attr('placeholder', r[0][key]).val(r[0][key]) ;
+            $.inArray(key, exepciones) != -1 ? $(".parametro"+key).attr('placeholder', r[0][key] != null ? r[0][key] : 'Sin información').text(r[0][key]) : $(".parametro"+key).attr('placeholder', r[0][key] != null ? r[0][key] : 'Sin información').val(r[0][key]) ;
         })
 
         $(".empleadoRecibio").empty().append(r[0].empleadoRecibio);
