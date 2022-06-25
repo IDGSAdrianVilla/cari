@@ -32,16 +32,16 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-sm-3">Tel&eacute;fono:</label>
+                        <label class="control-label col-sm-3">Teléfono:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control parametrotelefono2" placeholder="Tel&eacute;fono"  onkeypress="return soloNumeros(event);" maxlength="10" name="telefono" required>
+                            <input type="text" class="form-control parametrotelefono2" placeholder="Teléfono"  onkeypress="return soloNumeros(event);" maxlength="10" name="telefono" required>
                         </div>
                     </div>
 
                     <div class="form-group" style="visibility: hidden; display: none;" id="t4">
-                        <label class="control-label col-sm-3">Tel&eacute;fono 2:</label>
+                        <label class="control-label col-sm-3">Teléfono 2:</label>
                         <div class="col-sm-9">
-                            <input id="tel4" type="text" class="form-control parametrotelefonoOpcional2" placeholder="Tel&eacute;fono 2 (Opcional)" onkeypress="return soloNumeros(event);" maxlength="10" name="telefonoOpcional">
+                            <input id="tel4" type="text" class="form-control parametrotelefonoOpcional2" placeholder="Teléfono 2 (Opcional)" onkeypress="return soloNumeros(event);" maxlength="10" name="telefonoOpcional">
                         </div>
                     </div>
 

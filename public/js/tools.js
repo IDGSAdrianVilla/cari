@@ -113,7 +113,7 @@ $(document).ready(function(){
 
         $(".tituloPrincipalModal").text(r[0].nombreCliente+' '+r[0].apellidoPaterno+' '+r[0].apellidoMaterno);
 
-        if ( r[0].telefonoOpcional != "" && r[0].telefonoOpcional != null ) {
+        if ( r[0].telefonoOpcional != null ) {
             let fragmento = `
             <div class="form-group tel2">
                 <label class="control-label col-sm-3">Teléfono Opcional:</label>
@@ -123,6 +123,8 @@ $(document).ready(function(){
             </div>
             `;
             $(".telefonoOcional").empty().html(fragmento);
+        } else {
+            $(".telefonoOcional").empty();
         }
 
         $(".poblacionParametro").val(r[0].PKCatPoblaciones).text(r[0].nombrePoblacion);
@@ -287,6 +289,12 @@ $(document).ready(function(){
             $("#mas2").hide();
             $("#menos2").show();
             $(".parametrotelefonoOpcional2").val(c[0].telefonoOpcional);
+        } else {
+            $("#t4").hide();
+            $("#t4").css('visibility', 'hidden');
+            $("#tel4").val('');
+            $("#mas2").show();
+            $("#menos2").hide();
         }
         $(".parametropoblacion2").val(c[0].PKCatPoblaciones);
         $(".parametropoblacion2").text(c[0].nombrePoblacion);
