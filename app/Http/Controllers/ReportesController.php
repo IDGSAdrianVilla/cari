@@ -44,7 +44,7 @@ class ReportesController extends Controller
 
             } catch (\Throwable $th) {
                 Log::info($th);
-                return back();
+                return back()->withErrors(['mensajeError' => 'Algo no salió bien.']);
             }
         } else {
             return redirect('/');
@@ -75,7 +75,7 @@ class ReportesController extends Controller
                 return back();
             } catch (\Throwable $th) {
                 Log::info($th);
-                return back();
+                return back()->withErrors(['mensajeError' => 'Algo no salió bien.']);
             }
         } else {
             return redirect('/');
@@ -115,7 +115,7 @@ class ReportesController extends Controller
                 return back();
             } catch (\Throwable $th) {
                 Log::info($th);
-                return back();
+                return back()->withErrors(['mensajeError' => 'Algo no salió bien.']);
             }
         } else {
             return redirect('/');
@@ -139,7 +139,7 @@ class ReportesController extends Controller
                 return back();
             } catch (\Throwable $th) {
                 Log::info($th);
-                return back();
+                return back()->withErrors(['mensajeError' => 'Algo no salió bien.']);
             }
         } else {
             return redirect('/');
@@ -166,7 +166,7 @@ class ReportesController extends Controller
                 return redirect('/reportes/Atendido');
             } catch (\Throwable $th) {
                 Log::info($th);
-                return back();
+                return back()->withErrors(['mensajeError' => 'Algo no salió bien.']);
             }
         } else {
             return redirect('/');
@@ -193,7 +193,7 @@ class ReportesController extends Controller
                 return redirect('/reportes/Pendiente');
             } catch (\Throwable $th) {
                 Log::info($th);
-                return back();
+                return back()->withErrors(['mensajeError' => 'Algo no salió bien.']);
             }
         } else {
             return redirect('/');

@@ -53,8 +53,12 @@
                             {{ $item->nombreCliente }} {{ $item->apellidoPaterno }}
                         </td>
                         <td class="table-data">
-                            {{ $item->telefono }}
-                        </td>
+                                <a href="tel:{{ $item->telefono }}">
+                                    <div style="height: 100%; width: 100%;">
+                                        <b style="color: #00809C;">{{ $item->telefono }}</b>
+                                    </div>
+                                </a>
+                            </td>
                         <td class="table-data verModalCliente" data-toggle='modal' data-target='#verModalCliente' id="{{ $item->PKTblClientes }}">
                             {{ $item->fechaAlta }}
                         </td>

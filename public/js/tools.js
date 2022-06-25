@@ -138,7 +138,7 @@ $(document).ready(function(){
         ];
 
         Object.keys(r[0]).forEach(function(key) {
-            $.inArray(key, exepciones) != -1 ? $(".parametro"+key).attr('placeholder', r[0][key]).text(r[0][key]) : $(".parametro"+key).attr('placeholder', r[0][key]).val(r[0][key]) ;
+            $.inArray(key, exepciones) != -1 ? $(".parametro"+key).attr('placeholder', r[0][key] != null ? r[0][key] : 'Sin información').text(r[0][key]) : $(".parametro"+key).attr('placeholder', r[0][key]).val(r[0][key]) ;
         })
 
         $(".empleadoRecibio").empty().append(r[0].empleadoRecibio);
@@ -163,13 +163,15 @@ $(document).ready(function(){
         const img = 'https://cari.villasoftsolutions.com/project/public/images/proceso.png';
         $(".apartadoBotones").empty();
 
+        let id = r[0].folio;
+
         if ( r[0].status == 'Atendido') {
             insert += `
                 <div class="col-sm-5">
                     <button class="btn form-control" style="margin-top: 15px; background: #FFA26D; font-weight: bold; color: white;">Actualizar</button>
                 </div>
                 <div class="col-sm-4">
-                    <a href="/retomar/`+r[0].folio+`">
+                    <a href="`+route('retomar', {id})+`">
                         <input class="btn form-control" style="margin-top: 15px; background: mediumaquamarine; font-weight: bold; color: white;" value="Retomar">
                     </a>
                 </div>
@@ -184,19 +186,19 @@ $(document).ready(function(){
                 </div>
                             
                 <div class="col-sm-4">
-                    <a href="/atender/`+r[0].folio+`" class="btn form-control" style="margin-top: 15px; background: mediumaquamarine; font-weight: bold; color: white;">Atender</a>
+                    <a href="`+route('atender', {id})+`" class="btn form-control" style="margin-top: 15px; background: mediumaquamarine; font-weight: bold; color: white;">Atender</a>
                 </div>
             `;
             if ( r[0].empleadoAtendiendo == "" || r[0].empleadoAtendiendo == null ) {
                 insert += `
                     <div class="col-sm-2">
-                    <a href="/atendiendo/`+r[0].folio+`" class="btn btn-primary form-control" style="margin-top: 15px;"><img src="`+img+`" alt="" width="22px"></a>
+                    <a href="`+route('atendiendo', {id})+`" class="btn btn-primary form-control" style="margin-top: 15px;"><img src="`+img+`" alt="" width="22px"></a>
                     </div>
                 `;
             } else if ( r[0].PKTblEmpleadosAtediendo == PKTblEmpleado ) {
                 insert += `
                     <div class="col-sm-2">
-                        <a href="/desatendiendo/`+r[0].folio+`" class="btn btn-danger form-control" style="margin-top: 15px;"><img src="`+img+`" alt="" width="22px"></a>
+                        <a href="`+route('desatendiendo', {id})+`" class="btn btn-danger form-control" style="margin-top: 15px;"><img src="`+img+`" alt="" width="22px"></a>
                     </div>
                 `;
             } else {
@@ -220,13 +222,13 @@ $(document).ready(function(){
             if ( r[0].empleadoAtendiendo == "" || r[0].empleadoAtendiendo == null ) {
                 insert += `
                     <div class="col-sm-2">
-                    <a href="/atendiendo/`+r[0].folio+`" class="btn btn-primary form-control" style="margin-top: 15px;"><img src="`+img+`" alt="" width="22px"></a>
+                    <a href="`+route('atendiendo', {id})+`" class="btn btn-primary form-control" style="margin-top: 15px;"><img src="`+img+`" alt="" width="22px"></a>
                     </div>
                 `;
             } else if ( r[0].PKTblEmpleadosAtediendo == PKTblEmpleado ) {
                 insert += `
                     <div class="col-sm-2">
-                        <a href="/desatendiendo/`+r[0].folio+`" class="btn btn-danger form-control" style="margin-top: 15px;"><img src="`+img+`" alt="" width="22px"></a>
+                        <a href="`+route('desatendiendo', {id})+`" class="btn btn-danger form-control" style="margin-top: 15px;"><img src="`+img+`" alt="" width="22px"></a>
                     </div>
                 `;
             } else {
@@ -327,16 +329,17 @@ $(document).ready(function(){
     });
 
     function mapToFormInsumoPoblacion ( pob ) {
-        console.log(pob);
         $("#PKCatPoblaciones").val(pob[0].PKCatPoblaciones);
         $(".parametroNombrePoblacion").val(pob[0].nombrePoblacion);
         $(".parametroCP").val(pob[0].codigoPostal);
 
+        let id = pob[0].PKCatPoblaciones;
+
         if (pob[0].Activo == 1) {
-            html = '<a style="width: 100%;" class="btn form-conrtol btn-warning" href="/inactivarPoblacion/'+pob[0].PKCatPoblaciones+'"><b style="color:white;">Inactivar</b></a>';
+            html = '<a style="width: 100%;" class="btn form-conrtol btn-warning" href="'+route('inactivarPoblacion', {id})+'"><b style="color:white;">Inactivar</b></a>';
             $(".btnAccion").empty().html(html);
         } else {
-            html = '<a style="width: 100%;" class="btn form-conrtol btn-info" href="/activarPoblacion/'+pob[0].PKCatPoblaciones+'"><b style="color:white;">Activar</b></a>';
+            html = '<a style="width: 100%;" class="btn form-conrtol btn-info" href="'+route('activarPoblacion', {id})+'"><b style="color:white;">Activar</b></a>';
             $(".btnAccion").empty().html(html);
         }
     }
@@ -370,11 +373,13 @@ $(document).ready(function(){
         $(".parametroNombreProblema").val(pro[0].nombreProblema);
         $(".parametroDescripcion").val(pro[0].descripcionProblema);
 
+        let id = pro[0].PKCatProblemas;
+
         if (pro[0].Activo == 1) {
-            html = '<a style="width: 100%;" class="btn form-conrtol btn-warning" href="/inactivarProblema/'+pro[0].PKCatProblemas+'"><b style="color:white;">Inactivar</b></a>';
+            html = '<a style="width: 100%;" class="btn form-conrtol btn-warning" href="'+route('inactivarProblema', {id})+'"><b style="color:white;">Inactivar</b></a>';
             $(".btnAccion").empty().html(html);
         } else {
-            html = '<a style="width: 100%;" class="btn form-conrtol btn-info" href="/activarProblema/'+pro[0].PKCatProblemas+'"><b style="color:white;">Activar</b></a>';
+            html = '<a style="width: 100%;" class="btn form-conrtol btn-info" href="'+route('activarProblema', {id})+'"><b style="color:white;">Activar</b></a>';
             $(".btnAccion").empty().html(html);
         }
     }
@@ -408,11 +413,13 @@ $(document).ready(function(){
         $(".parametroNombreRol").val(rol[0].nombreRol);
         $(".parametroDescripcion").val(rol[0].descripcionRol);
 
+        let id = rol[0].PKCatRoles;
+
         if (rol[0].Activo == 1) {
-            html = '<a style="width: 100%;" class="btn form-conrtol btn-warning" href="/inactivarRol/'+rol[0].PKCatRoles+'"><b style="color:white;">Inactivar</b></a>';
+            html = '<a style="width: 100%;" class="btn form-conrtol btn-warning" href="'+route('inactivarRol', {id})+'"><b style="color:white;">Inactivar</b></a>';
             $(".btnAccion").empty().html(html);
         } else {
-            html = '<a style="width: 100%;" class="btn form-conrtol btn-info" href="/activarRol/'+rol[0].PKCatRoles+'"><b style="color:white;">Activar</b></a>';
+            html = '<a style="width: 100%;" class="btn form-conrtol btn-info" href="'+route('activarRol', {id})+'"><b style="color:white;">Activar</b></a>';
             $(".btnAccion").empty().html(html);
         }
     }

@@ -74,7 +74,7 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3">Referencias:</label>
                         <div class="col-sm-9">
-                            <textarea rows="1" class="form-control parametroreferencias" name="referencias" id="referencias3" readonly style="background: white;"></textarea>
+                            <textarea rows="1" class="form-control parametroreferencias" name="referencias" id="referencias3" readonly style="background: white;" placeholder="Describe yourself here..."> asd </textarea>
                         </div>
                     </div>
                     <h6 align="center">
