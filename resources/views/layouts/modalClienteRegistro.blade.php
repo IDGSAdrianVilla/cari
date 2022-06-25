@@ -11,28 +11,28 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3">Nombre:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="Nombre" name="nombreCliente" onkeypress="return soloLetras(event);">
+                            <input type="text" class="form-control" placeholder="Nombre" name="nombreCliente" onkeypress="return soloLetras(event);" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label col-sm-3">Apellido Paterno:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="Apellido Paterno" name="apellidoPaterno" onkeypress="return soloLetras(event);">
+                            <input type="text" class="form-control" placeholder="Apellido Paterno" name="apellidoPaterno" onkeypress="return soloLetras(event);" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label col-sm-3">Apellido Materno:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="Apellido Materno" name="apellidoMaterno" onkeypress="return soloLetras(event);">
+                            <input type="text" class="form-control" placeholder="Apellido Materno" name="apellidoMaterno" onkeypress="return soloLetras(event);" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label col-sm-3">Tel&eacute;fono:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="Tel&eacute;fono"  onkeypress="return soloNumeros(event);" maxlength="10" name="telefono">
+                            <input type="text" class="form-control" placeholder="Tel&eacute;fono"  onkeypress="return soloNumeros(event);" maxlength="10" name="telefono" required>
                         </div>
                     </div>
 
@@ -53,7 +53,7 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3">Población:</label>
                         <div class="col-sm-9">
-                            <select id="poblacion" name="PKCatPoblaciones" class="form-control"  style="background: #D5EDFF;">
+                            <select id="poblacion" name="PKCatPoblaciones" class="form-control"  style="background: #D5EDFF;" required>
                                 <option value="" style="visibility: hidden; display: none;">Seleccione una población</option>
                                 @foreach($poblaciones as $poblacion)
                                     <option value="{{$poblacion->PKCatPoblaciones}}">{{$poblacion->nombrePoblacion}}</option>
@@ -70,13 +70,13 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3">Dirección:</label>
                         <div class="col-sm-9">
-                            <textarea rows="1" class="form-control" id="direccion" placeholder="Dirección" name="direccion" onkeypress="return letrasYNumeros(event);"></textarea>
+                            <textarea rows="1" class="form-control" id="direccion" placeholder="Dirección" name="direccion" onkeypress="return descripciones(event);" required></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-3">Referencias:</label>
                         <div class="col-sm-9">
-                            <textarea rows="1" class="form-control" id="referencias" placeholder="Referencias" name="referencias" onkeypress="return letrasYNumeros(event);"></textarea>
+                            <textarea rows="1" class="form-control" id="referencias" placeholder="Referencias" name="referencias" onkeypress="return descripciones(event);"></textarea>
                         </div>
                     </div>
 

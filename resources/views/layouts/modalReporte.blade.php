@@ -36,7 +36,7 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3">Descripción del problema:</label>
                         <div class="col-sm-9">
-                            <textarea rows="1" class="form-control" id="problema" placeholder="Descripción del problema" name="descripcionProblema" onkeypress="return letrasYNumeros(event);"></textarea>
+                            <textarea rows="1" class="form-control" id="problema" placeholder="Descripción del problema" name="descripcionProblema" onkeypress="return letrasYNumeros(event);" required></textarea>
                         </div>
                     </div>
 

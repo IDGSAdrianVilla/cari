@@ -16,21 +16,21 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3">Nombre:</label>
                         <div class="col-sm-9">
-                            <input name="nombreEmpleado" type="text" class="form-control" placeholder="Nombre" value="{{ session('usuario')[0]->{'nombreEmpleado'} }}" onkeypress="return soloLetras(event);">
+                            <input name="nombreEmpleado" type="text" class="form-control" placeholder="Nombre" value="{{ session('usuario')[0]->{'nombreEmpleado'} }}" onkeypress="return soloLetras(event);" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label col-sm-3">Apellido Paterno:</label>
                         <div class="col-sm-9">
-                            <input name="apellidoPaterno" type="text" class="form-control" placeholder="Apellido Paterno" value="{{ session('usuario')[0]->{'apellidoPaterno'} }}" onkeypress="return soloLetras(event);">
+                            <input name="apellidoPaterno" type="text" class="form-control" placeholder="Apellido Paterno" value="{{ session('usuario')[0]->{'apellidoPaterno'} }}" onkeypress="return soloLetras(event);" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label col-sm-3">Apellido Materno:</label>
                         <div class="col-sm-9">
-                            <input name="apellidoMaterno" type="text" class="form-control" placeholder="Apellido Materno" value="{{ session('usuario')[0]->{'apellidoMaterno'} }}" onkeypress="return soloLetras(event);">
+                            <input name="apellidoMaterno" type="text" class="form-control" placeholder="Apellido Materno" value="{{ session('usuario')[0]->{'apellidoMaterno'} }}" onkeypress="return soloLetras(event);" required>
                         </div>
                     </div>
 
@@ -40,7 +40,7 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3">Correo:</label>
                         <div class="col-sm-9">
-                            <input name="correo" type="text" id="correoInput2" class="form-control" placeholder="Correo" value="{{ session('usuario')[0]->{'correo'} }}">
+                            <input name="correo" type="text" id="correoInput2" class="form-control" placeholder="Correo" value="{{ session('usuario')[0]->{'correo'} }}" required>
                             <b class="resultInput2"></b>
                         </div>
                     </div>

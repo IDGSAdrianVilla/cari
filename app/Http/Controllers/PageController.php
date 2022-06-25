@@ -141,7 +141,7 @@ class PageController extends Controller
 
     public function obtenerInsumosRoles () {
         if ( session()->has('usuario') ) {
-            if ( session('usuario')[0]->{'PKTblEmpleados'} == 1 ) {
+            if ( session('usuario')[0]->{'FKCatRoles'} == 1 ) {
                 $troles         = CatRoles::orderBy('PKCatRoles', 'DESC')->get();
                 $poblaciones    = $this->obtenerTblCatPoblaciones();
                 $problemas      = $this->obtenerTblCatProblemas();
@@ -171,7 +171,7 @@ class PageController extends Controller
 
     public function obtenerInsumosProblemas () {
         if ( session()->has('usuario') ) {
-            if ( session('usuario')[0]->{'PKTblEmpleados'} == 1 ) {
+            if ( session('usuario')[0]->{'FKCatRoles'} == 1 ) {
                 $tProblemas = CatProblemas::orderBy('PKCatProblemas', 'DESC')->get();
 
                 $poblaciones    = $this->obtenerTblCatPoblaciones();
@@ -202,7 +202,7 @@ class PageController extends Controller
 
     public function obtenerInsumosPoblaciones () {
         if ( session()->has('usuario') ) {
-            if ( session('usuario')[0]->{'PKTblEmpleados'} == 1 ) {
+            if ( session('usuario')[0]->{'FKCatRoles'} == 1 ) {
                 $tPoblaciones   = CatPoblaciones::orderBy('PKCatPoblaciones', 'DESC')->get();
                 $poblaciones    = $this->obtenerTblCatPoblaciones();
                 $problemas      = $this->obtenerTblCatProblemas();
@@ -232,7 +232,7 @@ class PageController extends Controller
 
     public function obtenerUsuarios () {
         if ( session()->has('usuario') ) {
-            if ( session('usuario')[0]->{'PKTblEmpleados'} == 1 ) {
+            if ( session('usuario')[0]->{'FKCatRoles'} == 1 ) {
                 $poblaciones    = $this->obtenerTblCatPoblaciones();
                 $problemas      = $this->obtenerTblCatProblemas();
                 $roles          = $this->obtenerTblCatRoles();
@@ -273,7 +273,7 @@ class PageController extends Controller
 
     public function obtenerClientes () {
         if ( session()->has('usuario') ) {
-            if ( session('usuario')[0]->{'PKTblEmpleados'} == 3 || session('usuario')[0]->{'PKTblEmpleados'} == 1 ) {
+            if ( session('usuario')[0]->{'FKCatRoles'} == 3 || session('usuario')[0]->{'FKCatRoles'} == 1 ) {
                 $poblaciones    = $this->obtenerTblCatPoblaciones();
                 $problemas      = $this->obtenerTblCatProblemas();
                 $roles          = $this->obtenerTblCatRoles();
