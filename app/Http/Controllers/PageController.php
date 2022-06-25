@@ -299,8 +299,8 @@ class PageController extends Controller
                                     ->get();
         
                 $cont = 0;
-                foreach ($clientes as $item) {
-                    $clientes[$cont]['fechaAlta'] = Carbon::parse($clientes[$cont]['fechaAlta'])->format('d-m-Y');
+                foreach ($tclientes as $item) {
+                    $tclientes[$cont]['fechaAlta'] = Carbon::parse($tclientes[$cont]['fechaAlta'])->format('d-m-Y');
                     $cont += 1;
                 }
         

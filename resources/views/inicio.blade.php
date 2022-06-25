@@ -5,7 +5,7 @@
 
     @include('layouts/cabeceraInicio')
 </head>
-<body>
+<body class="asd">
 
     @include('layouts/navbarPrincipal')
 

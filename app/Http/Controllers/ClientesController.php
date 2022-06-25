@@ -48,6 +48,38 @@ class ClientesController extends Controller
         }
     }
 
+    public function actualizarCliente ( Request $request) {
+        if ( session()->has('usuario') ) {
+            try {
+                DB::beginTransaction();
+                    TblDirecciones::where('PKTblDirecciones', $request['PKTblDirecciones'])
+                                  ->update([
+                                      'FKCatPoblaciones'    => $request['PKCatPoblaciones'],
+                                      'coordenadas'         => $request['coordenadas'],
+                                      'referencias'         => $request['referencias'],
+                                      'direccion'           => $request['direccion']
+                                  ]);
+                    TblClientes::where('PKTblClientes', $request['PKTblClientes'])
+                               ->update([
+                                   'nombreCliente'      => $request['nombreCliente'],
+                                   'apellidoPaterno'    => $request['apellidoPaterno'],
+                                   'apellidoMaterno'    => $request['apellidoMaterno'],
+                                   'telefono'           => $request['telefono'],
+                                   'telefonoOpcional'   => $request['telefonoOpcional']
+                               ]);
+                DB::commit();
+
+                return back();
+
+            } catch (\Throwable $th) {
+                Log::info($th);
+                return back();
+            }
+        } else {
+            return redirect('/');
+        }
+    }
+
     public function inactivarCliente ( $id ) {
         if ( session()->has('usuario') ) {
             try {

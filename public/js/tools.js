@@ -246,6 +246,61 @@ $(document).ready(function(){
         $(".apartadoBotones").append(insert);
     }
 
+    $(".verModalCliente").click( function(){
+
+        let id = $(this).attr("id");
+
+        $(".asd").css('filter','grayscale(0.1) blur(10px)');
+        $.ajax({
+            url: route('detalleCliente', {id}),
+            type:'get',
+            success:  function (detalleCliente) {
+                mapToFormCliente(detalleCliente);
+                $(".asd").css('filter','');
+            },
+            statusCode: {
+               404: function() {
+                  alert('web not found');
+               }
+            },
+            error:function(x,xs,xt){
+               window.open(JSON.stringify(x));
+            }
+         });
+    });
+
+    function mapToFormCliente ( c ) {
+
+        $(".tituloPrincipalModal").text(c[0].nombreCliente+' '+c[0].apellidoPaterno+' '+c[0].apellidoMaterno);
+
+        $(".parametroPKCliente").val(c[0].PKTblClientes);
+        $(".parametroPKDireccion").val(c[0].PKTblDirecciones);
+        $(".parametronombreCliente2").val(c[0].nombreCliente);
+        $(".parametroapellidoPaterno2").val(c[0].apellidoPaterno);
+        $(".parametroapellidoMaterno2").val(c[0].apellidoMaterno);
+        $(".parametrotelefono2").val(c[0].telefono);
+        if ( c[0].telefonoOpcional != null ) {
+            $("#t4").show();
+            $("#t4").css('visibility', 'visible');
+            $("#mas2").hide();
+            $("#menos2").show();
+            $(".parametrotelefonoOpcional2").val(c[0].telefonoOpcional);
+        }
+        $(".parametropoblacion2").val(c[0].PKCatPoblaciones);
+        $(".parametropoblacion2").text(c[0].nombrePoblacion);
+        $(".parametrocoordenadas2").val(c[0].coordenadas);
+        $(".parametrodireccion2").val(c[0].direccion);
+        $(".parametroreferencias2").val(c[0].referencias);
+        let id = c[0].PKCatPoblaciones;
+        if (c[0].Activo == 1) {
+            html = '<a style="width: 100%;" class="btn form-conrtol btn-warning" href="'+route("inactivarCliente", {id})+'"><b style="color:white;">Inactivar</b></a>';
+            $(".btnAccionClientes").empty().html(html);
+        } else {
+            html = '<a style="width: 100%;" class="btn form-conrtol btn-info" href="'+route("activarCliente", {id})+'"><b style="color:white;">Activar</b></a>';
+            $(".btnAccionClientes").empty().html(html);
+        }
+    }
+
     $(".verModalInsumoPoblacion").click( function(){
         
         let id = $(this).attr("id");

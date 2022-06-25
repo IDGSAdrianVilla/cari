@@ -67,14 +67,14 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3">Dirección:</label>
                         <div class="col-sm-9">
-                            <textarea rows="1" class="form-control parametrodireccion" name="direccion" id="direccion" readonly style="background: white;"></textarea>
+                            <textarea rows="1" class="form-control parametrodireccion" name="direccion" id="direccion3" readonly style="background: white;"></textarea>
                         </div>
                     </div>
                     
                     <div class="form-group">
                         <label class="control-label col-sm-3">Referencias:</label>
                         <div class="col-sm-9">
-                            <textarea rows="1" class="form-control parametroreferencias" name="referencias" id="referencias" readonly style="background: white;"></textarea>
+                            <textarea rows="1" class="form-control parametroreferencias" name="referencias" id="referencias3" readonly style="background: white;"></textarea>
                         </div>
                     </div>
                     <h6 align="center">

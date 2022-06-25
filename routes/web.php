@@ -45,6 +45,9 @@ Route::get('/reportes/{status}','App\Http\Controllers\PageController@obtenerInsu
 //obtener detalle de cada reportes según se presione un click
 Route::get('/detalleReporte/{id}','App\Http\Controllers\ReportesController@obtenerDetalleReporte')->name('detalleReporte');
 
+//obtener detalle de cada cliente según se presione un click
+Route::get('/detalleCliente/{id}','App\Http\Controllers\ReportesController@obtenerDetalleCliente')->name('detalleCliente');
+
 //actualizar reporte en curso desde el modal
 Route::post('actualizarReporte','App\Http\Controllers\ReportesController@actualizarReporte')->name('actualizarReporte');
 
@@ -94,6 +97,7 @@ Route::post('registrarUsuario','App\Http\Controllers\UserController@registrarUsu
 // acciones para clientes
 Route::get('/inactivarCliente/{id}','App\Http\Controllers\ClientesController@inactivarCliente')->name('inactivarCliente');
 Route::get('/activarCliente/{id}','App\Http\Controllers\ClientesController@activarCliente')->name('activarCliente');
+Route::post('actualizarCliente','App\Http\Controllers\ClientesController@actualizarCliente')->name('actualizarCliente');
 Route::post('registrarCliente','App\Http\Controllers\ClientesController@registrarCliente')->name('registrarCliente');
 
 // rutas excel

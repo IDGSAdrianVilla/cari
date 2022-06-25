@@ -90,6 +90,14 @@ class ReportesController extends Controller
         }
     }
 
+    public function obtenerDetalleCliente ( $id ) {
+        if ( session()->has('usuario') ) {
+            return DB::select('SELECT * FROM generalclientes WHERE pktblclientes = '.$id);
+        } else {
+            return redirect('/');
+        }
+    }
+
     public function atendiendoReporte ( $id ) {
         if ( session()->has('usuario') ) {
             try {

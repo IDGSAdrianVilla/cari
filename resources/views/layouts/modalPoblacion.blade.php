@@ -13,18 +13,18 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3">Nombre:</label>
                         <div class="col-sm-9">
-                            <input id="nombrePoblacion" type="text" class="form-control" placeholder="Nombre de la población" required name="nombrePoblacion" onkeypress="return soloLetras(event);">
+                            <input type="text" class="form-control" placeholder="Nombre de la población" required name="nombrePoblacion" onkeypress="return soloLetras(event);">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-3">Código postal:</label>
                         <div class="col-sm-9">
-                            <input id="nombrePoblacion" type="text" class="form-control" placeholder="Código postal" required name="codigoPostal" onkeypress="return soloNumeros(event);" maxlength="5">
+                            <input type="text" class="form-control" placeholder="Código postal" required name="codigoPostal" onkeypress="return soloNumeros(event);" maxlength="5">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-12" style="text-align:center; margin-top: 3%;">
-                            <button class="btn" id="envio" style="background: #6C3483;"><b style="color:white;">Registrar población</b></button>
+                            <button class="btn" style="background: #6C3483;"><b style="color:white;">Registrar población</b></button>
                         </div>
                     </div>
                 </form>

@@ -24,7 +24,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-12" style="text-align:center; margin-top: 3%;">
-                            <button class="btn" id="envio" style="background: #6C3483;"><b style="color:white;">Registrar Rol</b></button>
+                            <button class="btn" style="background: #6C3483;"><b style="color:white;">Registrar Rol</b></button>
                         </div>
                     </div>
                 </form>

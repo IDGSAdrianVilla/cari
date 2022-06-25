@@ -22,6 +22,21 @@ $(document).ready(function(){
         }
     });
 
+    $("#mas2").on('click', function(){
+        $("#t4").show();
+        $("#t4").css('visibility', 'visible');
+        $("#mas2").hide();
+        $("#menos2").show();
+    });
+
+    $("#menos2").on('click', function(){
+        $("#t4").hide();
+        $("#t4").css('visibility', 'hidden');
+        $("#tel4").val('');
+        $("#mas2").show();
+        $("#menos2").hide();
+    });
+
     $("#mas").on('click', function(){
         $("#t").show();
         $("#t").css('visibility', 'visible');
@@ -106,6 +121,50 @@ $(document).ready(function(){
         }
     });
 });
+
+var textarea = document.querySelector('#direccion3');
+
+             
+function autosize(){
+    var el = this;
+    setTimeout(function(){
+        el.style.cssText = 'height:auto; padding:5';
+        el.style.cssText = 'height:' + el.scrollHeight + 'px';
+  },0);
+}
+
+var textarea = document.querySelector('#referencias3');
+
+             
+function autosize(){
+    var el = this;
+    setTimeout(function(){
+        el.style.cssText = 'height:auto; padding:5';
+        el.style.cssText = 'height:' + el.scrollHeight + 'px';
+  },0);
+}
+
+var textarea = document.querySelector('#direccion2');
+
+             
+function autosize(){
+    var el = this;
+    setTimeout(function(){
+        el.style.cssText = 'height:auto; padding:5';
+        el.style.cssText = 'height:' + el.scrollHeight + 'px';
+  },0);
+}
+
+var textarea = document.querySelector('#referencias2');
+
+             
+function autosize(){
+    var el = this;
+    setTimeout(function(){
+        el.style.cssText = 'height:auto; padding:5';
+        el.style.cssText = 'height:' + el.scrollHeight + 'px';
+  },0);
+}
 
 var textarea = document.querySelector('#direccion');
 
