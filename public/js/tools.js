@@ -1,4 +1,5 @@
 function validarActiazacionUsuario() {
+    console.log("asdasd");
     let correo = $('#correoInput').val();
     return validateEmail(correo) ? true : false;
 }

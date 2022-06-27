@@ -32,7 +32,7 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3">Rol:</label>
                         <div class="col-sm-9">
-                            <select id="rol" name="FKCatRoles" class="form-control"  style="background: #D5EDFF;" required>
+                            <select name="FKCatRoles" class="form-control"  style="background: #D5EDFF;" required>
                                 <option value="" style="visibility: hidden; display: none;">Seleccione una población</option>
                                 @foreach($roles as $rol)
                                     <option value="{{$rol->PKCatRoles}}">{{$rol->nombreRol}}</option>

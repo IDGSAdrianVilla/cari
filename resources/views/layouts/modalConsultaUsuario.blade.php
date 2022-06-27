@@ -6,7 +6,7 @@
                 <h4 class="modal-title"><b>Actualizar Usuario</b></h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" action="{{ route('actualizarEmpleado') }}" autocomplete="off" method="post" onsubmit="return validarActiazacionUsuarioC()">
+                <form class="form-horizontal" action="{{ route('actualizarEmpleado') }}" autocomplete="off" method="post" onsubmit="return validarActiazacionUsuario()">
                     @csrf
 
                     <input type="hidden" id="PKTblEmpleados" name="PKTblEmpleados">
@@ -51,9 +51,9 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3">Correo:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control parametroCorreo" placeholder="Correo" name="correo" id="correoInput2">
+                            <input type="text" class="form-control parametroCorreo" placeholder="Correo" name="correo" id="correoInput">
                             <br>
-                            <b class="resultInput2"></b>
+                            <b class="resultInput"></b>
                         </div>
                     </div>
 
