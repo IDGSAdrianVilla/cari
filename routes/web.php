@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::post('/cari/login_react','App\Http\Controllers\UserController@login_react');
+
 Route::post('/login','App\Http\Controllers\UserController@login')->name('login');
 Route::get('/logout','App\Http\Controllers\UserController@logout')->name('logout');
 

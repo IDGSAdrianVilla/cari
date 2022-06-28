@@ -10,6 +10,16 @@ use App\Models\TblEmpleados;
 
 class UserController extends Controller
 {
+    public function login_react (Request $request) {
+        $return = TblEmpleados::where([
+                                        ["correo", $request['correo']],
+                                        ["contrasenia", $request['contrasenia']],
+                                        ["Activo", 1]
+                                     ])
+                              ->get();
+
+        return count($return) > 0 ? true : false;
+    }
 
     public function login (Request $request) {
         $return = TblEmpleados::where([
