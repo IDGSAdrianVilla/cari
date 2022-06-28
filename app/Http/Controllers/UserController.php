@@ -18,7 +18,15 @@ class UserController extends Controller
                                      ])
                               ->get();
 
-        return count($return) > 0 ? true : false;
+        if ( count($return) > 0 ) {
+            return response()->json([
+                'message' => "Bienvenido a CARI"
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => "Usuario no encontrado, favor de verificar las credenciales"
+            ], 401);
+        }
     }
 
     public function login (Request $request) {
@@ -157,6 +165,40 @@ class UserController extends Controller
             }
         } else {
             return redirect('/');
+        }
+    }
+
+    public function register_user ( Request $request ) {
+        if ( $this->validarSoloCorreo($request['correo']) ) {
+            try {
+                DB::beginTransaction();
+                    $usuario                    = new TblEmpleados;
+                    $usuario->FKCatRoles        = $request['FKCatRoles'];
+                    $usuario->nombreEmpleado    = $request['nombreEmpleado'];
+                    $usuario->apellidoPaterno   = $request['apellidoPaterno'];
+                    $usuario->apellidoMaterno   = $request['apellidoMaterno'];
+                    $usuario->fechaAlta         = $request['fechaAlta'];
+                    $usuario->correo            = $request['correo'];
+                    $usuario->contrasenia       = $request['contrasenia'];
+                    $usuario->fechaAlta         = Carbon::now();
+                    $usuario->Activo            = 1;
+                    $var = $usuario->save();
+                DB::commit();
+
+                return response()->json([
+                    'message' => "Se registro con éxito el nuevo usuario"
+                ], 200);
+            } catch (\Throwable $th) {
+                Log::info($th);
+                return response()->json([
+                    'error'   => $th,
+                    'message' => "Error al registrar nuevo usuario"
+                ], 401);
+            }
+        } else {
+            return response()->json([
+                'message' => "Otra cuenta ya esta asociada a este correo"
+            ], 401);
         }
     }
 

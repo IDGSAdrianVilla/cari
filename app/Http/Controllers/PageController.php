@@ -38,7 +38,7 @@ class PageController extends Controller
         return CatProblemas::where('Activo', 1)->get();
     }
 
-    private function obtenerTblCatRoles () {
+    public function obtenerTblCatRoles () {
         return CatRoles::where('Activo', 1)->get();
     }
 

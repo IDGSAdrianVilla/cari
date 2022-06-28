@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('cari/login_react','App\Http\Controllers\UserController@login_react');
+
+Route::post('cari/register_user','App\Http\Controllers\UserController@register_user');
+
+Route::get('cari/obten_roles', 'App\Http\Controllers\PageController@obtenerTblCatRoles');
