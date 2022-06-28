@@ -42,6 +42,30 @@
             color: white;
         }
 
+        footer {
+            background-color: #222;
+            color: #fff;
+            font-size: 14px;
+            bottom: 0;
+            position: fixed;
+            left: 0;
+            right: 0;
+            text-align: center;
+            z-index: 999;
+        }
+
+        footer p {
+            margin: 10px 0;
+        }
+
+        footer i {
+            color: red;
+        }
+
+        footer a {
+            color: #3c97bf;
+            text-decoration: none;
+        }
     </style>
 
     <link rel="icon" type="image/png" href="{{ asset('images/icono.png') }}" />
@@ -97,6 +121,16 @@
             </div>
         </div>
     </div>
+
+    <footer>
+        <p>
+            ©Copyright
+            <a href="javascript:void(0);">VillaSoftSolutions.com</a> | 
+            Designed By
+            <a target="_blank" href="https://idgsadrianvilla.github.io/">Adrián Villa</a>
+        </p>
+    </footer>
+
     @routes
     <script>
         function miFuncion() {
