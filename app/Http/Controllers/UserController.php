@@ -14,6 +14,7 @@ class UserController extends Controller
         $return = TblEmpleados::where([
                                         ["correo", $request['correo']],
                                         ["contrasenia", $request['contrasenia']],
+                                        ["FKCatRoles", 1],
                                         ["Activo", 1]
                                      ])
                               ->get();
@@ -24,7 +25,7 @@ class UserController extends Controller
             ], 200);
         } else {
             return response()->json([
-                'message' => "Usuario no encontrado, favor de verificar las credenciales"
+                'message' => "Al parecer no tienes permitido acceder"
             ], 401);
         }
     }
@@ -147,7 +148,6 @@ class UserController extends Controller
                         $usuario->nombreEmpleado    = $request['nombreEmpleado'];
                         $usuario->apellidoPaterno   = $request['apellidoPaterno'];
                         $usuario->apellidoMaterno   = $request['apellidoMaterno'];
-                        $usuario->fechaAlta         = $request['fechaAlta'];
                         $usuario->correo            = $request['correo'];
                         $usuario->contrasenia       = $request['contrasenia'];
                         $usuario->fechaAlta         = Carbon::now();
@@ -177,7 +177,6 @@ class UserController extends Controller
                     $usuario->nombreEmpleado    = $request['nombreEmpleado'];
                     $usuario->apellidoPaterno   = $request['apellidoPaterno'];
                     $usuario->apellidoMaterno   = $request['apellidoMaterno'];
-                    $usuario->fechaAlta         = $request['fechaAlta'];
                     $usuario->correo            = $request['correo'];
                     $usuario->contrasenia       = $request['contrasenia'];
                     $usuario->fechaAlta         = Carbon::now();
