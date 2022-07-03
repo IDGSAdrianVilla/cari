@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Models\TblEmpleados;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -22,7 +23,7 @@ class UserController extends Controller
         if ( count($return) > 0 ) {
             return response()->json([
                 'message' => "Bienvenido a CARI",
-                'PKempleados' => $return[0]['PKTblEmpleados']
+                'token_key' => Str::random(30)
             ], 200);
         } else {
             return response()->json([
