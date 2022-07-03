@@ -15,7 +15,7 @@ use App\Models\CatRoles;
 
 class PageController extends Controller
 {
-    private function obtenerTblReportes () {
+    public function obtenerTblReportes () {
         return DB::select('SELECT
                                   folio,
                                   nombreCliente,
@@ -30,11 +30,31 @@ class PageController extends Controller
                            LIMIT 5');
     }
 
-    private function obtenerTblCatPoblaciones () {
+    public function obtenerTblReportesApi ( $status ) {
+        return DB::select('SELECT * FROM generalreportes WHERE status = "'.$status.'"');
+    }
+
+    public function obtenerTblEmpleados () {
+        return TblEmpleados::select(
+            'tblempleados.PKTblEmpleados',
+            'tblempleados.nombreEmpleado',
+            'tblempleados.apellidoPaterno',
+            'tblempleados.apellidoMaterno',
+            'tblempleados.fechaAlta',
+            'tblempleados.correo',
+            'tblempleados.Activo',
+            'catroles.nombreRol'
+        )
+        ->join('catroles','PKCatRoles','FKCatRoles')
+        ->orderBy('PKTblEmpleados','DESC')
+        ->get();
+    }
+
+    public function obtenerTblCatPoblaciones () {
         return CatPoblaciones::where('Activo', 1)->get();
     }
 
-    private function obtenerTblCatProblemas () {
+    public function obtenerTblCatProblemas () {
         return CatProblemas::where('Activo', 1)->get();
     }
 
@@ -42,11 +62,11 @@ class PageController extends Controller
         return CatRoles::where('Activo', 1)->get();
     }
 
-    private function obtenerTblClientes () {
+    public function obtenerTblClientes () {
         return TblClientes::where('Activo', 1)->get();
     }
 
-    private function obtenerRegistroReportesUsuarios() {
+    public function obtenerRegistroReportesUsuarios() {
         $resultado = DB::select("select
                                     count(*) as registros,
                                     concat(tblempleados.nombreEmpleado, ' ', tblempleados.apellidoPaterno) as nombre
@@ -68,7 +88,7 @@ class PageController extends Controller
         ];
     }
 
-    private function obtenerAtencionReportesUsuarios() {
+    public function obtenerAtencionReportesUsuarios() {
         $resultado = DB::select("select
                                     count(*) as registros,
                                     concat(tblempleados.nombreEmpleado, ' ', tblempleados.apellidoPaterno) as nombre
