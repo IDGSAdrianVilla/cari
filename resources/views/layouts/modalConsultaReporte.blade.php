@@ -49,8 +49,6 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3">Población:</label>
                         <div class="col-sm-9">
-                            <!-- ver el porque de la variable cont-->
-                            <!--select name="id_poblacion" class="form-control poblacion" required style="background: #FFDFDF;" id="<?php //echo $cont;?>"-->
                             <select name="PKCatPoblaciones" class="form-control poblacion" readonly style="background: #FFDFDF;">
                                 <option class="poblacionParametro" style="visibility: hidden; display: none;"></option>
                             </select>
@@ -84,8 +82,6 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3">Problema:</label>
                         <div class="col-sm-9">
-                            <!-- ver el porque de la variable cont-->
-                            <!--select name="id_problema" class="form-control tproblema" required style="background: #FFDFDF;" id="<?php //echo $cont;?>"-->
                             <select name="PKCatProblemas" class="form-control tproblema" readonly style="background: #FFDFDF;">
                                 <option class="problemaParametro" style="visibility: hidden; display: none;"></option>
                             </select>

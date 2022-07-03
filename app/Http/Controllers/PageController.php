@@ -136,6 +136,18 @@ class PageController extends Controller
         }
     }
 
+    public function obtenerInsumosAPI () {
+        return [
+            "reportes"           => $this->obtenerTblReportes(),
+            "poblaciones"        => $this->obtenerTblCatPoblaciones(),
+            "problemas"          => $this->obtenerTblCatProblemas(),
+            "roles"              => $this->obtenerTblCatRoles(),
+            "clientes"           => $this->obtenerTblClientes(),
+            "graficaRegistro"    => $this->obtenerRegistroReportesUsuarios(),
+            "graficaAtencion"    => $this->obtenerAtencionReportesUsuarios()
+        ];
+    }
+
     public function obtenerInsumosReportes ( $status ) {
         if ( session()->has('usuario') ) {
             $reportes = DB::select('SELECT * FROM generalreportes WHERE status = "'.$status.'"');
