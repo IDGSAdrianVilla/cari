@@ -30,4 +30,4 @@ Route::get('cari/obtener_poblaciones', 'App\Http\Controllers\PageController@obte
 Route::get('cari/obtener_roles', 'App\Http\Controllers\PageController@obtenerTblCatRoles');
 Route::get('cari/obtener_usuarios', 'App\Http\Controllers\PageController@obtenerTblEmpleados');
 
-Route::get('cari/obtener_detalleReporte/{pk}','App\Http\Controllers\ReportesController@obtenerDetalleReporte');
+Route::get('cari/obtener_detalleReporte/{pk}','App\Http\Controllers\ReportesController@obtenerDetalleReporteAPI');
