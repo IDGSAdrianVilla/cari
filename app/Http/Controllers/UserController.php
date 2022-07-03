@@ -21,7 +21,8 @@ class UserController extends Controller
 
         if ( count($return) > 0 ) {
             return response()->json([
-                'message' => "Bienvenido a CARI"
+                'message' => "Bienvenido a CARI",
+                'PKempleados' => $return[0]['PKTblEmpleados']
             ], 200);
         } else {
             return response()->json([

@@ -79,7 +79,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-9 col-lg-8 mx-auto">
-                                <h2 class="login-heading mb-4"><b style="color: gray;">Bienvenido</b></h2>
+                                <h2 class="login-heading mb-4"><b style="color: gray;">Bienvenid@ a CARI</b></h2>
                                 <form action="{{ route('login') }}" method="post" onsubmit="return miFuncion()">
                                     @csrf
                                     <div class="form-floating mb-3">
