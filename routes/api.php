@@ -29,3 +29,5 @@ Route::get('cari/obtener_problemas', 'App\Http\Controllers\PageController@obtene
 Route::get('cari/obtener_poblaciones', 'App\Http\Controllers\PageController@obtenerTblCatPoblaciones');
 Route::get('cari/obtener_roles', 'App\Http\Controllers\PageController@obtenerTblCatRoles');
 Route::get('cari/obtener_usuarios', 'App\Http\Controllers\PageController@obtenerTblEmpleados');
+
+Route::get('cari/obtener_detalleReporte/{pk}','App\Http\Controllers\ReportesController@obtenerDetalleReporte');
