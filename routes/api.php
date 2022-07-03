@@ -22,6 +22,7 @@ Route::post('cari/login_react','App\Http\Controllers\UserController@login_react'
 
 Route::post('cari/register_user','App\Http\Controllers\UserController@register_user');
 
+Route::get('cari/obtener_reportesAtr', 'App\Http\Controllers\PageController@obtenerTblReportes');
 Route::get('cari/obtener_reportes/{status}', 'App\Http\Controllers\PageController@obtenerTblReportesApi');
 Route::get('cari/obtener_clientes', 'App\Http\Controllers\PageController@obtenerTblClientes');
 Route::get('cari/obtener_problemas', 'App\Http\Controllers\PageController@obtenerTblCatProblemas');
