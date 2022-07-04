@@ -23,7 +23,8 @@ class UserController extends Controller
         if ( count($return) > 0 ) {
             return response()->json([
                 'message' => "Bienvenido a CARI",
-                'token_key' => Str::random(30)
+                'token_key' => Str::random(30),
+                'PKTblEmpleados' => $return[0]->PKTblEmpleados
             ], 200);
         } else {
             return response()->json([

@@ -20,10 +20,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('cari/login_react','App\Http\Controllers\UserController@login_react');
 
-Route::post('cari/register_user','App\Http\Controllers\UserController@register_user');
-
 Route::get('cari/obtener_reportes/{status}', 'App\Http\Controllers\PageController@obtenerTblReportesApi');
 Route::get('cari/obtener_usuarios', 'App\Http\Controllers\PageController@obtenerTblEmpleados');
 Route::get('cari/obtener_insumos', 'App\Http\Controllers\PageController@obtenerInsumosAPI');
 
 Route::get('cari/obtener_detalleReporte/{pk}','App\Http\Controllers\ReportesController@obtenerDetalleReporteAPI');
+
+Route::post('cari/register_user','App\Http\Controllers\UserController@register_user');
+Route::post('cari/registrar_reporte','App\Http\Controllers\ReportesController@registrarReporteAPI');

@@ -29,8 +29,8 @@ class ReportesController extends Controller
 
                     $reporte                            = new TblReportes;
                     $reporte->FKCatProblemas            = $request['PKCatProblemas'];
-                    $reporte->FKTblEmpleadosRecibio     = session('usuario')[0]->{'PKTblEmpleados'}; // esto cambiara una vez implementado el login
-                    $reporte->FKCatStatus               = 1; // es el primer status por defecto para recien registrado
+                    $reporte->FKTblEmpleadosRecibio     = session('usuario')[0]->{'PKTblEmpleados'};
+                    $reporte->FKCatStatus               = 1;
                     $reporte->FKTblDetalleReporte       = $detalle->id;
                     $reporte->FKTblClientes             = $request['PKTblClientes'];
                     $reporte->descripcionProblema       = $request['descripcionProblema'];
@@ -48,6 +48,34 @@ class ReportesController extends Controller
             }
         } else {
             return redirect('/');
+        }
+    }
+
+    public function registrarReporteAPI (Request $request) {
+        Log::alert($request);
+        try {
+
+            DB::beginTransaction();
+
+                $detalle = new TblDetalleReporte;
+                $detalle->save();
+
+                $reporte                            = new TblReportes;
+                $reporte->FKCatProblemas            = $request['PKCatProblemas'];
+                $reporte->FKTblEmpleadosRecibio     = $request['PKTblEmpleados'];
+                $reporte->FKCatStatus               = 1;
+                $reporte->FKTblDetalleReporte       = $detalle->id;
+                $reporte->FKTblClientes             = $request['PKTblClientes'];
+                $reporte->descripcionProblema       = $request['descripcionProblema'];
+                $reporte->observaciones             = $request['observaciones'];
+                $reporte->fechaAlta                 = Carbon::now();
+                $var = $reporte->save();
+                
+            DB::commit();
+
+        } catch (\Throwable $th) {
+            Log::info($th);
+            return $th;
         }
     }
 
