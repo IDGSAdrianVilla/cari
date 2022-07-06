@@ -93,7 +93,7 @@
                             </td>
 
                             @if ( !empty($item->coordenadas) )
-                                <td class="table-data verModalReporte"><b></b>
+                                <td><b></b>
                                     <a target="_blank" href="https://www.google.es/maps?q={{ $item->coordenadas }}">
                                         <div style="width: 100%; height: 100%;">
                                             <img src="{{ asset('images/maps.png') }}" alt="" width="22px">
