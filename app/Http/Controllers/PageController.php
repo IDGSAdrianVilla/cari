@@ -50,6 +50,28 @@ class PageController extends Controller
         ->get();
     }
 
+    public function obtenerInsumosPC ( $categoria ) {
+        switch ( $categoria ) {
+            case 'poblaciones':
+                $retorno = CatPoblaciones::orderBy('PKCatPoblaciones', 'DESC')->get();
+            break;
+            case 'problemas':
+                $retorno = CatProblemas::orderBy('PKCatProblemas', 'DESC')->get();
+            break;
+            case 'roles':
+                $retorno = CatRoles::orderBy('PKCatRoles', 'DESC')->get();
+            break;
+            case 'clientes':
+                $retorno = TblClientes::orderBy('PKTblClientes', 'DESC')->get();
+            break;
+            case 'empleados':
+                $retorno = TblEmpleados::orderBy('PKTblEmpleados', 'DESC')->get();
+            break;
+        }
+
+        return $retorno;
+    }
+
     public function obtenerTblCatPoblaciones () {
         return CatPoblaciones::where('Activo', 1)->get();
     }

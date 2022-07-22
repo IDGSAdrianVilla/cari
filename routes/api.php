@@ -24,6 +24,9 @@ Route::get('cari/obtener_reportes/{status}', 'App\Http\Controllers\PageControlle
 Route::get('cari/obtener_usuarios', 'App\Http\Controllers\PageController@obtenerTblEmpleados');
 Route::get('cari/obtener_insumos', 'App\Http\Controllers\PageController@obtenerInsumosAPI');
 
+//insumos para retablas de los mismos
+Route::get('cari/obtener_poblaciones/{categoria}', 'App\Http\Controllers\PageController@obtenerInsumosPC');
+
 Route::get('cari/obtener_detalleReporte/{pk}','App\Http\Controllers\ReportesController@obtenerDetalleReporteAPI');
 
 Route::post('cari/register_user','App\Http\Controllers\UserController@register_user');
