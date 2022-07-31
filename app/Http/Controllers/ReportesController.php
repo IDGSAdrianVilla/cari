@@ -232,9 +232,9 @@ class ReportesController extends Controller
         }
     }
 
-    public function reporteExcel () {
+    public function reporteExcel ( $status ) {
         if ( session()->has('usuario') ) {
-            return Excel::download(new ReportesExport, 'reportesPendientes.xlsx');
+            return (new ReportesExport( $status ))->download('Reportes '.$status.'s ('.Carbon::now()->format('d-m-Y').').xlsx');
         } else {
             return redirect('/');
         }

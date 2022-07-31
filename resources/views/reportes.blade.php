@@ -29,13 +29,13 @@
         <div class="col-sm-10">
             <div class="form-group">
                 <label>Buscar en Reportes {{ $status }}s</label>
-                <input id="search" type="text" class="form-control" placeholder="Buscar en Reportes {{ $status }}" maxlength="30">
+                <input id="search" type="text" class="form-control" placeholder="Buscar en Reportes {{ $status }}s" maxlength="30">
             </div>
         </div>
         <div class="col-sm-2">
             <div class="form-group">
                 <label>Reporte</label>
-                <a href="{{ url('reporteExcel') }}"><button class="btn btn-info form-control"><img src="{{ asset('images/reporte.png') }}"alt="" width="22px"></button></a>
+                <a href="{{ route('reporteExcel', $status) }}"><button class="btn btn-info form-control"><img src="{{ asset('images/reporte.png') }}"alt="" width="22px"></button></a>
             </div>
         </div>
 

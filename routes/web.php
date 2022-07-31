@@ -101,4 +101,4 @@ Route::post('actualizarCliente','App\Http\Controllers\ClientesController@actuali
 Route::post('registrarCliente','App\Http\Controllers\ClientesController@registrarCliente')->name('registrarCliente');
 
 // rutas excel
-Route::get('/reporteExcel','App\Http\Controllers\ReportesController@reporteExcel')->name('reporteExcel');
+Route::get('/reporteExcel/{estado}','App\Http\Controllers\ReportesController@reporteExcel')->name('reporteExcel');
