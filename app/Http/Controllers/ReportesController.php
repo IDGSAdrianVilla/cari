@@ -52,7 +52,6 @@ class ReportesController extends Controller
     }
 
     public function registrarReporteAPI (Request $request) {
-        Log::alert($request);
         try {
 
             DB::beginTransaction();
@@ -90,7 +89,11 @@ class ReportesController extends Controller
                                 'observaciones'       => $request['observaciones']
                             ]);
                             
-                    TblDetalleReporte::where('PKTblDetalleReporte', DB::raw('(SELECT FKTblDetalleReporte FROM tblreportes WHERE PKTblReportes = '.$request["PKTblReportes"].')'))
+                    TblDetalleReporte::where('PKTblDetalleReporte', '=', function ( $subselect ) use ( $request ) {
+                                        $subselect->from('tblreportes')
+                                                ->select('FKTblDetalleReporte')
+                                                ->where('PKTblReportes', $request["PKTblReportes"]);
+                                    })
                                     ->update([
                                         'diagnostico'               => $request['diagnostico'],
                                         'solucion'                  => $request['solucion'],
@@ -99,7 +102,6 @@ class ReportesController extends Controller
                                     ]);
                 DB::commit();
 
-                //return redirect('/reportes/Pendiente');
                 return back();
             } catch (\Throwable $th) {
                 Log::info($th);
@@ -107,6 +109,35 @@ class ReportesController extends Controller
             }
         } else {
             return redirect('/');
+        }
+    }
+
+    public function actualizarReporteAPI (Request $request) {
+        Log::alert($request);
+        try {
+
+            DB::beginTransaction();
+                TblReportes::where('PKTblReportes', $request['formFolio'])
+                        ->update([
+                            'descripcionProblema' => $request['formDescripcionProblema'],
+                            'observaciones'       => $request['formObservaciones']
+                        ]);
+                        
+                TblDetalleReporte::where('PKTblDetalleReporte', '=', function ( $subselect ) use ( $request ) {
+                                    $subselect->from('tblreportes')
+                                              ->select('FKTblDetalleReporte')
+                                              ->where('PKTblReportes', $request["formFolio"]);
+                                })
+                                ->update([
+                                    'diagnostico'               => $request['formDiagnostico'],
+                                    'solucion'                  => $request['formSolucion'],
+                                    'FKTblEmpleadosActualizo'   => $request['formPKTblEmpleados'],
+                                    'fechaActualizacion'        => Carbon::now()
+                                ]);
+            DB::commit();
+
+        } catch (\Throwable $th) {
+            Log::info($th);
         }
     }
 
@@ -154,6 +185,24 @@ class ReportesController extends Controller
         }
     }
 
+    public function atendiendoReporteAPI ( $id, $empleado ) {
+        try {
+            DB::beginTransaction();
+                $temp = TblReportes::where('PKTblReportes', $id)
+                    ->first();
+
+                TblDetalleReporte::where('PKTblDetalleReporte', $temp->{'FKTblDetalleReporte'})
+                                ->update([
+                                    'FKTblEmpleadosAtediendo'   => $empleado,
+                                    'fechaAtendiendo'           => Carbon::now()
+                                ]);
+            DB::commit();
+
+        } catch (\Throwable $th) {
+            Log::info($th);
+        }
+    }
+
     public function desatendiendoReporte ( $id ) {
         if ( session()->has('usuario') ) {
             try {
@@ -178,6 +227,26 @@ class ReportesController extends Controller
         }
     }
 
+    public function desatendiendoReporteAPI ( $id ) {
+        try {
+            DB::beginTransaction();
+                $temp = TblReportes::where('PKTblReportes', $id)
+                    ->first();
+
+                TblDetalleReporte::where('PKTblDetalleReporte', $temp->{'FKTblDetalleReporte'})
+                                ->update([
+                                    'FKTblEmpleadosAtediendo'   => null,
+                                    'fechaAtendiendo'           => null
+                                ]);
+            DB::commit();
+
+            return back();
+        } catch (\Throwable $th) {
+            Log::info($th);
+            return back()->withErrors(['mensajeError' => 'Algo no salió bien.']);
+        }
+    }
+
     public function atenderReporte ( $id ) {
         if ( session()->has('usuario') ) {
             try {
@@ -188,7 +257,11 @@ class ReportesController extends Controller
                                     'FKCatStatus' => 2
                                 ]);
 
-                    TblDetalleReporte::where('PKTblDetalleReporte', DB::raw('(SELECT FKTblDetalleReporte FROM tblreportes WHERE PKTblReportes = '.$id.')'))
+                    TblDetalleReporte::where('PKTblDetalleReporte', '=', function ( $subselect ) use ( $id ) {
+                                        $subselect->from('tblreportes')
+                                                  ->select('FKTblDetalleReporte')
+                                                  ->where('PKTblReportes', $id);
+                                    })
                                     ->update([
                                             'FKTblEmpleadosAtencion'    => session('usuario')[0]->{'PKTblEmpleados'},
                                             'fechaAtencion'             => Carbon::now()
@@ -215,7 +288,11 @@ class ReportesController extends Controller
                                     'FKCatStatus' => 1
                                 ]);
 
-                    TblDetalleReporte::where('PKTblDetalleReporte', DB::raw('(SELECT FKTblDetalleReporte FROM tblreportes WHERE PKTblReportes = '.$id.')'))
+                    TblDetalleReporte::where('PKTblDetalleReporte', '=', function ( $subselect ) use ( $id ) {
+                                        $subselect->from('tblreportes')
+                                                ->select('FKTblDetalleReporte')
+                                                ->where('PKTblReportes', $id);
+                                    })
                                     ->update([
                                             'FKTblEmpleadosAtencion' => null,
                                             'fechaAtencion'         => null

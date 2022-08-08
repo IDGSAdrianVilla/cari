@@ -31,3 +31,8 @@ Route::get('cari/obtener_detalleReporte/{pk}','App\Http\Controllers\ReportesCont
 
 Route::post('cari/register_user','App\Http\Controllers\UserController@register_user');
 Route::post('cari/registrar_reporte','App\Http\Controllers\ReportesController@registrarReporteAPI');
+
+//Actualizaciones desde modal
+Route::post('cari/actualizar_reporte','App\Http\Controllers\ReportesController@actualizarReporteAPI');
+Route::get('cari/atendiendo_reporte/{id}/{empleado}','App\Http\Controllers\ReportesController@atendiendoReporteAPI');
+Route::get('cari/desatendiendo_reporte/{id}','App\Http\Controllers\ReportesController@desatendiendoReporteAPI');
