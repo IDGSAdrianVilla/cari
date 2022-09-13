@@ -182,7 +182,7 @@ $(document).ready(function(){
                     <button data-dismiss="modal" class="btn form-control" style="margin-top: 15px; background: #FF6A6A; font-weight: bold; color: white;"><b>X</b></button>
                 </div>
             `;
-        } else if ( r[0].diagnostico != "" && r[0].diagnostico != null && r[0].solucion != "" && r[0].solucion != null ) {
+        } else if ( (r[0].diagnostico != "" && r[0].diagnostico != null) || (r[0].solucion != "" && r[0].solucion != null) ) {
             insert += `
                 <div class="col-sm-4">
                     <button class="btn form-control" style="margin-top: 15px; background: #FFA26D; font-weight: bold; color: white;">Actualizar</button>
