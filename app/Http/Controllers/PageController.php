@@ -372,4 +372,29 @@ class PageController extends Controller
         }
     }
 
+    public function obtenerReporte (){
+        if ( session()->has('usuario') ) {
+            $reportes           = $this->obtenerTblReportes();
+            $poblaciones        = $this->obtenerTblCatPoblaciones();
+            $problemas          = $this->obtenerTblCatProblemas();
+            $roles              = $this->obtenerTblCatRoles();
+            $clientes           = $this->obtenerTblClientes();
+            $graficaRegistro    = $this->obtenerRegistroReportesUsuarios();
+            $graficaAtencion    = $this->obtenerAtencionReportesUsuarios();
+
+            return view('inicio')
+                ->with('reportes', $reportes)
+                ->with('poblaciones', $poblaciones)
+                ->with('problemas', $problemas)
+                ->with('roles', $roles)
+                ->with('clientes', $clientes)
+                ->with('cantidadRegistrosRegistro', $graficaRegistro['cantidadRegistros'])
+                ->with('nombresRegistrosRegistro', $graficaRegistro['nombresRegistros'])
+                ->with('cantidadRegistrosAtencion', $graficaAtencion['cantidadRegistros'])
+                ->with('nombresRegistrosAtencion', $graficaAtencion['nombresRegistros']);
+        } else {
+            return redirect('/');
+        }
+
+    }
 }
