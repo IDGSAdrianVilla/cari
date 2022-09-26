@@ -10,7 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-    <title>CARI</title>
+    <title>GALA</title>
 
     <style>
 
@@ -68,7 +68,7 @@
         }
     </style>
 
-    <link rel="icon" type="image/png" href="{{ asset('images/icono.png') }}" />
+    <link rel="icon" type="image/png" href="{{ asset('images/icono2.png') }}" />
 </head>
 <body>
     <div class="container-fluid ps-md-0">
@@ -79,7 +79,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-9 col-lg-8 mx-auto">
-                                <h2 class="login-heading mb-4"><b style="color: gray;">Bienvenid@ a CARI</b></h2>
+                                <h2 class="login-heading mb-4"><b style="color: gray;">Bienvenid@ a GALA</b></h2>
                                 <form action="{{ route('login') }}" method="post" onsubmit="return miFuncion()">
                                     @csrf
                                     <div class="form-floating mb-3">
@@ -108,7 +108,7 @@
                                     <center><b id="texto" style="color: red;">@if($errors->any()) {{$errors->first()}} @endif</b></center>
                                     <br>
                                     <div class="d-grid">
-                                        <button class="btn btn-lg btn-login text-uppercase fw-bold mb-2" type="submit">Entrar</button>
+                                        <button class="btn btn-lg btn-login text-uppercase fw-bold mb-2" type="submit" style="background:#81CCD6">Entrar</button>
                                         <div class="text-center">
                                             <a class="small" href="javascript:void(0);">¿Olvidaste tu contraseña?</a>
                                         </div>
