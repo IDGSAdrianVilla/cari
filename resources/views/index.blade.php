@@ -11,9 +11,9 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <title>CARI</title>
+ 
     <link rel="stylesheet" href="public/css/index.css"/>
-
-    <link rel="icon" type="image/png" href="css/style.css" />
+    <link rel="icon" type="image/png" href="{{ asset('images/icono.png') }}" />
 </head>
 <body>
     <div class="container-fluid ps-md-0">
