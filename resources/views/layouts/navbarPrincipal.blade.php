@@ -6,7 +6,6 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{{ url('inicio') }}">Inicio</a></li>
-                <li class="active"><a href="{{ url('reporte') }}">Reporte</a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown">Reportes <span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -21,6 +20,15 @@
                         <ul class="dropdown-menu">
                             <li data-toggle="modal" data-target="#modalClienteRegistro"><a>Agregar Cliente</a></li>
                             <li data-toggle="modal"><a href="{{ url('obtenerClientes') }}">Ver todos</a></li>
+                        </ul>
+                    </li>
+                @endif
+
+                @if ( session('usuario')[0]->{'FKCatRoles'} == 3 || session('usuario')[0]->{'FKCatRoles'} == 1 )
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">Concentrados <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li data-toggle="modal"><a href="{{ url('concentradosReportes') }}">Concentrado de reportes</a></li>
                         </ul>
                     </li>
                 @endif

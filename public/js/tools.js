@@ -595,3 +595,7 @@ function menos() {
     $("#mas3").show();
     $("#menos3").hide();
 }
+
+function habilitaApartado ( habilita ) {
+    console.log(habilita);
+}
