@@ -317,4 +317,54 @@ class ReportesController extends Controller
         }
     }
 
+    public function consultarConcentradoReportes ( Request $request ) {
+        $request = (array) $request;
+        $cont = 0;
+        $param = count($request);
+
+        $query = 'SELECT * FROM generalreportes';
+        if ( isset($request['clienteReporteExcel']) ) {
+            $query = $query . 'WHERE PKTblClientes = '.$request['PKTblClientes'];
+            $cont+=1;
+        }
+
+        $query = $query . ($cont > 0 ? ($param > 3 ? ' AND ' : '') : ' WHERE ');
+
+        if ( isset($request['poblacionReporteExcel']) ) {
+            $query = $query . 'PKCatPoblaciones = '.$request['PKCatPoblaciones'];
+            $cont+=1;
+        }
+
+        $query = $query . ($cont > 0 ? ($param > 3 || $param > 5 ? ' AND ' : '') : ' WHERE ');
+
+        if ( isset($request['problemaReporteExcel']) ) {
+            $query = $query . 'PKCatProblemas = '.$request['PKCatProblemas'];
+            $cont+=1;
+        }
+
+        $query = $query . ($cont > 0 ? ($param > 3 || $param > 5 || $param > 7 ? ' AND ' : '') : ' WHERE ');
+
+        if ( isset($request['fechaDesde']) ) {
+            $query = $query . 'TO_DATE(fechaAlta) => TO_DATE('.$request['fechaDesde'].')';
+            $cont+=1;
+        }
+
+        $query = $query . ($cont > 0 ? ($param > 3 || $param > 5 || $param > 7 || $param > 9 ? ' AND ' : '') : ' WHERE ');
+
+        if ( isset($request['fechaHasta']) ) {
+            $query = $query . 'TO_DATE(fechaAlta) <= TO_DATE('.$request['fechaHasta'].')';
+            $cont+=1;
+        }
+
+        $query = $query . ($cont > 0 ? ($param > 3 || $param > 5 || $param > 7 || $param > 9 || $param > 11 ? ' AND ' : '') : ' WHERE ');
+
+        if ( isset($request['IDStatus']) ) {
+            $query = $query . 'status = '.$request['IDStatus'];
+        }
+
+        Log::alert($query);
+
+        return redirect()->back()->with('success', 'your message,here');
+    }
+
 }

@@ -74,6 +74,18 @@ const validateC2 = () => {
 }
 
 $(document).ready(function(){
+    var cont = 0;
+    $(".checks").change(function(){
+        let status = $(this).prop("checked");
+        cont = status ? cont + 1 : cont - 1;
+        let id = $(this).prop("id");
+
+        $('.'+id).prop('disabled', status ? false : true);
+        $('.'+id).attr('required', status ? true : false);
+        
+        $('.generarReporte').prop('disabled', cont > 0 ? false : true);
+    })
+
     $('#correoInput').on('input', validate);
     $('#correoInput2').on('input', validateC);
     $('#correoInput3').on('input', validateC2);
@@ -594,8 +606,4 @@ function menos() {
     $("#telefono23").val('');
     $("#mas3").show();
     $("#menos3").hide();
-}
-
-function habilitaApartado ( habilita ) {
-    console.log(habilita);
 }

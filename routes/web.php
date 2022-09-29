@@ -102,5 +102,8 @@ Route::post('registrarCliente','App\Http\Controllers\ClientesController@registra
 
 // rutas excel
 Route::get('/reporteExcel/{estado}','App\Http\Controllers\ReportesController@reporteExcel')->name('reporteExcel');
+
+
 // ruta de apartado nuevo para reporte 
 Route::get('/concentradosReportes','App\Http\Controllers\PageController@obtenerConcentradoReportes')->name('concentradosReportes');
+Route::post('/consultarConcentradoReportes','App\Http\Controllers\ReportesController@consultarConcentradoReportes')->name('consultarConcentradoReportes');
